@@ -9,7 +9,7 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:3001/mail/contactUs`, {name, email, message});
+    axios.post(`https://deploy-sp-back.herokuapp.com/mail/contactUs`, {name, email, message});
   };
 
   return (
