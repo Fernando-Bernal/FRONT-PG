@@ -8,6 +8,10 @@ module.exports = {
       center: true,
     },
     extend: {},
+    fontFamily: {
+      monserrat: ['Montserrat', 'sans-serif'],
+      smooch: ['Smooch', 'cursive']
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

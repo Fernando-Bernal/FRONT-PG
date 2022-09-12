@@ -2,6 +2,7 @@ import React,{useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { limpiarCarrito, resetTotal } from "../redux/actions/actions";
+import { AiFillDelete } from "react-icons/ai";
 import CardCarrito from "./CardCarrito";
 import NavBar from "./NavBar";
 import Checkout from "./Checkout";
@@ -40,7 +41,7 @@ export default function Cart() {
                               ))}
                             
                     <div className="flex items-center justify-end">
-                      <button onClick={()=>dispatch(limpiarCarrito())}>clear all</button>
+                      <button className="flex flex-row items-center h-8" onClick={()=>dispatch(limpiarCarrito())}><AiFillDelete/> <AiFillDelete/> <AiFillDelete/></button>
                     </div>
                         </div>
                       )}

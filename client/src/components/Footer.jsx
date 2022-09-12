@@ -3,6 +3,7 @@ import { FaFacebook, FaInstagram, FaTwitter, FaSpotify } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2"
 
 const Footer = () => {
 
@@ -21,8 +22,18 @@ const Footer = () => {
         e.preventDefault();
         Object.values(email)[0].includes("@")
           ? axios.post(`https://sneakers-api-pg.herokuapp.com/mail/newsletter`, email) &&
-            alert("Thanks for subscribing!")
-          : alert("Please enter a valid email address");
+          Swal.fire({
+            icon: 'success',
+            title: 'Thanks for subscribing!',
+            showConfirmButton: false,
+            timer: 2000
+          })  
+          : Swal.fire({
+            icon: 'error',
+            title: 'Use a valid email',
+            showConfirmButton: false,
+            timer: 2000
+            })
       };
 
     return (

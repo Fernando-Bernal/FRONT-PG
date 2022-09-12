@@ -17,7 +17,7 @@ function SearchBar() {
   };
 
   useEffect(() => {
-    dispatch(getByName(value));
+    dispatch(getByName(value.toLocaleLowerCase()));
   }, [dispatch, value]);
 
   return (

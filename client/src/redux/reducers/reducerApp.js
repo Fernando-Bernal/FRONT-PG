@@ -9,6 +9,7 @@ import {
     GET_LESS_PRICE,
     GET_MORE_PRICE,
     GET_BY_COLOR,
+    CLEAN_SHOE,
     ////////////////////////////
     ADD_PRODUCT_CARRITO, 
     DELETE_PRODUCT_CARRITO, 
@@ -96,15 +97,20 @@ export function reducerApp(state = initialState, action){
               );
             }),
         };
-        case GET_BY_COLOR:
-            return{
-                ...state, 
-                catalogBrand: [...state.catalogBrand].filter(e => e.color === action.payload)
-            }
-          case POST_USER:
-            return {
-                ...state,
-            };
+      case GET_BY_COLOR:
+        return{
+          ...state, 
+          catalogBrand: [...state.catalogBrand].filter(e => e.color === action.payload)
+        }
+      case POST_USER:
+        return {
+          ...state,
+        };
+      case CLEAN_SHOE:
+        return{
+          ...state,
+          shoe: []
+        }
     //////////////////////////////////////////////////////////////////////////////////////////
       case ADD_PRODUCT_CARRITO:
           return{

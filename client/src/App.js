@@ -14,12 +14,13 @@ import SizeChart from './components/SizeChart';
 import TermsOfService from './components/TermsOfService';
 import AuthContextProvider from './context/AuthContext';
 import Protected from './components/Protected'
+import PageNotFound from './components/PageNotFound';
 
 export function App() {
   
   return (
 
-    <div>
+    <div className='font-monserrat'>
       <AuthContextProvider>
       <Routes>
         <Route exact path="/" element={<Home />} />
@@ -34,6 +35,7 @@ export function App() {
         <Route exact path= "/contactUs" element={<ContactUs/>} />
         <Route exact path= "/sizeChart" element={<SizeChart/>} />
         <Route exact path= "/termsOfService" element={<TermsOfService/>} />
+        <Route path='*' element={<PageNotFound/>}/>
       </Routes>
       </AuthContextProvider>
     </div>

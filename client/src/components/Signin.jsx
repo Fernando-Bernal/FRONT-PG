@@ -1,37 +1,61 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import Swal from "sweetalert2";
 
 const Signin = () => {
   const [user, setUser] = useState({
     email: '',
     password: ''
   })
-  const [errors, setErrors] = useState({})
   const navigate = useNavigate()
   const {signIn} = UserAuth()
 
-  const validateForm = (form) => {
-    let errors = {
-      hasErrors: false
-    }
-    if (!/^[a-z0-9]+@[a-z]+\.[a-z]{2,3}/.test(form.email)) {
-      errors.email = "Use a valid email";
-      errors.hasErrors = true;
-  }
-  return errors
-  }
-
   const handleChanges = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
-    setErrors(validateForm({ ...user, [e.target.name]: e.target.value }));
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setErrors({ ...errors, hasErrors: true })
+    try {
+      e.preventDefault()
     await signIn(user.email, user.password)
+    Swal.fire({
+      icon: 'success',
+      title: 'You Login, Welcome!',
+      showConfirmButton: false,
+      timer: 2000
+    })
     navigate('/account')
+    } catch (error) {
+      if (error.code === 'auth/user-not-found'){
+        Swal.fire({
+        icon: 'error',
+        title: 'User not found',
+        showConfirmButton: false,
+        timer: 2000
+        })}
+      if (error.code === 'auth/wrong-password'){
+        Swal.fire({
+        icon: 'error',
+        title: 'Wrong Password',
+        showConfirmButton: false,
+        timer: 2000
+        })}
+      if (error.code === 'auth/internal-error'){
+        Swal.fire({
+        icon: 'error',
+        title: 'Fill the password',
+        showConfirmButton: false,
+        timer: 2000
+        })}
+      if (error.code === 'auth/invalid-email'){
+        Swal.fire({
+        icon: 'error',
+        title: 'Use a valid email',
+        showConfirmButton: false,
+        timer: 2000
+        })}
+      }
   }
 
   return (
@@ -45,7 +69,6 @@ const Signin = () => {
           <div className='flex flex-col py-2'>
             <label className='py-2 font-medium'>Email Address:</label>
             <input name='email' onChange={handleChanges} className='p-3 rounded-md text-black' type="email" />
-            {errors.email && (<p className='text-red-500'>{errors.email}</p>)}
           </div>
           <div className='flex flex-col py-2'>
             <label className='py-2 font-medium'>Password:</label>

@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import Select from "react-select";
 import Swal from "sweetalert2";
-import { getShoe, addProductCarrito } from '../redux/actions/actions';
+import { getShoe, addProductCarrito, cleanShoe } from '../redux/actions/actions';
 import NavBar from './NavBar';
 import RatingComponent from './RatingComponent';
 
@@ -39,7 +39,6 @@ const CardDetail = () => {
       if(shoeToCart.quantity === 0){
         e.preventDefault()
         Swal.fire({
-          position: 'top-center',
           icon: 'error',
           title: 'Add size',
           showConfirmButton: false,
@@ -49,7 +48,6 @@ const CardDetail = () => {
       }else{
         dispatch(addProductCarrito(shoeToCart))
         Swal.fire({
-          position: 'top-center',
           icon: 'success',
           title: 'Your shoe add to cart',
           showConfirmButton: false,
@@ -59,12 +57,16 @@ const CardDetail = () => {
     }
 
     useEffect(() => {
-        dispatch(getShoe(id));
-    }, [dispatch, id])
+      dispatch(getShoe(id));
+      return () => {
+        dispatch(cleanShoe())
+    }
+  }, [dispatch, id])
 
   return (
     <>
     <NavBar/>
+    {shoe.name ?
     <div className="">
       <div className="px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
@@ -77,7 +79,7 @@ const CardDetail = () => {
         <p className='text-white'>{shoe.description}</p>
         <div className="flex mt-6 items-center pb-5 border-b-2 mb-5">
           <div className="flex">
-            <span className="mr-3">{shoe.color}</span>
+            <span className="mr-3 text-white">{shoe.color}</span>
           </div>
           <div className="flex ml-6 items-center">
             <span className="mr-3">Size</span>
@@ -87,7 +89,7 @@ const CardDetail = () => {
           </div>
         </div>
         <div className="flex justify-around">
-          <span className="title-font font-medium text-2xl">${shoe.price}</span>
+          <span className="title-font font-medium text-2xl text-white">${shoe.price}</span>
         <Link to="/">
             <button className="border py-2 px-6">BACK HOME</button>
         </Link>
@@ -103,7 +105,7 @@ const CardDetail = () => {
     </div>
   </div>
 </div>
-
+  : <h1 className="text-white text-center text-3xl mt-80"> LOADING...</h1>}
 </>
   )
 }

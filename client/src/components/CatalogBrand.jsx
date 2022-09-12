@@ -15,8 +15,6 @@ function CatalogBrand() {
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  console.log(catalogBrand)
-
   const find = (e)=>{
     dispatch(getByColor(e.label)) 
   }

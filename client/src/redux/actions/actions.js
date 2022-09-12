@@ -12,6 +12,7 @@ export const POST_USER = 'POST_USER'
 export const GET_MORE_PRICE = 'GET_MORE_PRICE'
 export const GET_LESS_PRICE = 'GET_LESS_PRICE'
 export const GET_BY_COLOR = 'GET_BY_COLOR'
+export const CLEAN_SHOE = 'CLEAN_SHOE';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const ADD_PRODUCT_CARRITO = 'ADD_PRODUCT_CARRITO';
 export const DELETE_PRODUCT_CARRITO = 'DELETE_PRODUCT_CARRITO';
@@ -84,6 +85,13 @@ export function postUser(value) {
         payload: create,
         });
     };
+}
+
+export function cleanShoe() {
+    return {
+        type: 'CLEAN_SHOE',
+        payload: {}
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////

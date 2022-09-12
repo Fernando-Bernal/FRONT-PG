@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import Swal from "sweetalert2";
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -10,7 +11,12 @@ const Account = () => {
     try {
       await logout()
       navigate('/')
-      alert('You are logged out')
+      Swal.fire({
+        icon: 'success',
+        title: 'You logout',
+        showConfirmButton: false,
+        timer: 2000
+      })
     } catch (e) {
       console.log(e.message)
     }
