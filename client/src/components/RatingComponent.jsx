@@ -13,7 +13,7 @@ const Star = ({ selected = false, onSelect = (f) => f }) => (
 export default function StarRating({ totalStars = 5 }) {
     const [selectedStars, setSelectedStars] = useState(0);
     return (
-        <div>
+        <div className='flex flex-row pt-8 ' >
             {[...Array(totalStars)].map((n, i) => (
                 <Star
                     key={i}

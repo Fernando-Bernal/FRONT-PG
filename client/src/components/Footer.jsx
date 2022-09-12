@@ -42,10 +42,10 @@ const Footer = () => {
                 <div className='col-start-3 col-end-4 pt-8 md:pt-2'>
                     <p className='font-bold text-[#00ff01] text-center uppercase'>Follow US</p>
                     <p className='flex mt-6 pl-1 space-x-4'>
-                        <FaFacebook className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>
-                        <FaInstagram className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>
-                        <FaTwitter className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>
-                        <FaSpotify className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>  
+                        <FaFacebook className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/>
+                        <FaInstagram className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/>
+                        <a href="https://twitter.com/SneakerParadis3" target='_blank'><FaTwitter className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/></a>
+                        <a href="https://open.spotify.com/playlist/3RcRK9HGTAm9eLW1LepWKZ" target='_blank'><FaSpotify className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/></a>  
                     </p>
                     
                 </div>
