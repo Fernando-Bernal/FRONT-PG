@@ -65,7 +65,7 @@ export default function Cart() {
                       </div>
                     </div>
                   </div>
-                  <Checkout/>
+                  <Checkout products={products} subTotal={subTotal}/>
                 </div>
               </div>
             </div>
