@@ -59,7 +59,7 @@ export default function CardCarrito({ shoe }) {
         <div className="flex justify-center items-center">
           <div className="px-4 flex">
           <button
-              className="focus:outline-none bg-gray-100 h-8 w-18 rounded text-sm px-2 mx-2"
+              className="focus:outline-none bg-gray-100 h-8 w-20 rounded text-sm px-2 mx-2"
               disabled
             >
               size: {shoe.size}
