@@ -25,27 +25,27 @@ export const CLEAN_CART = 'CLEAN_CART';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const getShoes = () => (dispatch)=>{
-    return axios('https://sneakers-api-pg.herokuapp.com/shoes')
+    return axios('https://deploy-sp-back.herokuapp.com/shoes')
                     .then(res => dispatch({type: 'GET_SHOES', payload: res.data}))
 }
 
 export const getShoe = (id) => (dispatch)=>{
-    return axios(`https://sneakers-api-pg.herokuapp.com/shoes/${id}`)
+    return axios(`https://deploy-sp-back.herokuapp.com/shoes/${id}`)
                     .then(res => dispatch({type: 'GET_SHOE', payload: res.data}))
 }
 
 export const getBrands = () => (dispatch)=>{
-    return axios(`https://sneakers-api-pg.herokuapp.com/brands`)
+    return axios(`https://deploy-sp-back.herokuapp.com/brands`)
                     .then(res => dispatch({type: 'GET_BRANDS', payload: res.data})) 
 }
 
 export const getByName = (name) => (dispatch)=>{
-    return axios(`https://sneakers-api-pg.herokuapp.com/shoes?name=${name}`)
+    return axios(`https://deploy-sp-back.herokuapp.com/shoes?name=${name}`)
                     .then(res => dispatch({type: 'GET_BY_NAME', payload: res.data})) 
 }
 
 export const getByCatalogBrand = (brand) => (dispatch)=>{
-    return axios(`https://sneakers-api-pg.herokuapp.com/shoes?brand=${brand}`)
+    return axios(`https://deploy-sp-back.herokuapp.com/shoes?brand=${brand}`)
                     .then(res => dispatch({type: 'GET_BY_CATALOG_BRAND', payload: res.data})) 
 }
 
@@ -77,7 +77,7 @@ export const getByColor = (value) => {
 export function postUser(value) {
     return async function (dispatch) {
         const create = await axios.post(
-            `https://sneakers-api-pg.herokuapp.com/users`,
+            `https://deploy-sp-back.herokuapp.com/users`,
             value
         );
         return dispatch({

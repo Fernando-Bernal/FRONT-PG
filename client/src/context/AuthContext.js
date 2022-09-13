@@ -3,7 +3,9 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut, 
-  onAuthStateChanged
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithRedirect,
 } from 'firebase/auth'
 import {auth} from '../firebase'
 import { useDispatch } from 'react-redux'
@@ -24,6 +26,11 @@ const AuthContextProvider = ({children}) => {
     dispatch(postUser(userRegister))
   }
 
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider()
+    signInWithRedirect(auth, provider)
+  }
+
   const signIn = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password)
   }
@@ -35,7 +42,6 @@ const AuthContextProvider = ({children}) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
-      console.log(currentUser)
     })
     return () => {
       unsubscribe()
@@ -43,7 +49,7 @@ const AuthContextProvider = ({children}) => {
   }, [])
 
   return (
-    <UserContext.Provider value={{createUser, user, logout, signIn}}>
+    <UserContext.Provider value={{createUser, user, logout, signIn, googleSignIn}}>
       {children}
     </UserContext.Provider>
   )
