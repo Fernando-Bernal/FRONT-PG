@@ -1,24 +1,40 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
 import Swal from "sweetalert2";
+import GoogleButton from 'react-google-button'
 
 const Signin = () => {
-  const [user, setUser] = useState({
+  const [userAccount, setUser] = useState({
     email: '',
     password: ''
   })
   const navigate = useNavigate()
   const {signIn} = UserAuth()
-
+  const {googleSignIn} = UserAuth()
+  const { user } = UserAuth()
   const handleChanges = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setUser({ ...userAccount, [e.target.name]: e.target.value });
   }
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await googleSignIn()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if(user != null){
+      navigate('/account')
+    }
+  }, [user])
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-    await signIn(user.email, user.password)
+    await signIn(userAccount.email, userAccount.password)
     Swal.fire({
       icon: 'success',
       title: 'You Login, Welcome!',
@@ -75,6 +91,7 @@ const Signin = () => {
             <input name='password' onChange={handleChanges} className='p-3 rounded-md text-black' type="password" />
           </div>
           <button className='w-full py-4 my-2'>Sign In</button>
+          <GoogleButton onClick={handleGoogleSignIn}/>
           <Link to='/'><button className='w-full py-4 my-2'>Back Home</button></Link>
         </form>
       </div>
