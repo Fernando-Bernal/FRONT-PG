@@ -7,7 +7,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { limpiarCarrito } from "../redux/actions/actions";
 import { UserAuth } from "../context/AuthContext";
 import axios from "axios";
@@ -16,12 +16,15 @@ import Address from "./Address";
 
 function checkout({ products, subTotal }) {
   const stripePromise = loadStripe(
-    "pk_test_51Lgvm7FNV3brqOrQwACULzmK8Gh8gtEI1Tu1atrISNC3OfZ78CaUs8SIUTnl9wRvxacqpxPeeiwtYQT8ifSSaS2d00gs1hTmxj"
+    "pk_test_51Lgvm7FNV3brqOrQwACULzmK8Gh8gtEI1Tu1atrISNC3OfZ78CaUs8SIUTnl9wRvxacqpxPeeiwtYQT8ifSSaS2d00gs1hTmxj",
+    {
+      locale: "en",
+    }
   );
 
   const CheckoutForm = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [isProcessing, setProcessingTo] = useState(false);
     const [isDisable, setIsDisableTo] = useState(false);
 
@@ -55,30 +58,30 @@ function checkout({ products, subTotal }) {
             city: e.target.city.value,
             //country: e.target.country.value,
             line1: e.target.line1.value,
-            line2: e.target.line2.value,
+            //line2: e.target.line2.value,
             state: e.target.state.value,
-            //postal_code: e.target.postal_code.value
+            postal_code: e.target.postal_code.value,
           },
         },
       });
 
       setProcessingTo(true);
 
-      if (!error && products !== [] && subTotal !== 0 && subTotal > 0 ) {
-        if(!error && user.email !== undefined && user.uid !== undefined){
+      if (!error && products !== [] && subTotal !== 0 && subTotal > 0) {
+        if (!error && user.email !== undefined && user.uid !== undefined) {
           console.log(paymentMethod);
           const { id } = paymentMethod;
           try {
             const { data } = await axios.post(
-            "http://localhost:3001/api/checkout",
-            {
-              id,
-              email: user.email,
-              uid: user.uid,
-              shoes: products,
-              amount: subTotal * 100
-            }
-          )
+              "https://sneakers-api-pg.herokuapp.com/cart/checkout",
+              {
+                id,
+                email: user.email,
+                uid: user.uid,
+                shoes: products,
+                amount: subTotal * 100,
+              }
+            );
             Swal.fire({
               position: "top-center",
               icon: "success",
@@ -88,10 +91,10 @@ function checkout({ products, subTotal }) {
             });
             setProcessingTo(false);
             setIsDisableTo(false);
-            console.log(data)
+            console.log(data);
             console.log(paymentMethod);
             elements.getElement(CardElement).clear();
-            dispatch(limpiarCarrito())
+            dispatch(limpiarCarrito());
           } catch (error) {
             console.log(error);
             setProcessingTo(false);
@@ -104,9 +107,9 @@ function checkout({ products, subTotal }) {
               timer: 3000,
             });
           }
-        }else{
+        } else {
           setIsDisableTo(true);
-          navigate('/account')
+          navigate("/account");
           Swal.fire({
             position: "top-center",
             icon: "error",
@@ -115,7 +118,6 @@ function checkout({ products, subTotal }) {
             timer: 3000,
           });
         }
-        
       } else {
         console.log(error);
         e.preventDefault();
@@ -143,6 +145,9 @@ function checkout({ products, subTotal }) {
           },
           ":hover": {
             iconColor: "#ffff01",
+            backgroundColor: "#1F2937",
+          },
+          ":-webkit-autofill": {
             backgroundColor: "#1F2937",
           },
         },
@@ -199,7 +204,7 @@ function checkout({ products, subTotal }) {
             type="text"
             name="name"
             className="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4"
-            placeholder="Giga Tamarashvili2"
+            placeholder="Giga Tamarashvili"
           />
         </div>
 
@@ -212,7 +217,7 @@ function checkout({ products, subTotal }) {
 
         <button
           type="submit"
-          className="h-12 w-full mt-3 bg-[#00ff01] rounded focus:outline-none text-white hover:bg-blue-600 disabled:opacity-50 disabled:bg-gray-100"
+          className="h-12 w-full mt-3 bg-[#00ff01] rounded focus:outline-none text-white hover:bg-blue-600 disabled:opacity-50 disabled:bg-[#2f3436]"
           disabled={isDisable}
         >
           {isProcessing ? "Proccesading..." : `PAY $${subTotal}`}
