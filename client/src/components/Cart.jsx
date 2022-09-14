@@ -31,7 +31,7 @@ export default function Cart() {
                     <div className="flex justify-between items-center mt-6 pt-6">
                       {products?.length === 0 ? (
                         <div>
-                          {dispatch(resetTotal()) && <h1 className="text-white">No has agregado productos al carrito... </h1>}
+                          {dispatch(resetTotal()) && <h1 className="text-white">You have not added products to the cart... </h1>}
                         </div>
                       ) : (
                         <div>
