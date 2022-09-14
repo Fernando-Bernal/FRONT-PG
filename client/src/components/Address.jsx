@@ -44,7 +44,7 @@ function Address() {
           <label className="text-xs text-gray-400 ">Postal code</label>
           <input
             type="text"
-            name="state"
+            name="postal_code"
             className="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4"
             placeholder="AZ85705"
           />
