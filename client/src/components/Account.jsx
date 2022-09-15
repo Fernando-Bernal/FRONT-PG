@@ -5,8 +5,9 @@ import Swal from "sweetalert2";
 import NavBar from './NavBar';
 import { useEffect } from 'react';
 import {MdEmail, MdPerson, MdPhoneIphone, MdLock, MdChangeCircle, MdImage} from 'react-icons/md'
-import { ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
+import { updateProfile } from 'firebase/auth'
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -28,12 +29,24 @@ const Account = () => {
     }
   },[user])
 
+  const handleChange = (e) => {
+    if (e.target.files[0]){
+      setImageUp(e.target.files[0])
+    }
+  }
+
   const uploadImage = async () => {
     if (imageUp == null) return
     const imageRef = ref(storage, `${user.uid}`)
     await uploadBytes(imageRef, imageUp)
-    
-    alert('uploaded')
+    const imageURL = await getDownloadURL(imageRef)
+    updateProfile(user, {photoURL: imageURL})
+    Swal.fire({
+      icon: 'success',
+      title: 'Image Upload',
+      showConfirmButton: false,
+      timer: 2000
+    })
   }
 
   const handleLogout = async () => {
@@ -60,8 +73,8 @@ const Account = () => {
             <div className="mx-auto max-w-sm md:mx-0 md:w-full">
               <div className="inline-flex items-center space-x-4">
                 <img
-                  className="h-[80px] rounded-full object-cover"
-                  alt="Profile Image"
+                  className="h-[80px] w-[80px] rounded-full"
+                  alt=""
                   src={photoURL}
                 />
                 <h1 className="text-white text-xl">{user?.displayName}</h1>
@@ -154,7 +167,7 @@ const Account = () => {
                   <input
                     type="file"
                     className="w-11/12 p-2 bg-black"
-                    onChange={(e) => setImageUp(e.target.files[0])}
+                    onChange={handleChange}
                   />
                   <button onClick={uploadImage}>Upload</button>
                 </div>
