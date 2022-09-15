@@ -32,7 +32,6 @@ const Account = () => {
     if (imageUp == null) return
     const imageRef = ref(storage, `${user.uid}`)
     await uploadBytes(imageRef, imageUp)
-    .then(setPhotoURL(imageUp))
     
     alert('uploaded')
   }
