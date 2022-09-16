@@ -6,10 +6,10 @@ import {logEvent } from 'firebase/analytics';
 import Swal from "sweetalert2";
 import NavBar from './NavBar';
 import { useEffect } from 'react';
-import {MdEmail, MdPerson, MdPhoneIphone, MdLock, MdChangeCircle, MdImage} from 'react-icons/md'
+import {MdEmail, MdPerson, MdLock, MdImage} from 'react-icons/md'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
-import { updateProfile } from 'firebase/auth'
+import { updatePassword, updateProfile } from 'firebase/auth'
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -17,6 +17,8 @@ const Account = () => {
   const [admin, setAdmin] = useState(false)
   const [imageUp, setImageUp] = useState(null)
   const [photoURL, setPhotoURL] = useState('https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231709/thesomeday123170900021.jpg')
+  const [password, setPassword] = useState()
+  const [name, setName] = useState()
 
   const usersAdmin = () => {
     if(user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2' ||
@@ -56,6 +58,7 @@ const Account = () => {
       showConfirmButton: false,
       timer: 2000
     })
+    window.location.reload()
   }
 
   const handleLogout = async () => {
@@ -73,6 +76,43 @@ const Account = () => {
     }
   }
 
+  const handlePassword = async (e) => {
+    setPassword( e.target.value )
+  }
+
+  const changePassword = async () => {
+    try {
+      updatePassword(user, password)
+      Swal.fire({
+        icon: 'success',
+        title: 'Password Updated',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleName = async (e) => {
+    setName( e.target.value )
+  }
+
+  const changeName = async () => {
+    try {
+      updateProfile(user, {displayName: name})
+      Swal.fire({
+        icon: 'success',
+        title: 'Name Updated',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <NavBar/>
@@ -86,7 +126,7 @@ const Account = () => {
                   alt=""
                   src={photoURL}
                 />
-                <h1 className="text-white text-xl">{user?.displayName}</h1>
+                <h1 className="text-white text-2xl">{user?.displayName}</h1>
                 <Link to={'/admin'}>
                   {admin && 
                     <button
@@ -130,21 +170,10 @@ const Account = () => {
                       type="text"
                       className="w-11/12 p-2 focus:text-gray-600 focus:outline-none"
                       placeholder={user?.displayName}
+                      onChange={handleName}
                     />
                   </div>
-                </div>
-                <div>
-                  <label className="text-sm">Phone number</label>
-                  <div className="inline-flex w-full border">
-                    <div className="w-1/12 bg-gray-100 pt-2">
-                      <MdPhoneIphone className='h-6 w-6 ml-1'/>
-                    </div>
-                    <input
-                      type="text"
-                      className="w-11/12 p-2"
-                      placeholder="..."
-                    />
-                  </div>
+                  <button onClick={changeName}>Update Display name</button>
                 </div>
               </div>
             </div>
@@ -158,11 +187,13 @@ const Account = () => {
                     <MdLock className='h-6 w-6 ml-1'/>
                   </div>
                   <input
-                    type="email"
+                    type="password"
                     className="w-11/12 p-2"
                     placeholder='...'
+                    onChange={handlePassword}
                   />
                 </div>
+                <button onClick={changePassword}>Update Password</button>
               </div>
             </div>
             <div className="w-full items-center p-4 md:inline-flex">
@@ -178,8 +209,8 @@ const Account = () => {
                     className="w-11/12 p-2 bg-black"
                     onChange={handleChange}
                   />
-                  <button onClick={uploadImage}>Upload</button>
                 </div>
+                <button onClick={uploadImage}>Upload new image</button>
               </div>
             </div>
             <hr />
@@ -188,7 +219,6 @@ const Account = () => {
             </div>
             <hr />
             <div className="w-full p-4 justify-center items-center flex">
-              <button className='h-[60px] w-[160px] flex px-3 py-4 mx-6'><MdChangeCircle className='h-6 w-6 mr-1'/>Update Info</button>
               <button onClick={handleLogout} className='h-[60px] w-[160px] flex pl-[50px] py-4 mx-6'>Logout</button>
               <Link to='/'><button className='h-[60px] w-[160px] flex pl-[35px] py-4 mx-6'>Back Home</button></Link>
             </div>
