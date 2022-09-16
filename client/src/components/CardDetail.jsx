@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { analytics } from '../firebase';
+import {logEvent } from 'firebase/analytics'
 import {MdFavorite} from 'react-icons/md'
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,6 +57,14 @@ const CardDetail = () => {
         })
       }
     }
+
+    useEffect(()=>{
+      logEvent(analytics, 'shoe', {
+        id: `${shoe._id}`,
+        brand: `${shoe.brand}`,
+        name: `${shoe.name}`
+      })
+    },[])
 
     useEffect(() => {
       dispatch(getShoe(id));

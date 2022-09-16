@@ -57,7 +57,7 @@ export default function CardCarrito({ shoe }) {
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <div className="px-4 flex">
+          <div className="px-2 flex">
           <button
               className="focus:outline-none bg-gray-100 h-8 w-20 rounded text-sm px-2 mx-2"
               disabled
@@ -78,12 +78,12 @@ export default function CardCarrito({ shoe }) {
             </button>
             
           </div>
-          <div className="flex justify-center items-center">
-            <div className="pr-8 ">
+          <div className="flex justify-center items-center px-2">
+            <div className="">
               <p className="text-xs font-semibold text-white">${cantComprar * shoe.price}</p>
             </div>
           </div>
-          <div>
+          <div className="flex justify-center items-center">
             <button className="h-8 w-8" onClick={handleDelete}><AiFillDelete/></button>
           </div>
         </div>
