@@ -21,7 +21,8 @@ function Admin() {
     const [currentPageClients, setCurrentPageClients] = useState(0)
 
     const userSuperAdmin = ()=>{
-      if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2'){
+      if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' ||
+         user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2'){
         superSetAdmin(true)
       }else{
         superSetAdmin(false)
