@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 function CreateShoes() {
   return (
     <div>
-      <div className="min-h-screen bg-gray-800 flex justify-center items-center">
+      <div className="min-h-screen bg-gray-800 flex justify-center items-center py-20">
         <Formik 
             initialValues={{
                 brand:'',
@@ -14,56 +14,64 @@ function CreateShoes() {
                 image:'',
                 color:'',
                 price:'',
-                stock:''
+                size:'',
+                q:''
             }}
             validate={(values)=>{
                 let errorsActicon = {}
 
                 //brand
                 if(!values.brand){
-                    errorsActicon.brand = 'ingrese bien el nombre'
+                    errorsActicon.brand = 'enter the brand correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.brand)){
                     errorsActicon.brand = 'El nombre solo puede contener letras y espacios'
                 }
 
                 //name
                 if(!values.name){
-                    errorsActicon.name = 'ingrese bien el nombre'
+                    errorsActicon.name = 'enter the name correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)){
                     errorsActicon.name = 'El nombre solo puede contener letras y espacios'
                 }
 
                 //image
                 if(!values.image){
-                    errorsActicon.image = 'ingrese bien la image'
-                }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.image)){
+                    errorsActicon.image = 'enter the link correctly'
+                }else if(!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(values.image)){
                     errorsActicon.image = 'El nombre solo puede contener letras y espacios'
                 }
 
                 //color
                 if(!values.color){
-                    errorsActicon.color = 'ingrese bien el color'
+                    errorsActicon.color = 'enter the color correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.color)){
                     errorsActicon.color = 'El nombre solo puede contener letras y espacios'
                 }
 
                 //price
                 if(!values.price){
-                    errorsActicon.price = 'ingrese bien el price'
-                }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.price)){
+                    errorsActicon.price = 'enter the price correctly'
+                }else if(!/^[0-9]{1,40}$/.test(values.price)){
                     errorsActicon.price = 'El nombre solo puede contener letras y espacios'
                 }
 
-                //stock
-                if(!values.stock){
-                    errorsActicon.stock = 'ingrese bien el stock'
-                }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.stock)){
-                    errorsActicon.stock = 'El nombre solo puede contener letras y espacios'
+                //size
+                if(!values.size){
+                    errorsActicon.size = 'enter the size correctly'
+                }else if(!/^[0-9]{1,40}$/.test(values.size)){
+                    errorsActicon.size = 'El nombre solo puede contener letras y espacios'
+                }
+
+                //q
+                if(!values.q){
+                    errorsActicon.q = 'enter the quantity correctly'
+                }else if(!/^[0-9]{1,40}$/.test(values.q)){
+                    errorsActicon.q = 'El nombre solo puede contener letras y espacios'
                 }
 
                 //description
                 if(!values.description){
-                    errorsActicon.description = 'ingrese bien la description'
+                    errorsActicon.description = 'enter the description correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.description)){
                     errorsActicon.description = 'El nombre solo puede contener letras y espacios'
                 }
@@ -84,7 +92,7 @@ function CreateShoes() {
                         timer: 5000
                       })
                     const { data } = await axios.post(
-                        "https://sneakers-api-pg.herokuapp.com/shoes",
+                        "https://sneakers-back-end.herokuapp.com/shoes",
                         {
                           brand: e.brand,
                           name: e.name,
@@ -92,7 +100,10 @@ function CreateShoes() {
                           image: e.image,
                           color: e.color,
                           price: e.price,
-                          stock: e.stock
+                          stock: [{
+                            size:e.size,
+                            q:e.q
+                          }]
                         })
                         console.log(JSON.stringify(data))
                 }catch(error){
@@ -118,15 +129,15 @@ function CreateShoes() {
                             add some new shoes to the store!
                         </p>
                     </div>
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                         <Field
                         type="text"
                         name="brand"
                         placeholder="Brand"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
-                        <ErrorMessage name="brand" component={()=>(
-                            <div>{errors.brand}</div>
+                        <ErrorMessage component={()=>(
+                            <div className="text-xs px-1  text-red-500" name="brand">{errors.brand}</div>
                         )}/>
                         <Field
                         type="text"
@@ -135,7 +146,7 @@ function CreateShoes() {
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="name" component={()=>(
-                            <div>{errors.name}</div>
+                            <div className="text-xs px-1  text-red-500">{errors.name}</div>
                         )}/>
                         <Field
                         type="text"
@@ -144,7 +155,7 @@ function CreateShoes() {
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="image" component={()=>(
-                            <div>{errors.image}</div>
+                            <div className="text-xs px-1  text-red-500">{errors.image}</div>
                         )}/>
                         <Field
                         type="text"
@@ -153,25 +164,34 @@ function CreateShoes() {
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="color" component={()=>(
-                            <div>{errors.color}</div>
+                            <div className="text-xs px-1  text-red-500">{errors.color}</div>
                         )}/>
                         <Field
-                        type="text"
+                        type="number"
                         name="price"
                         placeholder="Price"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="price" component={()=>(
-                            <div>{errors.price}</div>
+                            <div className="text-xs px-1  text-red-500">{errors.price}</div>
                         )}/>
                         <Field
-                        type="text"
-                        name="stock"
-                        placeholder="Stock"
+                        type="number"
+                        name="size"
+                        placeholder="size"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
-                        <ErrorMessage name="stock" component={()=>(
-                            <div>{errors.stock}</div>
+                        <ErrorMessage name="size" component={()=>(
+                            <div className="text-xs px-1  text-red-500">{errors.size}</div>
+                        )}/>
+                        <Field
+                        type="number"
+                        name="q"
+                        placeholder="quantity"
+                        className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                        />
+                        <ErrorMessage name="q" component={()=>(
+                            <div className="text-xs px-1  text-red-500">{errors.q}</div>
                         )}/>
                         <Field
                         name="description" 
@@ -180,7 +200,7 @@ function CreateShoes() {
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="description" component={()=>(
-                            <div>{errors.description}</div>
+                            <div className="text-xs px-1  text-red-500">{errors.description}</div>
                         )}/>
                     </div>
                     <div className="text-center mt-6">
