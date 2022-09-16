@@ -23,6 +23,7 @@ export const INCREMENT_QUANTITY = 'INCREMENT_QUANTITY';
 export const DECREMENT_QUANTITY = 'DECREMENT_QUANTITY';
 export const CLEAN_CART = 'CLEAN_CART';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GET_USERS = 'GET_USERS'
 
 export const getShoes = () => (dispatch)=>{
     return axios('https://deploy-sp-back.herokuapp.com/shoes')
@@ -151,3 +152,7 @@ function localStorageCarrito(data, add) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+export const getUsers = () => (dispatch)=>{
+    return axios('https://deploy-sp-back.herokuapp.com/users')
+                    .then(res => dispatch({type: 'GET_USERS', payload: res.data}))
+}
