@@ -1,5 +1,7 @@
 import React,{useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { analytics } from '../firebase';
+import {logEvent } from 'firebase/analytics';
 import { Link } from "react-router-dom";
 import { limpiarCarrito, resetTotal } from "../redux/actions/actions";
 import { AiFillDelete } from "react-icons/ai";
@@ -11,6 +13,10 @@ export default function Cart() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.productosCarrito);
   const subTotal = useSelector((state=> state.totalCarrito));
+
+  useEffect(()=>{
+    logEvent(analytics,'CART |S.P|')
+  },[])
 
   useEffect(() => {
     
