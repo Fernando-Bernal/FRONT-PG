@@ -18,7 +18,11 @@ import {
     RESET_TOTAL, 
     INCREMENT_QUANTITY, 
     DECREMENT_QUANTITY, 
-    CLEAN_CART
+    CLEAN_CART,
+    GET_REVIEWS,
+    GET_EXACT_REVIEW,
+    POST_REVIEW,
+    EDIT_REVIEW
 } from '../actions/actions'
 
 const initialState = {
@@ -29,6 +33,8 @@ const initialState = {
     name: [],
     catalogBrand: [],
     cart:[],
+    review: {},
+    reviews: [],
     productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0
 }
@@ -174,6 +180,27 @@ export function reducerApp(state = initialState, action){
           }),
         };
       /////////////////////////////////////////////////////////////////////////////////////////////////
+      case GET_REVIEWS:
+        return{
+          ...state,
+          reviews: action.payload
+        }
+      case GET_EXACT_REVIEW:
+        return{
+          ...state,
+          review: action.payload[0]
+        }
+        case POST_REVIEW:
+        return {
+          ...state,
+        };
+
+        case EDIT_REVIEW:
+          return{
+            ...state,
+            review: {...state.review, ...action.payload}
+          }
+        
 
       default:
         return state;

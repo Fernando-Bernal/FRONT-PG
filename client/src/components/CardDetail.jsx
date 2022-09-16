@@ -6,7 +6,7 @@ import Select from "react-select";
 import Swal from "sweetalert2";
 import { getShoe, addProductCarrito, cleanShoe } from '../redux/actions/actions';
 import NavBar from './NavBar';
-import RatingComponent from './RatingComponent';
+import Review from './Review';
 
 const CardDetail = () => {
     const dispatch = useDispatch()
@@ -101,7 +101,7 @@ const CardDetail = () => {
           </button>
         </div>
       </div>
-      <RatingComponent/>
+      <Review id={id}/>
     </div>
   </div>
 </div>
