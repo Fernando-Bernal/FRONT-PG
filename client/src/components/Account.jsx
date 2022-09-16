@@ -1,6 +1,8 @@
 import React,{useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
+import { analytics } from '../firebase';
+import {logEvent } from 'firebase/analytics';
 import Swal from "sweetalert2";
 import NavBar from './NavBar';
 import { useEffect } from 'react';
@@ -10,11 +12,19 @@ const Account = () => {
   const navigate = useNavigate()
   const [admin, setAdmin] = useState(false)
 
+  console.log(user.uid)
+
   const usersAdmin = ()=>{
-    if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2'){
+    if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' || user?.email === 'luismfalco7@gmail.com' && user?.uid === 'S5aTKeI37ZMsJN5tm2g6KcobpgI2'){
       setAdmin(true)
+    }else{
+      setAdmin(false)
     }
   }
+
+  useEffect(()=>{
+    logEvent(analytics,'ACCOUNT |S.P|')
+  },[])
 
   useEffect(()=>{
     usersAdmin()
