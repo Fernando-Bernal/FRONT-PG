@@ -26,6 +26,7 @@ import {
 const initialState = {
     shoes: [],
     shoe: [],
+    allShoes: [],
     filter:[],
     brands:[],
     name: [],
@@ -42,6 +43,7 @@ export function reducerApp(state = initialState, action){
       case GET_SHOES:
         return {
           ...state,
+          allShoes: action.payload,
           shoes: action.payload.map((e) => ({
             ...e,
             quantity: 0
