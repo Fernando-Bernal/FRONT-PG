@@ -26,27 +26,27 @@ export const CLEAN_CART = 'CLEAN_CART';
 export const GET_USERS = 'GET_USERS'
 
 export const getShoes = () => (dispatch)=>{
-    return axios('https://deploy-sp-back.herokuapp.com/shoes')
+    return axios('https://sneakers-back-end.herokuapp.com/shoes')
                     .then(res => dispatch({type: 'GET_SHOES', payload: res.data}))
 }
 
 export const getShoe = (id) => (dispatch)=>{
-    return axios(`https://deploy-sp-back.herokuapp.com/shoes/${id}`)
+    return axios(`https://sneakers-back-end.herokuapp.com/shoes/${id}`)
                     .then(res => dispatch({type: 'GET_SHOE', payload: res.data}))
 }
 
 export const getBrands = () => (dispatch)=>{
-    return axios(`https://deploy-sp-back.herokuapp.com/brands`)
+    return axios(`https://sneakers-back-end.herokuapp.com/brands`)
                     .then(res => dispatch({type: 'GET_BRANDS', payload: res.data})) 
 }
 
 export const getByName = (name) => (dispatch)=>{
-    return axios(`https://deploy-sp-back.herokuapp.com/shoes?name=${name}`)
+    return axios(`https://sneakers-back-end.herokuapp.com/shoes?name=${name}`)
                     .then(res => dispatch({type: 'GET_BY_NAME', payload: res.data})) 
 }
 
 export const getByCatalogBrand = (brand) => (dispatch)=>{
-    return axios(`https://deploy-sp-back.herokuapp.com/shoes?brand=${brand}`)
+    return axios(`https://sneakers-back-end.herokuapp.com/shoes?brand=${brand}`)
                     .then(res => dispatch({type: 'GET_BY_CATALOG_BRAND', payload: res.data})) 
 }
 
@@ -78,7 +78,7 @@ export const getByColor = (value) => {
 export function postUser(value) {
     return async function (dispatch) {
         const create = await axios.post(
-            `https://deploy-sp-back.herokuapp.com/users`,
+            `https://sneakers-back-end.herokuapp.com/users`,
             value
         );
         return dispatch({
@@ -153,6 +153,6 @@ function localStorageCarrito(data, add) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const getUsers = () => (dispatch)=>{
-    return axios('https://deploy-sp-back.herokuapp.com/users')
+    return axios('https://sneakers-back-end.herokuapp.com/users')
                     .then(res => dispatch({type: 'GET_USERS', payload: res.data}))
 }
