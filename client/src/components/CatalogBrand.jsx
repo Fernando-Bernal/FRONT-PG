@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { analytics } from '../firebase';
+import {logEvent } from 'firebase/analytics';
 import Select from "react-select";
 import { getByCatalogBrand, getByColor, getLessPrice, getMorePrice } from "../redux/actions/actions";
 import { useParams } from "react-router-dom";
@@ -45,6 +47,12 @@ const options = catalogBrand.map(e => ({value:e._id, label:e.color}))
   };
 
   const catalogBrandPage = catalogBrand.slice(currentPage, currentPage + 28);
+
+  console.log(brand)
+
+  useEffect(()=>{
+    logEvent(analytics,`${brand} |S.P|`)
+  },[])
 
   useEffect(() => {
     dispatch(getByCatalogBrand(brand));

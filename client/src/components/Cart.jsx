@@ -1,5 +1,7 @@
 import React,{useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { analytics } from '../firebase';
+import {logEvent } from 'firebase/analytics';
 import { Link } from "react-router-dom";
 import { limpiarCarrito, resetTotal } from "../redux/actions/actions";
 import { AiFillDelete } from "react-icons/ai";
@@ -11,6 +13,10 @@ export default function Cart() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.productosCarrito);
   const subTotal = useSelector((state=> state.totalCarrito));
+
+  useEffect(()=>{
+    logEvent(analytics,'CART |S.P|')
+  },[])
 
   useEffect(() => {
     
@@ -31,7 +37,7 @@ export default function Cart() {
                     <div className="flex justify-between items-center mt-6 pt-6">
                       {products?.length === 0 ? (
                         <div>
-                          {dispatch(resetTotal()) && <h1 className="text-white">No has agregado productos al carrito... </h1>}
+                          {dispatch(resetTotal()) && <h1 className="text-white">You have not added products to the cart... </h1>}
                         </div>
                       ) : (
                         <div>

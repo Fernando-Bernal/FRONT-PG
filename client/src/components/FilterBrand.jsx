@@ -31,7 +31,7 @@ function FilterBrand() {
           <div className=" bg-white p-3.5">
             {brands?.map((e) => {
               return (
-                <div>
+                <div key={e._id}>
                   <Link to={`/colletions/${e.name}`}>
                     <button
                       className="bg-white border-none ml-2 uppercase"

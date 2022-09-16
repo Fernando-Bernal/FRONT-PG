@@ -18,7 +18,9 @@ import {
     RESET_TOTAL, 
     INCREMENT_QUANTITY, 
     DECREMENT_QUANTITY, 
-    CLEAN_CART
+    CLEAN_CART,
+    /////////////////////////////
+    GET_USERS
 } from '../actions/actions'
 
 const initialState = {
@@ -30,7 +32,8 @@ const initialState = {
     catalogBrand: [],
     cart:[],
     productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
-    totalCarrito: 0
+    totalCarrito: 0,
+    users:[]
 }
 
 export function reducerApp(state = initialState, action){
@@ -174,6 +177,11 @@ export function reducerApp(state = initialState, action){
           }),
         };
       /////////////////////////////////////////////////////////////////////////////////////////////////
+      case GET_USERS:
+        return {
+          ...state,
+          users: action.payload,
+        };
 
       default:
         return state;
