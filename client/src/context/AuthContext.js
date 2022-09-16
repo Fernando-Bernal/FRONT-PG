@@ -22,7 +22,6 @@ const AuthContextProvider = ({children}) => {
       email: register.user.email,
       idUser: register.user.uid 
     }
-    console.log(userRegister)
     dispatch(postUser(userRegister))
   }
 
@@ -42,6 +41,7 @@ const AuthContextProvider = ({children}) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
+      console.log(currentUser)
     })
     return () => {
       unsubscribe()
