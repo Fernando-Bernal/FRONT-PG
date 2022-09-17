@@ -82,10 +82,11 @@ function checkout({ products, subTotal }) {
                 amount: subTotal * 100,
               }
             );
+
+            console.log(data)
             Swal.fire({
               position: "top-center",
-              icon: "success",
-              title: "your payment has been successful",
+              title: `${data.message}`,
               showConfirmButton: false,
               timer: 5000,
             });
