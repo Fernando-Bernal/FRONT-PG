@@ -83,11 +83,8 @@ export const getByColor = (value) => {
 export function postUser(value) {
     return async function (dispatch) {
         const create = await axios.post(
-<<<<<<< HEAD
             `http://localhost:3001/users`,
-=======
             `https://sneakers-back-end.herokuapp.com/users`,
->>>>>>> 5bc677ae4943c7195c8c84ceb9f035e4e15e2f05
             value
         );
         return dispatch({
@@ -162,7 +159,6 @@ function localStorageCarrito(data, add) {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-<<<<<<< HEAD
 
 export const getReviews = (shoeId) => (dispatch)=>{
     return axios(`http://localhost:3001/reviews/${shoeId}`)
@@ -199,9 +195,7 @@ export function cleanReviews() {
      type: 'CLEAN_REVIEWS',
      payload: {}
  }
-=======
 export const getUsers = () => (dispatch)=>{
     return axios('https://sneakers-back-end.herokuapp.com/users')
                     .then(res => dispatch({type: 'GET_USERS', payload: res.data}))
->>>>>>> 5bc677ae4943c7195c8c84ceb9f035e4e15e2f05
 }
