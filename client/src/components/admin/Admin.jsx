@@ -5,20 +5,23 @@ import { UserAuth } from '../../context/AuthContext'
 import { SiFirebase, SiStripe } from "react-icons/si";
 import { GiRunningShoe } from "react-icons/gi";
 import { IoIosCreate } from "react-icons/io";
-import { getUsers } from '../../redux/actions/actions'
+import { getShoes, getUsers } from '../../redux/actions/actions'
 import Swal from "sweetalert2";
 import Users from './Users'
 import Clients from './Clients';
+import Products from './Products';
 
 function Admin() {
     const dispatch = useDispatch()
     const users = useSelector((state)=> state.users)
     const clients = useSelector((state)=> state.users)
+    const products = useSelector((state)=> state.shoes)
     const {user, logout} = UserAuth()
     const navigate = useNavigate()
     const [superAdmin, superSetAdmin] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
     const [currentPageClients, setCurrentPageClients] = useState(0)
+    const [currentPageProducts, setCurrentPageProducts] = useState(0)
 
     const userSuperAdmin = ()=>{
       if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' ||
@@ -50,7 +53,7 @@ function Admin() {
           setCurrentPage(currentPage + 4)
       }
     }
-
+    
     useEffect(()=>{
       if(clients.length){
           setCurrentPageClients(0)
@@ -72,12 +75,37 @@ function Admin() {
           setCurrentPageClients(currentPageClients + 4)
       }
     }
-  
-    const usersPage = users.slice(currentPage, currentPage + 4)
-    const clientsPage = clients.slice(currentPageClients, currentPageClients + 4)
 
+    useEffect(()=>{
+        if(products.length){
+            setCurrentPageProducts(0)
+        }
+      },[products])
+    
+      const prevPageProducts = ()=>{
+        if(currentPageProducts < 7){
+            setCurrentPageProducts(0)
+        }else{
+            setCurrentPageProducts(currentPageProducts - 6)
+        }
+      }
+    
+      const nextPageProducts = ()=>{
+        if(products.length <= currentPageProducts + 6){
+            setCurrentPageProducts(currentPageProducts)
+        }else{
+            setCurrentPageProducts(currentPageProducts + 6)
+        }
+      }
+
+      
+      const usersPage = users.slice(currentPage, currentPage + 4)
+      const clientsPage = clients.slice(currentPageClients, currentPageClients + 4)
+      const productsPage = products.slice(currentPageProducts, currentPageProducts + 6)
+      
     const resultUsers =  usersPage.length + currentPage
     const resultClients =  clientsPage.length + currentPageClients
+    const resultProducts =  productsPage.length + currentPageProducts
 
     useEffect(()=>{
         userSuperAdmin()
@@ -85,6 +113,7 @@ function Admin() {
 
     useEffect(()=>{
         dispatch(getUsers())
+        dispatch(getShoes())
     },[])
 
     const handleLogout = async () => {
@@ -286,6 +315,55 @@ function Admin() {
                                     </li>
                                     <li>
                                     <button className="px-3 py-1 mx-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next" onClick={nextPageClients}>
+                                        <svg className="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                        <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    </li>
+                                </ul>
+                                </nav>
+                            </span>
+                            </div>
+                            </div>
+                        </div>
+
+                    {/*-- Products Table --*/}
+                    <div className="my-4 mx-4">
+                            <div className="w-full overflow-hidden rounded-lg shadow-xs">
+                                <div className="w-full overflow-x-auto">
+                                <table className="w-full">
+                                    <thead>
+                                    <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                        <th className="px-4 py-3">Products</th>
+                                        <th className="px-4 py-3">brand</th>
+                                        <th className="px-4 py-3">edit</th>
+                                        <th className="px-4 py-3">delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                    {productsPage?.map(e =>  <Products 
+                                                key={e._id}
+                                                products={e}
+                                            />)}
+                                    </tbody>
+                                </table>
+                                </div>
+                                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                                <span className="flex items-center col-span-3"> Showing {resultProducts} of {products.length} </span>
+                                <span className="col-span-2"></span>
+                        {/*-- Pagination --*/}
+                            <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                <nav aria-label="Table navigation">
+                                <ul className="inline-flex items-center">
+                                    <li>
+                                    <button className="px-3 py-1 mx-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous" onClick={prevPageProducts}>
+                                        <svg aria-hidden="true" className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                        <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    </li>
+                                    <li>
+                                    <button className="px-3 py-1 mx-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next" onClick={nextPageProducts}>
                                         <svg className="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
                                         <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd"></path>
                                         </svg>
