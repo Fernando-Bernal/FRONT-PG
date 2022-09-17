@@ -92,6 +92,7 @@ const Signin = () => {
           </div>
           <button className='w-full py-4 my-2'>Sign In</button>
           <GoogleButton onClick={handleGoogleSignIn} className='mx-[210px]' type='light'/>
+          <Link to='/forget'><button className='w-full py-4 my-2'>Forget password?</button></Link>
           <Link to='/'><button className='w-full py-4 my-2'>Back Home</button></Link>
         </form>
       </div>

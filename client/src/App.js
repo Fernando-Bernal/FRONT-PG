@@ -19,6 +19,7 @@ import Admin from './components/admin/Admin';
 import Orders from './components/admin/Orders';
 import CreateShoes from './components/admin/CreateShoes';
 import CreateBrand from './components/admin/CreateBrand';
+import Forget from './components/Forget';
 
 export function App() {
   
@@ -43,6 +44,7 @@ export function App() {
           <Route exact path= "/contactUs" element={<ContactUs/>} />
           <Route exact path= "/sizeChart" element={<SizeChart/>} />
           <Route exact path= "/termsOfService" element={<TermsOfService/>} />
+          <Route exact path= "/forget" element={<Forget/>} />
           <Route path='*' element={<PageNotFound/>}/>
         </Routes>
       </AuthContextProvider>
