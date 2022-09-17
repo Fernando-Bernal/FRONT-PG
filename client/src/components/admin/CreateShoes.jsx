@@ -24,56 +24,54 @@ function CreateShoes() {
                 if(!values.brand){
                     errorsActicon.brand = 'enter the brand correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.brand)){
-                    errorsActicon.brand = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.brand = 'The name can only contain letters and spaces'
                 }
 
                 //name
                 if(!values.name){
                     errorsActicon.name = 'enter the name correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)){
-                    errorsActicon.name = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.name = 'The name can only contain letters and spaces'
                 }
 
                 //image
                 if(!values.image){
-                    errorsActicon.image = 'enter the link correctly'
-                }else if(!/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(values.image)){
-                    errorsActicon.image = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.image = 'add the image'
                 }
 
                 //color
                 if(!values.color){
                     errorsActicon.color = 'enter the color correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.color)){
-                    errorsActicon.color = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.color = 'The name can only contain letters and spaces'
                 }
 
                 //price
                 if(!values.price){
                     errorsActicon.price = 'enter the price correctly'
                 }else if(!/^[0-9]{1,40}$/.test(values.price)){
-                    errorsActicon.price = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.price = 'only numbers'
                 }
 
                 //size
                 if(!values.size){
                     errorsActicon.size = 'enter the size correctly'
                 }else if(!/^[0-9]{1,40}$/.test(values.size)){
-                    errorsActicon.size = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.size = 'only numbers'
                 }
 
                 //q
                 if(!values.q){
                     errorsActicon.q = 'enter the quantity correctly'
                 }else if(!/^[0-9]{1,40}$/.test(values.q)){
-                    errorsActicon.q = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.q = 'only numbers'
                 }
 
                 //description
                 if(!values.description){
                     errorsActicon.description = 'enter the description correctly'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.description)){
-                    errorsActicon.description = 'El nombre solo puede contener letras y espacios'
+                    errorsActicon.description = 'The name can only contain letters and spaces'
                 }
 
                 return errorsActicon
@@ -148,12 +146,6 @@ function CreateShoes() {
                         <ErrorMessage name="name" component={()=>(
                             <div className="text-xs px-1  text-red-500">{errors.name}</div>
                         )}/>
-                        <Field
-                        type="text"
-                        name="image"
-                        placeholder="Image"
-                        className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
-                        />
                         <ErrorMessage name="image" component={()=>(
                             <div className="text-xs px-1  text-red-500">{errors.image}</div>
                         )}/>
@@ -201,6 +193,14 @@ function CreateShoes() {
                         />
                         <ErrorMessage name="description" component={()=>(
                             <div className="text-xs px-1  text-red-500">{errors.description}</div>
+                        )}/>
+                        <Field
+                        type="file"
+                        name="image"
+                        className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                        />
+                        <ErrorMessage name="image" component={()=>(
+                            <div className="text-xs px-1  text-red-500">{errors.image}</div>
                         )}/>
                     </div>
                     <div className="text-center mt-6">
