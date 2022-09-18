@@ -5,7 +5,7 @@ import { UserAuth } from '../../context/AuthContext'
 import { SiFirebase, SiStripe } from "react-icons/si";
 import { GiRunningShoe } from "react-icons/gi";
 import { IoIosCreate } from "react-icons/io";
-import { getShoes, getUsers } from '../../redux/actions/actions'
+import { getClients, getShoes, getUsers } from '../../redux/actions/actions'
 import Swal from "sweetalert2";
 import Users from './Users'
 import Clients from './Clients';
@@ -14,7 +14,7 @@ import Products from './Products';
 function Admin() {
     const dispatch = useDispatch()
     const users = useSelector((state)=> state.users)
-    const clients = useSelector((state)=> state.users)
+    const clients = useSelector((state)=> state.clients)
     const products = useSelector((state)=> state.shoes)
     const {user, logout} = UserAuth()
     const navigate = useNavigate()
@@ -31,6 +31,12 @@ function Admin() {
         superSetAdmin(false)
       }
     }
+
+    let clientsShoe = clients?.map(e=>e.shoe.length)
+    let orders = clientsShoe?.reduce((pv,cv)=> pv + cv,0)
+
+    let clientsAmount = clients.map(e=> e.amount/100)
+    let sales = clientsAmount?.reduce((pv,cv)=> pv + cv,0)
 
     useEffect(()=>{
       if(users.length){
@@ -58,7 +64,7 @@ function Admin() {
       if(clients.length){
           setCurrentPageClients(0)
       }
-    },[clients])
+    },[])
   
     const prevPageClients = ()=>{
       if(currentPageClients < 5){
@@ -80,7 +86,7 @@ function Admin() {
         if(products.length){
             setCurrentPageProducts(0)
         }
-      },[products])
+      },[])
     
       const prevPageProducts = ()=>{
         if(currentPageProducts < 7){
@@ -98,10 +104,9 @@ function Admin() {
         }
       }
 
-      
-      const usersPage = users.slice(currentPage, currentPage + 4)
-      const clientsPage = clients.slice(currentPageClients, currentPageClients + 4)
-      const productsPage = products.slice(currentPageProducts, currentPageProducts + 6)
+    const usersPage = users.slice(currentPage, currentPage + 4)
+    const clientsPage = clients.slice(currentPageClients, currentPageClients + 4)
+    const productsPage = products.slice(currentPageProducts, currentPageProducts + 6)
       
     const resultUsers =  usersPage.length + currentPage
     const resultClients =  clientsPage.length + currentPageClients
@@ -109,10 +114,11 @@ function Admin() {
 
     useEffect(()=>{
         userSuperAdmin()
-      },[user])
+      },[])
 
     useEffect(()=>{
         dispatch(getUsers())
+        dispatch(getClients())
         dispatch(getShoes())
     },[])
 
@@ -212,7 +218,7 @@ function Admin() {
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                         </div>
                         <div className="text-right">
-                        <p className="text-2xl">557</p>
+                        <p className="text-2xl">{orders}</p>
                         <p>Orders</p>
                         </div>
                     </div>
@@ -221,7 +227,7 @@ function Admin() {
                         <svg width="30" height="30" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="stroke-current text-blue-800 dark:text-gray-800 transform transition-transform duration-500 ease-in-out"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                         </div>
                         <div className="text-right">
-                        <p className="text-2xl">$11,257</p>
+                        <p className="text-2xl">$ {sales}</p>
                         <p>Sales</p>
                         </div>
                     </div>
@@ -238,6 +244,9 @@ function Admin() {
                                     <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                         <th className="px-4 py-3">Users</th>
                                         <th className="px-4 py-3">Date</th>
+                                        <th className="px-4 py-3">Status</th>
+                                        <th className="px-4 py-3">Disable</th>
+                                        <th className="px-4 py-3">Enable</th>
                                     </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -287,8 +296,9 @@ function Admin() {
                                         <th className="px-4 py-3">Stripe</th>
                                         <th className="px-4 py-3">Amount</th>
                                         <th className="px-4 py-3">Date</th>
-                                        <th className="px-4 py-3">Status</th>
                                         <th className="px-4 py-3">Order</th>
+                                        <th className="px-4 py-3">Status</th>
+                                        <th className="px-4 py-3">Edit</th>
                                     </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">

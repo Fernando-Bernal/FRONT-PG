@@ -34,10 +34,10 @@ function CreateShoes() {
                     errorsActicon.name = 'The name can only contain letters and spaces'
                 }
 
-                //image
+                /* //image
                 if(!values.image){
                     errorsActicon.image = 'add the image'
-                }
+                } */
 
                 //color
                 if(!values.color){
@@ -145,9 +145,6 @@ function CreateShoes() {
                         />
                         <ErrorMessage name="name" component={()=>(
                             <div className="text-xs px-1  text-red-500">{errors.name}</div>
-                        )}/>
-                        <ErrorMessage name="image" component={()=>(
-                            <div className="text-xs px-1  text-red-500">{errors.image}</div>
                         )}/>
                         <Field
                         type="text"
