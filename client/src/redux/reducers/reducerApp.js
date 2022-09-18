@@ -20,7 +20,11 @@ import {
     DECREMENT_QUANTITY, 
     CLEAN_CART,
     /////////////////////////////
-    GET_USERS
+    GET_USERS,
+    GET_CLIENTS,
+    GET_ORDER_CLIENT,
+    DELETE_SHOE,
+    MODIF_SHOE
 } from '../actions/actions'
 
 const initialState = {
@@ -33,7 +37,9 @@ const initialState = {
     cart:[],
     productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0,
-    users:[]
+    users:[],
+    clients:[],
+    order:[]
 }
 
 export function reducerApp(state = initialState, action){
@@ -182,6 +188,26 @@ export function reducerApp(state = initialState, action){
           ...state,
           users: action.payload,
         };
+      case GET_CLIENTS:
+        return {
+          ...state,
+          clients: action.payload,
+        };
+        case GET_ORDER_CLIENT:
+          return{
+            ...state, 
+            order: [...state.clients].filter(e => e.idPayment === action.payload)
+          }
+        case DELETE_SHOE:
+          return{
+            ...state, 
+            shoes: [...state.shoes].filter(e => e._id !== action.payload)
+          }
+        case MODIF_SHOE:
+          return{
+            ...state, 
+            shoes: [...state.shoes].filter(e => e._id === action.payload)
+          }
 
       default:
         return state;

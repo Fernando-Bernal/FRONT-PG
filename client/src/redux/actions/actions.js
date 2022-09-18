@@ -24,6 +24,10 @@ export const DECREMENT_QUANTITY = 'DECREMENT_QUANTITY';
 export const CLEAN_CART = 'CLEAN_CART';
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GET_USERS = 'GET_USERS'
+export const GET_CLIENTS = 'GET_CLIENTS'
+export const GET_ORDER_CLIENT = 'GET_ORDER_CLIENT'
+export const DELETE_SHOE = 'DELETE_SHOE'
+export const MODIF_SHOE = 'MODIF_SHOE'
 
 export const getShoes = () => (dispatch)=>{
     return axios('https://sneakers-back-end.herokuapp.com/shoes')
@@ -155,4 +159,29 @@ function localStorageCarrito(data, add) {
 export const getUsers = () => (dispatch)=>{
     return axios('https://sneakers-back-end.herokuapp.com/users')
                     .then(res => dispatch({type: 'GET_USERS', payload: res.data}))
+}
+
+export const getClients = () => (dispatch)=>{
+    return axios('https://sneakers-back-end.herokuapp.com/cart')
+                    .then(res => dispatch({type: 'GET_CLIENTS', payload: res.data}))
+}
+
+export const getOrderClient = (order)=>{
+    return {
+        type: 'GET_ORDER_CLIENT',
+        payload: order
+    }
+}
+
+export const deleteShoe = (shoe)=>{
+    return {
+        type: 'DELETE_SHOE',
+        payload: shoe
+    }
+}
+export const modifShoe = (shoe)=>{
+    return {
+        type: 'MODIF_SHOE',
+        payload: shoe
+    }
 }
