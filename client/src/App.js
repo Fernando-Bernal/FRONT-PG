@@ -20,6 +20,7 @@ import Orders from './components/admin/Orders';
 import CreateShoes from './components/admin/CreateShoes';
 import CreateBrand from './components/admin/CreateBrand';
 import Forget from './components/Forget';
+import ModifShoe from './components/admin/ModifShoe';
 
 export function App() {
   
@@ -38,6 +39,7 @@ export function App() {
           <Route exact path= "/orders" element={<Orders/>} />
           <Route exact path= "/createshoes" element={<CreateShoes/>} />
           <Route exact path= "/createbrand" element={<CreateBrand/>} />
+          <Route exact path= "/modifshoe" element={<ModifShoe/>} />
           <Route exact path="/colletions/:brand" element={<CatalogBrand/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path= "/aboutUs" element={<AboutUs/>} />
