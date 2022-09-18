@@ -35,7 +35,7 @@ export function App() {
           <Route exact path="/signin" element={<Signin/>} />
           <Route exact path="/createaccount" element={<CreateAccount/>} />
           <Route exact path='/account' element={<Protected><Account/></Protected>} />
-          <Route exact path= "/admin" element={<Admin/>} />
+          <Route exact path= "/admin" element={<Protected><Admin/></Protected>} />
           <Route exact path= "/orders" element={<Orders/>} />
           <Route exact path= "/createshoes" element={<CreateShoes/>} />
           <Route exact path= "/createbrand" element={<CreateBrand/>} />
