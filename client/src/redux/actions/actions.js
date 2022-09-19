@@ -28,6 +28,7 @@ export const GET_CLIENTS = 'GET_CLIENTS'
 export const GET_ORDER_CLIENT = 'GET_ORDER_CLIENT'
 export const DELETE_SHOE = 'DELETE_SHOE'
 export const MODIF_SHOE = 'MODIF_SHOE'
+export const DELETE_BRAND = 'DELETE_BRAND'
 
 export const getShoes = () => (dispatch)=>{
     return axios('https://sneakers-back-end.herokuapp.com/shoes')
@@ -183,5 +184,11 @@ export const modifShoe = (shoe)=>{
     return {
         type: 'MODIF_SHOE',
         payload: shoe
+    }
+}
+export const deleteBrand = (brand)=>{
+    return {
+        type: 'DELETE_BRAND',
+        payload: brand
     }
 }

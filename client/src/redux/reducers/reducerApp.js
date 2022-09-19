@@ -24,7 +24,8 @@ import {
     GET_CLIENTS,
     GET_ORDER_CLIENT,
     DELETE_SHOE,
-    MODIF_SHOE
+    MODIF_SHOE,
+    DELETE_BRAND
 } from '../actions/actions'
 
 const initialState = {
@@ -207,6 +208,11 @@ export function reducerApp(state = initialState, action){
           return{
             ...state, 
             shoes: [...state.shoes].filter(e => e._id === action.payload)
+          }
+        case DELETE_BRAND:
+          return{
+            ...state, 
+            brands: [...state.brands].filter(e => e._id !== action.payload)
           }
 
       default:
