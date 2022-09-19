@@ -22,6 +22,7 @@ import CreateShoes from './components/admin/CreateShoes';
 import CreateBrand from './components/admin/CreateBrand';
 import Forget from './components/Forget';
 import ModifShoe from './components/admin/ModifShoe';
+import OnSale from './components/OnSale';
 
 export function App() {
   
@@ -31,6 +32,7 @@ export function App() {
       <AuthContextProvider>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/sale" element={<OnSale />} />
           <Route exact path="/products" element={<Catalog />} />
           <Route exact path="/products/:id" element={<CardDetail/>} />
           <Route exact path="/signin" element={<Signin/>} />
