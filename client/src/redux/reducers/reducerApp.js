@@ -1,6 +1,7 @@
 import {
     GET_SHOES,
     GET_SHOE,
+    GET_ONSALE,
     GET_BY_NAME,
     GET_BRANDS,
     GET_BY_BRAND,
@@ -24,18 +25,27 @@ import {
     GET_CLIENTS,
     GET_ORDER_CLIENT,
     DELETE_SHOE,
-    MODIF_SHOE
+    MODIF_SHOE,
+    /////////////////////////////
+    GET_REVIEWS,
+    GET_EXACT_REVIEW,
+    POST_REVIEW,
+    EDIT_REVIEW,
+    CLEAN_REVIEWS
 } from '../actions/actions'
 
 const initialState = {
     shoes: [],
     shoe: [],
     allShoes: [],
+    onSale: [],
     filter:[],
     brands:[],
     name: [],
     catalogBrand: [],
     cart:[],
+    review: {},
+    shoeReviews: [],
     productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0,
     users:[],
@@ -64,6 +74,11 @@ export function reducerApp(state = initialState, action){
             stock:action.payload[0].stock.map( el => ({...el, quantity:0}))
           },
         };
+        case GET_ONSALE:
+      return {
+        ...state,
+        onSale: action.payload,
+      };
       case GET_BRANDS:
         return {
           ...state,
@@ -210,7 +225,33 @@ export function reducerApp(state = initialState, action){
             ...state, 
             shoes: [...state.shoes].filter(e => e._id === action.payload)
           }
-
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        case GET_REVIEWS:
+         return{
+           ...state,
+           shoeReviews: action.payload
+         }
+        case GET_EXACT_REVIEW:
+         return{
+           ...state,
+           myReview: action.payload
+         }
+         case POST_REVIEW:
+         return {
+           ...state,
+           review: action.payload
+         };
+         case EDIT_REVIEW:
+           return{
+             ...state,
+             review: {...state.review, ...action.payload}
+           }
+         case CLEAN_REVIEWS:
+          return{
+            ...state,
+            review: {},
+            shoeReviews: []
+          }
       default:
         return state;
     }
