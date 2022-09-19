@@ -5,31 +5,34 @@ import { UserAuth } from '../../context/AuthContext'
 import { SiFirebase, SiStripe } from "react-icons/si";
 import { GiRunningShoe } from "react-icons/gi";
 import { IoIosCreate } from "react-icons/io";
-import { getClients, getShoes, getUsers } from '../../redux/actions/actions'
+import { getBrands, getClients, getShoes, getUsers } from '../../redux/actions/actions'
 import Swal from "sweetalert2";
 import Users from './Users'
 import Clients from './Clients';
 import Products from './Products';
+import Brands from './Brands';
 
 function Admin() {
     const dispatch = useDispatch()
     const users = useSelector((state)=> state.users)
     const clients = useSelector((state)=> state.clients)
     const products = useSelector((state)=> state.shoes)
+    const brands = useSelector((state)=> state.brands)
     const {user, logout} = UserAuth()
     const navigate = useNavigate()
     const [superAdmin, superSetAdmin] = useState(false)
     const [currentPage, setCurrentPage] = useState(0)
     const [currentPageClients, setCurrentPageClients] = useState(0)
     const [currentPageProducts, setCurrentPageProducts] = useState(0)
+    const [currentPageBrands, setCurrentPageBrands] = useState(0)
 
     const userSuperAdmin = ()=>{
-      if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' ||
-         user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2'){
+        if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' ||
+            user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2'){
         superSetAdmin(true)
-      }else{
+        }else{
         superSetAdmin(false)
-      }
+        }
     }
 
     let clientsShoe = clients?.map(e=>e.shoe.length)
@@ -39,104 +42,129 @@ function Admin() {
     let sales = clientsAmount?.reduce((pv,cv)=> pv + cv,0)
 
     useEffect(()=>{
-      if(users.length){
-          setCurrentPage(0)
-      }
+        if(users.length){
+            setCurrentPage(0)
+        }
     },[users])
-  
+
     const prevPage = ()=>{
-      if(currentPage < 5){
-          setCurrentPage(0)
-      }else{
-          setCurrentPage(currentPage - 4)
-      }
+        if(currentPage < 5){
+            setCurrentPage(0)
+        }else{
+            setCurrentPage(currentPage - 4)
+        }
     }
-  
+
     const nextPage = ()=>{
-      if(users.length <= currentPage + 4){
-          setCurrentPage(currentPage)
-      }else{
-          setCurrentPage(currentPage + 4)
-      }
+        if(users.length <= currentPage + 4){
+            setCurrentPage(currentPage)
+        }else{
+            setCurrentPage(currentPage + 4)
+        }
     }
     
     useEffect(()=>{
-      if(clients.length){
-          setCurrentPageClients(0)
-      }
+        if(clients.length){
+            setCurrentPageClients(0)
+        }
     },[])
-  
+
     const prevPageClients = ()=>{
-      if(currentPageClients < 5){
-          setCurrentPageClients(0)
-      }else{
-          setCurrentPageClients(currentPageClients - 4)
-      }
+        if(currentPageClients < 5){
+            setCurrentPageClients(0)
+        }else{
+            setCurrentPageClients(currentPageClients - 4)
+        }
     }
-  
+
     const nextPageClients = ()=>{
-      if(clients.length <= currentPageClients + 4){
-          setCurrentPageClients(currentPageClients)
-      }else{
-          setCurrentPageClients(currentPageClients + 4)
-      }
+        if(clients.length <= currentPageClients + 4){
+            setCurrentPageClients(currentPageClients)
+        }else{
+            setCurrentPageClients(currentPageClients + 4)
+        }
     }
 
     useEffect(()=>{
         if(products.length){
             setCurrentPageProducts(0)
         }
-      },[])
+        },[])
     
-      const prevPageProducts = ()=>{
+        const prevPageProducts = ()=>{
         if(currentPageProducts < 7){
             setCurrentPageProducts(0)
         }else{
             setCurrentPageProducts(currentPageProducts - 6)
         }
-      }
-    
-      const nextPageProducts = ()=>{
+        }
+
+        const nextPageProducts = ()=>{
         if(products.length <= currentPageProducts + 6){
             setCurrentPageProducts(currentPageProducts)
         }else{
             setCurrentPageProducts(currentPageProducts + 6)
         }
-      }
+        }
+
+        useEffect(()=>{
+        if(brands.length){
+            setCurrentPageBrands(0)
+        }
+        },[])
+    
+        const prevPageBrands = ()=>{
+        if(currentPageBrands < 5){
+            setCurrentPageBrands(0)
+        }else{
+            setCurrentPageBrands(currentPageBrands - 4)
+        }
+        }
+    
+        const nextPageBrands = ()=>{
+        if(brands.length <= currentPageBrands + 4){
+            setCurrentPageBrands(currentPageBrands)
+        }else{
+            setCurrentPageBrands(currentPageBrands + 4)
+        }
+        }
 
     const usersPage = users.slice(currentPage, currentPage + 4)
     const clientsPage = clients.slice(currentPageClients, currentPageClients + 4)
     const productsPage = products.slice(currentPageProducts, currentPageProducts + 6)
-      
+    const brandsPage = brands.slice(currentPageBrands, currentPageBrands + 4)
+
     const resultUsers =  usersPage.length + currentPage
     const resultClients =  clientsPage.length + currentPageClients
     const resultProducts =  productsPage.length + currentPageProducts
+    const resultBrands =  brandsPage.length + currentPageBrands
 
     useEffect(()=>{
         userSuperAdmin()
-      },[])
+        },[])
 
     useEffect(()=>{
         dispatch(getUsers())
         dispatch(getClients())
         dispatch(getShoes())
+        dispatch(getBrands())
     },[])
 
     const handleLogout = async () => {
         try {
-          await logout()
-          navigate('/')
-          Swal.fire({
+            await logout()
+            navigate('/')
+            Swal.fire({
             position: 'top-center',
             icon: 'success',
             title: 'You logout',
             showConfirmButton: false,
             timer: 3000
-          })
+            })
         } catch (e) {
-          console.log(e.message)
+            console.log(e.message)
         }
-      }
+    }
 
     return ( 
         <div>
@@ -385,10 +413,57 @@ function Admin() {
                             </div>
                             </div>
                         </div>
+
+                    {/*-- Brands Table --*/}
+                    <div className="my-4 mx-4">
+                            <div className="w-full overflow-hidden rounded-lg shadow-xs">
+                                <div className="w-full overflow-x-auto">
+                                <table className="w-full">
+                                    <thead>
+                                    <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                                        <th className="px-4 py-3">Brands</th>
+                                        <th className="px-4 py-3">Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                    {brandsPage?.map(e =>  <Brands 
+                                                key={e._id}
+                                                brands={e}
+                                            />)}
+                                    </tbody>
+                                </table>
+                                </div>
+                                <div className="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                                <span className="flex items-center col-span-3"> Showing {resultBrands} of {brands.length} </span>
+                                <span className="col-span-2"></span>
+                        {/*-- Pagination --*/}
+                            <span className="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                <nav aria-label="Table navigation">
+                                <ul className="inline-flex items-center">
+                                    <li>
+                                    <button className="px-3 py-1 mx-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous" onClick={prevPageBrands}>
+                                        <svg aria-hidden="true" className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                        <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" fillRule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    </li>
+                                    <li>
+                                    <button className="px-3 py-1 mx-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next" onClick={nextPageBrands}>
+                                        <svg className="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                        <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" fillRule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    </li>
+                                </ul>
+                                </nav>
+                            </span>
+                            </div>
+                            </div>
+                        </div>
                 </div>
-             </div>
+                </div>
         </div>
-     );
+        );
 }
 
 export default Admin;

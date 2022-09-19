@@ -31,7 +31,9 @@ import {
     GET_EXACT_REVIEW,
     POST_REVIEW,
     EDIT_REVIEW,
-    CLEAN_REVIEWS
+    CLEAN_REVIEWS,
+    DELETE_BRAND
+
 } from '../actions/actions'
 
 const initialState = {
@@ -227,30 +229,35 @@ export function reducerApp(state = initialState, action){
           }
         /////////////////////////////////////////////////////////////////////////////////////////////////
         case GET_REVIEWS:
-         return{
-           ...state,
-           shoeReviews: action.payload
-         }
+          return{
+            ...state,
+            shoeReviews: action.payload
+          }
         case GET_EXACT_REVIEW:
-         return{
-           ...state,
-           myReview: action.payload
-         }
-         case POST_REVIEW:
-         return {
-           ...state,
-           review: action.payload
-         };
-         case EDIT_REVIEW:
-           return{
-             ...state,
-             review: {...state.review, ...action.payload}
-           }
-         case CLEAN_REVIEWS:
+          return{
+            ...state,
+            myReview: action.payload
+          }
+          case POST_REVIEW:
+          return {
+            ...state,
+            review: action.payload
+          };
+          case EDIT_REVIEW:
+            return{
+              ...state,
+              review: {...state.review, ...action.payload}
+            }
+          case CLEAN_REVIEWS:
           return{
             ...state,
             review: {},
             shoeReviews: []
+          }
+        case DELETE_BRAND:
+          return{
+            ...state, 
+            brands: [...state.brands].filter(e => e._id !== action.payload)
           }
       default:
         return state;

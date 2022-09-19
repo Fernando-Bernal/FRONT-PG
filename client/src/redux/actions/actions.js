@@ -36,6 +36,8 @@ export const POST_REVIEW = "POST_REVIEW"
 export const EDIT_REVIEW = "EDIT_REVIEW"
 export const CLEAN_REVIEWS = "CLEAN_REVIEWS"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const DELETE_BRAND = 'DELETE_BRAND'
+
 
 export const getShoes = () => (dispatch)=>{
     return axios('https://sneakers-back-end.herokuapp.com/shoes')
@@ -48,8 +50,8 @@ export const getShoe = (id) => (dispatch)=>{
 }
 
 export const getOnSale = () => (dispatch)=>{
- return axios("http://localhost:3001/shoes/onSale")
-     .then(res=> dispatch({type: "GET_ONSALE", payload: res.data}))
+    return axios("http://localhost:3001/shoes/onSale")
+        .then(res=> dispatch({type: "GET_ONSALE", payload: res.data}))
 }
 
 export const getBrands = () => (dispatch)=>{
@@ -198,43 +200,49 @@ export const modifShoe = (shoe)=>{
         payload: shoe
     }
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 export const getReviews = (shoeId) => (dispatch)=>{
- return axios(`http://localhost:3001/reviews/${shoeId}`)
-                 .then(res => dispatch({type: 'GET_REVIEWS', payload: res.data}))
+    return axios(`http://localhost:3001/reviews/${shoeId}`)
+        .then(res => dispatch({type: 'GET_REVIEWS', payload: res.data}))
 }
 
 export const getExactReview = (shoeId, idUser) => (dispatch) => {
- return axios(`http://localhost:3001/reviews/${shoeId}`, {idUser : idUser})
-                 .then(res => dispatch({type: 'GET_EXACT_REVIEW', payload: res.data}))
+    return axios(`http://localhost:3001/reviews/${shoeId}`, {idUser : idUser})
+        .then(res => dispatch({type: 'GET_EXACT_REVIEW', payload: res.data}))
 }
 
 export function postReview(idUser, review, rating, shoeId) {
- return async function (dispatch) {
-  const create = axios.post(`http://localhost:3001/reviews/${shoeId}`, { idUser: idUser, review: review, rating: rating })
-     return dispatch({
-     type: 'POST_REVIEW',
-     payload: create,
-     });
- };
+    return async function (dispatch) {
+    const create = axios.post(`http://localhost:3001/reviews/${shoeId}`, { idUser: idUser, review: review, rating: rating })
+        return dispatch({
+        type: 'POST_REVIEW',
+        payload: create,
+        });
+    };
 }
 
 export const editReview = (idReview, review, rating) => (dispatch) =>{
- return axios.put(`http://localhost:3001/reviews/exact/${idReview}`, {review, rating })
- .then(res => dispatch({type: 'EDIT_REVIEW', payload: res.data}))
+    return axios.put(`http://localhost:3001/reviews/exact/${idReview}`, {review, rating })
+    .then(res => dispatch({type: 'EDIT_REVIEW', payload: res.data}))
 }
 
 export const deleteReview = (idReview) => (dispatch) => {
- return axios.delete(`http://localhost:3001/reviews/exact/${idReview}`)
- .then(res => dispatch({type: 'DELETE_REVIEW', payload: {}}))
+    return axios.delete(`http://localhost:3001/reviews/exact/${idReview}`)
+    .then(res => dispatch({type: 'DELETE_REVIEW', payload: {}}))
 }
 
 export function cleanReviews() {
 return {
-  type: 'CLEAN_REVIEWS',
-  payload: {}
+    type: 'CLEAN_REVIEWS',
+    payload: {}
 }
+}
+
+export const deleteBrand = (brand)=>{
+    return {
+        type: 'DELETE_BRAND',
+        payload: brand
+    }
 }
