@@ -5,6 +5,7 @@ import Catalog from "./Catalog";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import Carousel from "./Carousel";
+import ChatBot from './ChatBot'
 
 function Home() {
 
@@ -16,6 +17,7 @@ function Home() {
     <div>
         <NavBar/>
         <Carousel/>
+        <ChatBot/>
         <Catalog/>
         <Footer />
     </div> 
