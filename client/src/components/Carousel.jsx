@@ -36,38 +36,38 @@ const Carousel = () => {
   }, [dispatch])
 
   return (
-   <div>
-     <h1 className="text-[#00ff01] flex justify-center items-center bg-black py-4 font-bold text-xl">
-       The most wanted!
-     </h1>
-     <div className="px-4 pt-2 pb-2 relative flex justify-center items-center bg-black">
-       {length > 0 ?<><BsArrowLeftSquareFill
-         onClick={prevSlide}
-         className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer left-12 hover:opacity-60"
-       />
-       <BsArrowRightSquareFill
-         onClick={nextSlide}
-         className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer right-12 hover:opacity-60"
-       />
-       </> : null}
-       {length > 0
-         ? saleShoes.map((shoe, index) => (
-             <div className={index === slide ? "opacity-100" : "opacity-0"}>
-               {index === slide && (
-                 <Link to={`/products/${shoe._id}`}>
-                   <img
-                     className="rounded-lg object-cover h-[400px] w-[700px] cursor-pointer hover:opacity-60"
-                     src={shoe.image}
-                     alt="x"
-                   />
-                 </Link>
-               )}
-             </div>
-           ))
-         : <img alt = "img not found" src = {Banner}/>}
-     </div>
-   </div>
- );
+    <div>
+      <h1 className="text-[#00ff01] flex justify-center items-center bg-black py-4 font-bold text-xl">
+        The most wanted!
+      </h1>
+      <div className="px-4 pt-2 pb-2 relative flex justify-center items-center bg-black">
+        {length > 0 ?<><BsArrowLeftSquareFill
+          onClick={prevSlide}
+          className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer left-12 hover:opacity-60"
+        />
+        <BsArrowRightSquareFill
+          onClick={nextSlide}
+          className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer right-12 hover:opacity-60"
+        />
+        </> : null}
+        {length > 0
+          ? saleShoes.map((shoe, index) => (
+              <div className={index === slide ? "opacity-100" : "opacity-0"}>
+                {index === slide && (
+                  <Link to={`/products/${shoe._id}`}>
+                    <img
+                      className="rounded-lg object-cover h-[400px] w-[700px] cursor-pointer hover:opacity-60"
+                      src={shoe.image}
+                      alt="x"
+                    />
+                  </Link>
+                )}
+              </div>
+            ))
+          : <img alt = "img not found" src = {Banner} className='h-[400px] w-[700px]'/>}
+      </div>
+    </div>
+  );
 };
 
 export default Carousel;
