@@ -31,6 +31,9 @@ const Account = () => {
 
   useEffect(()=>{
     logEvent(analytics,'ACCOUNT |S.P|')
+    return () => {
+      setImageUp(null)
+    }
   },[])
 
   useEffect(()=>{
@@ -47,7 +50,7 @@ const Account = () => {
   }
 
   const uploadImage = async () => {
-    if (imageUp == null) return
+    if (imageUp === null) return
     const imageRef = ref(storage, `${user.uid}`)
     await uploadBytes(imageRef, imageUp)
     const imageURL = await getDownloadURL(imageRef)

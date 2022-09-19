@@ -14,12 +14,14 @@ import SizeChart from './components/SizeChart';
 import TermsOfService from './components/TermsOfService';
 import AuthContextProvider from './context/AuthContext';
 import Protected from './components/Protected'
+import ProtectedAdmin from './components/admin/ProtectedAdmin'
 import PageNotFound from './components/PageNotFound';
 import Admin from './components/admin/Admin';
 import Orders from './components/admin/Orders';
 import CreateShoes from './components/admin/CreateShoes';
 import CreateBrand from './components/admin/CreateBrand';
 import Forget from './components/Forget';
+import ModifShoe from './components/admin/ModifShoe';
 
 export function App() {
   
@@ -34,10 +36,11 @@ export function App() {
           <Route exact path="/signin" element={<Signin/>} />
           <Route exact path="/createaccount" element={<CreateAccount/>} />
           <Route exact path='/account' element={<Protected><Account/></Protected>} />
-          <Route exact path= "/admin" element={<Admin/>} />
+          <Route exact path= "/admin" element={<ProtectedAdmin><Admin/></ProtectedAdmin>} />
           <Route exact path= "/orders" element={<Orders/>} />
           <Route exact path= "/createshoes" element={<CreateShoes/>} />
           <Route exact path= "/createbrand" element={<CreateBrand/>} />
+          <Route exact path= "/modifshoe" element={<ModifShoe/>} />
           <Route exact path="/colletions/:brand" element={<CatalogBrand/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path= "/aboutUs" element={<AboutUs/>} />
