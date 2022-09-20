@@ -29,6 +29,7 @@ export const GET_CLIENTS = 'GET_CLIENTS'
 export const GET_ORDER_CLIENT = 'GET_ORDER_CLIENT'
 export const DELETE_SHOE = 'DELETE_SHOE'
 export const MODIF_SHOE = 'MODIF_SHOE'
+export const DELETE_BRAND = 'DELETE_BRAND'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GET_REVIEWS = "GET_REVIEWS"
 export const GET_EXACT_REVIEW = "GET_EXACT_REVIEW"
@@ -36,7 +37,6 @@ export const POST_REVIEW = "POST_REVIEW"
 export const EDIT_REVIEW = "EDIT_REVIEW"
 export const CLEAN_REVIEWS = "CLEAN_REVIEWS"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DELETE_BRAND = 'DELETE_BRAND'
 
 
 export const getShoes = () => (dispatch)=>{
@@ -200,6 +200,13 @@ export const modifShoe = (shoe)=>{
         payload: shoe
     }
 }
+export const deleteBrand = (brand)=>{
+    return {
+        type: 'DELETE_BRAND',
+        payload: brand
+    }
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -240,9 +247,4 @@ return {
 }
 }
 
-export const deleteBrand = (brand)=>{
-    return {
-        type: 'DELETE_BRAND',
-        payload: brand
-    }
-}
+
