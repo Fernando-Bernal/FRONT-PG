@@ -78,6 +78,26 @@ const CardDetail = () => {
     }
   }, [dispatch, id])
 
+  const addFavorite = () => {
+    dispatch(postFavorite(idUser, shoeId))
+    Swal.fire({
+      icon: 'success',
+      title: 'Shoe added to Favorites',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
+
+  const removeFavorite = () => {
+    dispatch(deleteFavorite(idUser, shoeId))
+    Swal.fire({
+      icon: 'success',
+      title: 'Shoe remove from Favorites',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
+
   return (
     <>
     <NavBar/>
@@ -111,10 +131,10 @@ const CardDetail = () => {
           <Link to={`/cart`}> 
             <button className="flex ml-auto border py-2 px-6" onClick={toCart}>BUY ME!</button>
           </Link>
-            <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4" onClick={() => dispatch(postFavorite(idUser, shoeId))}>
+            <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4" onClick={addFavorite}>
             <MdFavorite/>
           </button>
-        <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4 bg-[#e04747] border-[#de3030]" onClick={() => dispatch(deleteFavorite(idUser, shoeId))}>
+        <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4 bg-[#e04747] border-[#de3030]" onClick={removeFavorite}>
         <IoMdHeartDislike/>
         </button>
         </div>

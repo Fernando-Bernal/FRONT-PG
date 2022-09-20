@@ -12,6 +12,7 @@ import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
 import { useSelector, useDispatch } from 'react-redux';
 import { getOrderDetail, getUsers } from '../redux/actions/actions';
+import {RiAdminFill} from 'react-icons/ri'
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -145,18 +146,19 @@ const Account = () => {
         <div className="container mx-auto max-w-2xl md:w-3/4">
           <div className="rounded-t-lg border-2 border-[#00ff01] p-4">
             <div className="mx-auto max-w-sm md:mx-0 md:w-full">
-              <div className="inline-flex items-center space-x-4">
+              <div className="inline-flex items-center space-x-8">
                 <img
                   className="h-[80px] w-[80px] rounded-full"
                   alt=""
                   src={photoURL}
                 />
                 <h1 className="text-white text-2xl">{user?.displayName}</h1>
-                <Link to='/favorites'><button className="mr-4 px-8 py-4 text-xl"><MdFavorite/></button></Link>
+                <Link to='/favorites'><button className="px-4 py-3 text-xl flex w-[165px]"><MdFavorite className='h-6 w-6 mr-2'/>Favorites</button></Link>
                 <Link to={'/admin'}>
                   {admin && 
                     <button
-                      className='px-6 py-2 my-4'>
+                      className='px-7 py-3 text-xl flex w-[165px]'>
+                      <RiAdminFill className='h-6 w-6 mr-2'/>
                       Admin
                     </button>
                   }
