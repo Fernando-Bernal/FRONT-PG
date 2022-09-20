@@ -10,6 +10,8 @@ import {MdEmail, MdPerson, MdLock, MdImage} from 'react-icons/md'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrderDetail } from '../redux/actions/actions';
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -19,6 +21,8 @@ const Account = () => {
   const [photoURL, setPhotoURL] = useState('https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231709/thesomeday123170900021.jpg')
   const [password, setPassword] = useState()
   const [name, setName] = useState()
+  const orders = useSelector(state => state.orders)
+  const dispatch = useDispatch()
 
   const usersAdmin = () => {
     if(user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2' ||
@@ -31,6 +35,7 @@ const Account = () => {
 
   useEffect(()=>{
     logEvent(analytics,'ACCOUNT |S.P|')
+    dispatch(getOrderDetail(user.email))
     return () => {
       setImageUp(null)
     }
@@ -219,6 +224,7 @@ const Account = () => {
             <hr />
             <div className="w-full items-center p-4 md:inline-flex">
               <h2 className="px-4">My Orders</h2>
+              {orders ? orders.map(e => <p>{e}</p>): <p>No orders</p>}
             </div>
             <hr />
             <div className="w-full p-4 justify-center items-center flex">

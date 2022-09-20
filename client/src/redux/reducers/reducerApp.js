@@ -26,6 +26,7 @@ import {
     GET_ORDER_CLIENT,
     DELETE_SHOE,
     MODIF_SHOE,
+    GET_ORDER_DETAIL,
     /////////////////////////////
     GET_REVIEWS,
     GET_EXACT_REVIEW,
@@ -52,7 +53,8 @@ const initialState = {
     totalCarrito: 0,
     users:[],
     clients:[],
-    order:[]
+    order:[],
+    orders: []
 }
 
 export function reducerApp(state = initialState, action){
@@ -226,6 +228,11 @@ export function reducerApp(state = initialState, action){
           return{
             ...state, 
             shoes: [...state.shoes].filter(e => e._id === action.payload)
+          }
+        case GET_ORDER_DETAIL:
+          return{
+            ...state,
+            orders: action.payload.records.map(e => e.idPayment)
           }
         /////////////////////////////////////////////////////////////////////////////////////////////////
         case GET_REVIEWS:
