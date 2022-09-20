@@ -63,7 +63,7 @@ const CardDetail = () => {
     }
 
     useEffect(()=>{
-     dispatch(getFavorites(idUser))
+      dispatch(getFavorites(idUser))
       logEvent(analytics, 'shoe', {
         id: `${shoe._id}`,
         brand: `${shoe.brand}`,

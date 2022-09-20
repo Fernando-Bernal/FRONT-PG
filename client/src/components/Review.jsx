@@ -59,7 +59,7 @@ const Review = (props) => {
             <div className="mt-20 ">
               <h1>ADD REVIEW</h1>
               <div>
-        <div className="flex flex-row pt-8 ">
+        <div className="flex flex-row py-4 ">
           {[...Array(totalStars)].map((n, i) => (
             <Star
               key={i}
@@ -74,24 +74,28 @@ const Review = (props) => {
       </div>
               <form onSubmit={() => dispatch(postReview(idUser, review, rating, shoeId))}>
                 <div className="form-group">
-                  <label htmlFor="description">Description</label>
-                  <input
+                  <label className="flex flex-row">Description:</label>
+                  <textarea
                     type="text"
-                    className="form-control text-black rounded-md"
+                    className="form-control text-black rounded-md h-[80px]"
                     id="description"
                     name="description"
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
+                    required
+                    minLength={20}
+                    maxLength={500}
+                    placeholder="Message"
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">SUBMIT</button>
+                <button type="submit" className='text-black border bg-[#00ff01] border-[#00ff01] mt-2'>SUBMIT</button>
               </form>
             </div>
             <h3 className="mt-7">ALL REVIEWS </h3>
             {reviews.length > 0 ? (
               reviews.map((r) => {
                 return (
-                  <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 bg-slate-400 mb-5 rounded">
+                  <div className="w-[400px] mt-6 mb-5 rounded border border-[#00ff01]">
                     {editForm && r.idUser === idUser ? (
                       <form>
                         <div className="form-group flex flex-row">

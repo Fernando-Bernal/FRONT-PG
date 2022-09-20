@@ -11,7 +11,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrderDetail } from '../redux/actions/actions';
+import { getOrderDetail, getUsers } from '../redux/actions/actions';
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -22,6 +22,7 @@ const Account = () => {
   const [password, setPassword] = useState()
   const [name, setName] = useState()
   const orders = useSelector(state => state.orders)
+  const users = useSelector(state => state.users)
   const dispatch = useDispatch()
 
   const usersAdmin = () => {
@@ -33,9 +34,24 @@ const Account = () => {
     }
   }
 
+  const validateAccount = (users) => {
+    let userVal = users.find(u => u.email === user.email)
+    if(userVal.status === "Disabled" || userVal.status === "Eliminated"){
+      navigate('/')
+      Swal.fire({
+        icon: 'warning',
+        title: 'Your account is Disabled or Eliminated',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      logout()
+    }
+  }
+
   useEffect(()=>{
     logEvent(analytics,'ACCOUNT |S.P|')
     dispatch(getOrderDetail(user.email))
+    dispatch(getUsers())
     return () => {
       setImageUp(null)
     }
@@ -43,6 +59,7 @@ const Account = () => {
 
   useEffect(()=>{
     usersAdmin()
+    if(users.length > 0 && user) validateAccount(users)
     if(user?.photoURL){
       setPhotoURL(user.photoURL)
     }
@@ -75,7 +92,7 @@ const Account = () => {
       navigate('/')
       Swal.fire({
         icon: 'success',
-        title: 'You logout',
+        title: 'See you later!',
         showConfirmButton: false,
         timer: 2000
       })
