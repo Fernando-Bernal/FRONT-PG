@@ -6,7 +6,7 @@ import {logEvent } from 'firebase/analytics';
 import Swal from "sweetalert2";
 import NavBar from './NavBar';
 import { useEffect } from 'react';
-import {MdEmail, MdPerson, MdLock, MdImage} from 'react-icons/md'
+import {MdEmail, MdPerson, MdLock, MdImage, MdFavorite} from 'react-icons/md'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
@@ -130,6 +130,7 @@ const Account = () => {
                   src={photoURL}
                 />
                 <h1 className="text-white text-2xl">{user?.displayName}</h1>
+                <Link to='/favorites'><button className="mr-4 px-8 py-4 text-xl"><MdFavorite/></button></Link>
                 <Link to={'/admin'}>
                   {admin && 
                     <button

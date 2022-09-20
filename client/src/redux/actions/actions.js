@@ -37,6 +37,11 @@ export const EDIT_REVIEW = "EDIT_REVIEW"
 export const CLEAN_REVIEWS = "CLEAN_REVIEWS"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const DELETE_BRAND = 'DELETE_BRAND'
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GET_FAVORITES = 'GET_FAVORITES'
+export const POST_FAVORITES = 'POST_FAVORITES'
+export const DELETE_FAVORITES = 'DELETE_FAVORITES'
+
 
 
 export const getShoes = () => (dispatch)=>{
@@ -240,9 +245,32 @@ return {
 }
 }
 
+
 export const deleteBrand = (brand)=>{
     return {
         type: 'DELETE_BRAND',
         payload: brand
     }
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+export const getFavorites = (idUser) => (dispatch)=>{
+ return axios(`http://localhost:3001/favorites/${idUser}`)
+     .then(res => dispatch({type: 'GET_FAVORITES', payload: res.data}))
+}
+
+export function postFavorite(idUser, shoeId) {
+ return async function (dispatch) {
+ const create = axios.post(`http://localhost:3001/favorites/${idUser}`, { shoeId: shoeId })
+     return dispatch({
+     type: 'POST_FAVORITES',
+     payload: create,
+     });
+ };
+}
+
+export const deleteFavorite = (idUser, shoeId) => (dispatch) => {
+ return axios.delete(`http://localhost:3001/favorites/${idUser}`, { data: {shoeId} })
+ .then(res => dispatch({type: 'DELETE_FAVORITES', payload: {}}))
 }
