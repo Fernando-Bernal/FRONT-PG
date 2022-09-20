@@ -53,7 +53,12 @@ const Review = (props) => {
 
   return (
     <>
-      <div>
+      <div className="container ">
+        <div>
+          <div className=" text-white col-12 ">
+            <div className="mt-20 ">
+              <h1>ADD REVIEW</h1>
+              <div>
         <div className="flex flex-row pt-8 ">
           {[...Array(totalStars)].map((n, i) => (
             <Star
@@ -67,11 +72,6 @@ const Review = (props) => {
           </p>
         </div>
       </div>
-      <div className="container ">
-        <div>
-          <div className=" text-white col-12 ">
-            <div className="mt-20 ">
-              <h1>ADD REVIEW</h1>
               <form onSubmit={() => dispatch(postReview(idUser, review, rating, shoeId))}>
                 <div className="form-group">
                   <label htmlFor="description">Description</label>
