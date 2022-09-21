@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import NavBar from './NavBar';
 
 const ContactUs = () => {
   const [name, setName] = useState("");
@@ -13,9 +14,11 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-black">
-      <div className="flex flex-col items-center justify-center h-3/4 w-1/4 bg-[#00ff01] rounded-lg">
-        <h1 className="text-4xl italic font-semibold">Contact Us</h1>
+    <>
+    <NavBar/>
+    <div className="flex flex-col items-center justify-center mt-28">
+      <div className="flex flex-col items-center justify-center h-[530px] w-1/5 bg-[#00ff01] rounded-lg">
+        <h1 className="text-4xl italic font-semibold mb-4">Contact Us</h1>
         <div>
           <form className="flex flex-col items-center justify-center">
             <label className="text-2xl font-semibold">Name</label>
@@ -27,7 +30,7 @@ const ContactUs = () => {
               name="name"
               onChange={(e) => setName(e.target.value)}
             />
-            <label className="text-2xl font-semibold">Email</label>
+            <label className="text-2xl font-semibold mt-4">Email</label>
             <input
               className="text-1xl font-semibold rounded-lg border-2 border-black"
               required
@@ -36,9 +39,9 @@ const ContactUs = () => {
               name="email"
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label className="text-2xl font-semibold">Message</label>
+            <label className="text-2xl font-semibold mt-4">Message</label>
             <textarea
-              className="text-1xl font-semibold rounded-lg border-2 border-black"
+              className="text-1xl font-semibold rounded-lg border-2 border-black h-[100px]"
               required
               minLength={20}
               maxLength={500}
@@ -48,7 +51,7 @@ const ContactUs = () => {
               onChange={(e) => setMessage(e.target.value)}
             />
             <button
-              className="text-2xl bg-black text-[#00ff01] hover:text-black font-semibold rounded-lg border-2 mt-4 border-black"
+              className="text-2xl bg-black text-[#00ff01] hover:text-black font-semibold rounded-lg border-2 mt-5 border-black"
               onClick={(e) => handleSubmit(e)}
             >
               Submit
@@ -62,6 +65,7 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -148,7 +148,7 @@ const Account = () => {
   return (
     <div>
       <NavBar/>
-      <div className="pt-[90px]">
+      <div className="pt-[90px] text-[#00ff01]">
         <div className="container mx-auto max-w-2xl md:w-3/4">
           <div className="rounded-t-lg border-2 border-[#00ff01] p-4">
             <div className="mx-auto max-w-sm md:mx-0 md:w-full">
@@ -172,37 +172,37 @@ const Account = () => {
               </div>
             </div>
           </div>
-          <div className="space-y-3 bg-[#000000] border ">
+          <div className="space-y-3 border border-[#00ff01]">
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Account</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3">Account</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm text-[#00ff01]">Email</label>
+                <label className="text-sm">Email</label>
                 <div className="inline-flex w-full">
-                  <div className="w-1/12 bg-[#000000] pt-2">
-                    <MdEmail className='text-[#00ff01] h-6 w-6 ml-1'/>
+                  <div className="w-1/12 pt-2">
+                    <MdEmail className='h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="email"
-                    className="w-11/12 p-2 bg-[#000000] focus:text-[#00ff01] focus:outline-none"
+                    className="w-11/12 p-2"
                     placeholder={user && user.email}
                     disabled
                   />
                 </div>
               </div>
             </div>
-            <hr />
+            <hr className='border border-[#00ff01]'/>
             <div className="w-full items-center space-y-4 p-4 md:inline-flex md:space-y-0">
-              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Personal info</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3">Personal info</h2>
               <div className="mx-auto max-w-sm space-y-5 md:w-2/3">
                 <div>
-                  <label className="text-sm text-[#00ff01] ">Display name</label>
+                  <label className="text-sm">Display name</label>
                   <div className="inline-flex w-full">
-                    <div className="w-1/12 bg-[#000000] pt-2">
-                      <MdPerson className='text-[#00ff01] h-6 w-6 ml-1'/>
+                    <div className="w-1/12 pt-2">
+                      <MdPerson className='h-6 w-6 ml-1'/>
                     </div>
                     <input
                       type="text"
-                      className=" bg-[#000000] w-11/12 p-2 focus:text-[#00ff01] focus:outline-none"
+                      className="w-11/12 p-2 focus:text-black text-black"
                       placeholder={user?.displayName}
                       onChange={handleName}
                     />
@@ -211,18 +211,18 @@ const Account = () => {
                 </div>
               </div>
             </div>
-            <hr />
+            <hr className='border border-[#00ff01]'/>
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Change password</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3">Change password</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm text-[#00ff01] ">New Password</label>
+                <label className="text-sm">New Password</label>
                 <div className="inline-flex w-full">
-                  <div className="w-1/12 bg-[#000000] pt-2">
-                    <MdLock className='text-[#00ff01] h-6 w-6 ml-1'/>
+                  <div className="w-1/12 pt-2">
+                    <MdLock className='h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="password"
-                    className=" bg-[#000000] focus:text-[#00ff01] w-11/12 p-2"
+                    className="focus:text-black text-black w-11/12 p-2"
                     placeholder='...'
                     onChange={handlePassword}
                   />
@@ -231,23 +231,23 @@ const Account = () => {
               </div>
             </div>
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Upload an image</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3">Upload an image</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm text-[#00ff01] ">New profile image</label>
+                <label className="text-sm">New profile image</label>
                 <div className="inline-flex w-full">
-                  <div className="w-1/12 bg-[#000000] pt-2">
-                    <MdImage className=' text-[#00ff01] h-6 w-6 ml-1'/>
+                  <div className="w-1/12 pt-2">
+                    <MdImage className='h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="file"
-                    className="w-11/12 p-2 bg-black"
+                    className="w-11/12 p-2 bg-black text-black"
                     onChange={handleChange}
                   />
                 </div>
                 <button onClick={uploadImage}>Upload new image</button>
               </div>
             </div>
-            <hr />
+            <hr className='border border-[#00ff01]'/>
             <h2 className="text-center pt-4 font-bold text-lg">My Orders</h2>
             <div className="w-full items-center p-4 columns-2">
               <div className='text-center'>
@@ -259,7 +259,7 @@ const Account = () => {
                 {/* {historyUser(users).map(e => <p>${e.idPayment.amount}</p>)} */}
               </div>
             </div>
-            <hr />
+            <hr className='border border-[#00ff01]'/>
             <div className="w-full p-4 justify-center items-center flex">
               <button onClick={handleLogout} className='h-[60px] w-[160px] flex pl-[50px] py-4 mx-6'>Logout</button>
               <Link to='/'><button className='h-[60px] w-[160px] flex pl-[35px] py-4 mx-6'>Back Home</button></Link>
