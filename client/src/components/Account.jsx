@@ -141,18 +141,18 @@ const Account = () => {
               </div>
             </div>
           </div>
-          <div className="space-y-3 bg-white">
+          <div className="space-y-3 bg-[#000000] border ">
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Account</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Account</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm">Email</label>
-                <div className="inline-flex w-full border">
-                  <div className="w-1/12 bg-gray-100 pt-2">
-                    <MdEmail className='h-6 w-6 ml-1'/>
+                <label className="text-sm text-[#00ff01]">Email</label>
+                <div className="inline-flex w-full">
+                  <div className="w-1/12 bg-[#000000] pt-2">
+                    <MdEmail className='text-[#00ff01] h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="email"
-                    className="w-11/12 p-2"
+                    className="w-11/12 p-2 bg-[#000000] focus:text-[#00ff01] focus:outline-none"
                     placeholder={user && user.email}
                     disabled
                   />
@@ -161,17 +161,17 @@ const Account = () => {
             </div>
             <hr />
             <div className="w-full items-center space-y-4 p-4 md:inline-flex md:space-y-0">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Personal info</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Personal info</h2>
               <div className="mx-auto max-w-sm space-y-5 md:w-2/3">
                 <div>
-                  <label className="text-sm">Display name</label>
-                  <div className="inline-flex w-full border">
-                    <div className="w-1/12 bg-gray-100 pt-2">
-                      <MdPerson className='h-6 w-6 ml-1'/>
+                  <label className="text-sm text-[#00ff01] ">Display name</label>
+                  <div className="inline-flex w-full">
+                    <div className="w-1/12 bg-[#000000] pt-2">
+                      <MdPerson className='text-[#00ff01] h-6 w-6 ml-1'/>
                     </div>
                     <input
                       type="text"
-                      className="w-11/12 p-2 focus:text-gray-600 focus:outline-none"
+                      className=" bg-[#000000] w-11/12 p-2 focus:text-[#00ff01] focus:outline-none"
                       placeholder={user?.displayName}
                       onChange={handleName}
                     />
@@ -182,16 +182,16 @@ const Account = () => {
             </div>
             <hr />
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Change password</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Change password</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm">New Password</label>
-                <div className="inline-flex w-full border">
-                  <div className="w-1/12 bg-gray-100 pt-2">
-                    <MdLock className='h-6 w-6 ml-1'/>
+                <label className="text-sm text-[#00ff01] ">New Password</label>
+                <div className="inline-flex w-full">
+                  <div className="w-1/12 bg-[#000000] pt-2">
+                    <MdLock className='text-[#00ff01] h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="password"
-                    className="w-11/12 p-2"
+                    className=" bg-[#000000] focus:text-[#00ff01] w-11/12 p-2"
                     placeholder='...'
                     onChange={handlePassword}
                   />
@@ -200,12 +200,12 @@ const Account = () => {
               </div>
             </div>
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Upload an image</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Upload an image</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm">New profile image</label>
-                <div className="inline-flex w-full border">
-                  <div className="w-1/12 bg-gray-100 pt-2">
-                    <MdImage className='h-6 w-6 ml-1'/>
+                <label className="text-sm text-[#00ff01] ">New profile image</label>
+                <div className="inline-flex w-full">
+                  <div className="w-1/12 bg-[#000000] pt-2">
+                    <MdImage className=' text-[#00ff01] h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="file"
@@ -218,7 +218,7 @@ const Account = () => {
             </div>
             <hr />
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="px-4">My Orders</h2>
+              <h2 className="px-4 text-[#00ff01]">My Orders</h2>
             </div>
             <hr />
             <div className="w-full p-4 justify-center items-center flex">

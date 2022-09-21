@@ -139,17 +139,18 @@ function checkout({ products, subTotal }) {
         base: {
           fontSize: "14px",
           iconColor: "#00ff01",
-          backgroundColor: "#1F2937",
+          backgroundColor: "#000000",
+          color: "#ffffff",
           "::placeholder": {
-            color: "#9CA3AF",
-            backgroundColor: "#1F2937",
+            color: "#00ff01",
+            backgroundColor: "0000000",
           },
           ":hover": {
             iconColor: "#ffff01",
-            backgroundColor: "#1F2937",
+            backgroundColor: "#000000",
           },
           ":-webkit-autofill": {
-            backgroundColor: "#1F2937",
+            backgroundColor: "#0000000",
           },
         },
         invalid: {},
@@ -161,28 +162,28 @@ function checkout({ products, subTotal }) {
       <form onSubmit={handleSubmit}>
         <Address />
 
-        <span className="text-xl font-medium text-gray-100 block py-3">
+        <span className="text-xl font-medium text-[#00ff01] block py-3">
           Card Details
         </span>
 
-        <span className="text-xs text-gray-400 ">Card Type</span>
+        <span className="text-xs text-[#00ff01]">Card Type</span>
 
         <div className="overflow-visible flex justify-between items-center mt-2">
-          <div className="rounded w-52 h-28 bg-gray-500 py-2 px-4 relative right-10">
-            <span className="italic text-lg font-medium text-gray-200 underline">
+          <div className="border rounded w-52 h-28 bg-black py-2 px-4 relative right-10">
+            <span className="italic text-lg font-medium text-[#00ff01] underline">
               VISA
             </span>
 
             <div className="flex justify-between items-center pt-4 ">
-              <span className="text-xs text-gray-200 font-medium">****</span>
-              <span className="text-xs text-gray-200 font-medium">****</span>
-              <span className="text-xs text-gray-200 font-medium">****</span>
-              <span className="text-xs text-gray-200 font-medium">****</span>
+              <span className="text-xs text-[#00ff01] font-medium">****</span>
+              <span className="text-xs text-[#00ff01] font-medium">****</span>
+              <span className="text-xs text-[#00ff01] font-medium">****</span>
+              <span className="text-xs text-[#00ff01] font-medium">****</span>
             </div>
 
             <div className="flex justify-between items-center mt-3">
-              <span className="text-xs  text-gray-200">Giga Tamarashvili</span>
-              <span className="text-xs  text-gray-200">12/18</span>
+              <span className="text-xs  text-[#00ff01]">Card Holder Name</span>
+              <span className="text-xs  text-[#00ff01]">12/18</span>
             </div>
           </div>
 
@@ -200,25 +201,25 @@ function checkout({ products, subTotal }) {
         </div>
 
         <div className="flex justify-center flex-col pt-3">
-          <label className="text-xs text-gray-400 ">Name on Card</label>
+          <label className="text-xs text-[#00ff01] ">Name on Card</label>
           <input
             type="text"
             name="name"
-            className="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4"
-            placeholder="Giga Tamarashvili"
+            className="w-full h-6 bg-black text-white placeholder-[#00ff01] placeholder-opacity-25 text-sm border-b border-gray-600 py-4 hover:border-[#00ff01]  focus:border-[#00ff01] rounded-md"
+            placeholder="Card Holder Name"
           />
         </div>
 
         <div className="flex justify-center flex-col pt-3">
           <CardElement
-            className=" p-2 border bg-gray-800 border-gray-600 hover:border-blue-600"
+            className=" p-2 border text-white bg-black border-gray-600 hover:border-[#00ff01] focus:outline-none focus:border-[#00ff01] rounded-md"
             options={cardElementOption}
           />
         </div>
 
         <button
           type="submit"
-          className="h-12 w-full mt-3 bg-[#00ff01] rounded focus:outline-none text-white hover:bg-blue-600 disabled:opacity-50 disabled:bg-[#2f3436]"
+          className="h-12 w-full mt-3 bg-[#00ff01] rounded focus:outline-none text-white hover:bg-[#000000] disabled:opacity-50 disabled:bg-black"
           disabled={isDisable}
         >
           {isProcessing ? "Proccesading..." : `PAY $${subTotal}`}
@@ -231,7 +232,7 @@ function checkout({ products, subTotal }) {
     <div>
       <Elements stripe={stripePromise}>
         <div>
-          <div className=" p-5 bg-[#2f3436] rounded overflow-visible">
+          <div className=" p-5 bg-black rounded overflow-visible">
             <div className="flex justify-center flex-col pt-3">
               <CheckoutForm />
             </div>
