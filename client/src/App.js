@@ -25,6 +25,7 @@ import ModifShoe from './components/admin/ModifShoe';
 import OnSale from './components/OnSale';
 import Favorites from './components/Favorites'
 import CreateSize from './components/admin/CreateSize';
+import Order from './components/Order'
 
 export function App() {
   
@@ -34,6 +35,7 @@ export function App() {
       <AuthContextProvider>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/order/:idPayment" element={<Order />} />
           <Route exact path="/favorites" element={<Favorites />} />
           <Route exact path="/sale" element={<OnSale />} />
           <Route exact path="/products" element={<Catalog />} />

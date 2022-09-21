@@ -11,7 +11,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
 import { useSelector, useDispatch } from 'react-redux';
-import { getUsers } from '../redux/actions/actions';
+import { getUsers, getOrders } from '../redux/actions/actions';
 import { RiAdminFill } from 'react-icons/ri'
 
 const Account = () => {
@@ -23,8 +23,9 @@ const Account = () => {
   const [password, setPassword] = useState()
   const [name, setName] = useState()
   const users = useSelector(state => state.users)
+  const orders = useSelector(state => state.userOrders)
   const dispatch = useDispatch()
-
+  const [showOrders, setShowOrders] = useState(false)
   const usersAdmin = () => {
     if(user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2' ||
        user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' ){
@@ -48,13 +49,6 @@ const Account = () => {
     }
   }
 
-  // const historyUser = (users) => {
-  //   let userOrder = users.find(u => u.email === user.email)
-    
-  //     console.log(userOrder.records)
-  //     return userOrder.records
-  // } 
-  
   useEffect(()=>{
     logEvent(analytics,'ACCOUNT |S.P|')
     dispatch(getUsers())
@@ -66,7 +60,7 @@ const Account = () => {
   useEffect(()=>{
     usersAdmin()
     if(users.length > 0 && user) validateAccount(users)
-    // if(users.length > 0 && user) historyUser(users)
+    if(user) dispatch(getOrders(user.email))
     if(user?.photoURL){
       setPhotoURL(user.photoURL)
     }
@@ -144,7 +138,7 @@ const Account = () => {
       console.log(error)
     }
   }
-  
+
   return (
     <div>
       <NavBar/>
@@ -249,16 +243,19 @@ const Account = () => {
             </div>
             <hr className='border border-[#00ff01]'/>
             <h2 className="text-center pt-4 font-bold text-lg">My Orders</h2>
+            {showOrders ? 
             <div className="w-full items-center p-4 columns-2">
-              <div className='text-center'>
-                <h3 className='mb-3 font-bold'>Order ID</h3>
-                {/* {historyUser(users).map(e => <p>{e.idPayment._id}</p>)} */}
-              </div>
-              <div className='text-center'>
-                <h3 className='mb-3 font-bold'>Total</h3>
-                {/* {historyUser(users).map(e => <p>${e.idPayment.amount}</p>)} */}
-              </div>
+            <div className='text-center'>
+              <h3 className='mb-3 font-bold'>Order ID</h3>
+              {orders?.map(e => <Link to={`/order/${e.idPayment}`} className='hover:text-white'><p>{e.idPayment}</p></Link>)}
             </div>
+            <div className='text-center'>
+              <h3 className='mb-3 font-bold'>Total</h3>
+              {orders?.map(e => <p>${e.amount}</p>)}
+            </div>
+          </div>
+            : (users.length > 0 && user.email) && <button onClick={() => setShowOrders(true)} className='ml-[262px]'>SHOW ORDERS</button> 
+            }
             <hr className='border border-[#00ff01]'/>
             <div className="w-full p-4 justify-center items-center flex">
               <button onClick={handleLogout} className='h-[60px] w-[160px] flex pl-[50px] py-4 mx-6'>Logout</button>

@@ -41,6 +41,9 @@ export const CLEAN_REVIEWS = "CLEAN_REVIEWS"
 export const GET_FAVORITES = 'GET_FAVORITES'
 export const POST_FAVORITES = 'POST_FAVORITES'
 export const DELETE_FAVORITES = 'DELETE_FAVORITES'
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const GET_USER_ORDERS = "GET_USER_ORDERS"
+export const GET_ORDER_ID = "GET_ORDER_ID"
 
 
 
@@ -277,4 +280,16 @@ export function postFavorite(idUser, shoeId) {
 export const deleteFavorite = (idUser, shoeId) => (dispatch) => {
     return axios.delete(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { data: {shoeId} })
     .then(res => dispatch({type: 'DELETE_FAVORITES', payload: {}}))
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+export const getOrders = (email) => (dispatch) => {
+ return axios(`https://sneakers-back-end.herokuapp.com/cart/${email}`)
+ .then(res => dispatch({type: 'GET_USER_ORDERS', payload: res.data}))
+}
+
+export const getOrderId = (idPayment) => (dispatch) => {
+ return axios(`https://sneakers-back-end.herokuapp.com/cart/order/${idPayment}`)
+ .then(res => dispatch({type: 'GET_ORDER_ID', payload: res.data}))
 }

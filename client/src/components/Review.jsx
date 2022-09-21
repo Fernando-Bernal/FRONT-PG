@@ -22,11 +22,12 @@ const Review = (props) => {
   const shoeId = props.id;
   const [review, setReview] = useState("");
   const [updateReview, setUpdateReview] = useState("");
+  const [error, setError]= useState('')
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const totalStars = 5;
-  const [selectedStars, setSelectedStars] = useState(0);
+  const [selectedStars, setSelectedStars] = useState(1);
   const [editForm, setEditForm] = useState(false);
 
   const rating = selectedStars;
@@ -40,15 +41,20 @@ const Review = (props) => {
     };
   }, [dispatch, shoeId]);
 
+  useEffect(() => {
+    review.length < 5 ? setError('Review must contain at least 5 characters.') : setError('')
+    rating === 0 ? setError("Rating can't be 0") : setError('')
+}, [review])  
+  
   async function handleDelete(r) {
     await dispatch(deleteReview(r._id));
-    navigate("/");
+    window.location.reload();
   }
 
   async function handleEdit(r) {
     console.log();
     await dispatch(editReview(r._id, updateReview, rating));
-    navigate("/");
+    window.location.reload();
   }
 
   return (
@@ -75,6 +81,7 @@ const Review = (props) => {
             </div>          
             <form onSubmit={() => dispatch(postReview(idUser, review, rating, shoeId))}>
               <div className="form-group">
+              {error !== '' ? <p>ERROR: {error}</p> : null}
                 <label className="flex flex-row">Description:</label>
                 <textarea
                   type="text"
@@ -83,13 +90,10 @@ const Review = (props) => {
                   name="description"
                   value={review}
                   onChange={(e) => setReview(e.target.value)}
-                  required
-                  minLength={20}
-                  maxLength={500}
                   placeholder="Message"
                 />
               </div>
-              <button type="submit" className='text-black border bg-[#00ff01] border-[#00ff01] mt-2'>SUBMIT</button>
+              {error === '' ? <button type="submit" className='text-black border bg-[#00ff01] border-[#00ff01] mt-2'>SUBMIT</button> : <p>CHECK FOR ERRORS</p>}
             </form>
             </div>
             : <p> LOG IN TO REVIEW IT</p>

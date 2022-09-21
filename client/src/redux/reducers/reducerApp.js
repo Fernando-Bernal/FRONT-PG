@@ -36,6 +36,9 @@ import {
     CLEAN_REVIEWS,
     /////////////////////////////
     GET_FAVORITES,
+    /////////////////////////////
+    GET_USER_ORDERS,
+    GET_ORDER_ID
 } from '../actions/actions'
 
 const initialState = {
@@ -56,7 +59,9 @@ const initialState = {
     users:[],
     clients:[],
     order:[],
-    orders: []
+    orders: [],
+    userOrders: [],
+    orderId: {}
 }
 
 export function reducerApp(state = initialState, action){
@@ -287,7 +292,18 @@ export function reducerApp(state = initialState, action){
              ...state,
              favorites: concatShoesFavs(state.shoes, action.payload)
            }
-
+          //////////////////////////////////////////////////////////
+          case GET_USER_ORDERS:
+           return{
+            ...state,
+            userOrders: action.payload
+           }
+          
+          case GET_ORDER_ID:
+           return{
+            ...state,
+            orderId: action.payload
+           }
       default:
         return state;
     }
