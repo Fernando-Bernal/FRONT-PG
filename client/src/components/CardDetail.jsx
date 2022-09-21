@@ -92,7 +92,7 @@ const CardDetail = () => {
     dispatch(deleteFavorite(idUser, shoeId))
     Swal.fire({
       icon: 'success',
-      title: 'Shoe remove from Favorites',
+      title: 'Shoe removed from Favorites',
       showConfirmButton: false,
       timer: 2000
     })

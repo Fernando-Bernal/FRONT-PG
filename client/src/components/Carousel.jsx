@@ -37,7 +37,7 @@ const Carousel = () => {
 
   return (
     <div>
-      <h1 className="text-[#00ff01] flex justify-center items-center bg-black py-4 font-bold text-xl">
+      <h1 className="text-[#00ff01] flex justify-center items-center bg-black py-4 font-bold text-3xl">
         Big Sale!!!
       </h1>
       <div className="px-4 pt-2 pb-2 relative flex justify-center items-center bg-black">
