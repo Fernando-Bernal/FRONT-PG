@@ -28,6 +28,7 @@ function Admin() {
 
     const userSuperAdmin = ()=>{
         if(user?.email === 'luismfalco8@gmail.com' && user?.uid === 'eAuEIixgTwfhUcz7hFOTTbOQQxY2' ||
+            user?.email === 'desdelaweb@gmail.com' && user?.uid === 'mq110DAUn8XAzendDTs60BjXVjH2' ||
             user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2'){
         superSetAdmin(true)
         }else{

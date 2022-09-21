@@ -8,6 +8,8 @@ const ProtectedAdmin = ({children}) => {
   switch(user.email){
     case 'luismfalco8@gmail.com':
       return children
+    case 'desdelaweb@gmail.com':
+      return children
     case 'marioelkamui@gmail.com':
       return children
     default:

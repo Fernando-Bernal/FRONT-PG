@@ -36,9 +36,9 @@ function ModifShoe() {
             }
 
             //image
-                if(!values.image){
-                    errorsActicon.image = 'add the image'
-                }
+                // if(!values.image){
+                //     errorsActicon.image = 'add the image'
+                // }
 
             //color
             if (!values.color) {
@@ -50,13 +50,13 @@ function ModifShoe() {
               errorsActicon.price = "enter the price correctly";
             }
 
-            //size
-            if (!values.size) {
-              errorsActicon.size = "enter the size correctly";
-            }
+            // //size
+            // if (!values.size) {
+            //   errorsActicon.size = "enter the size correctly";
+            // }
 
-            //q
-            if (!values.q) {
+            // //q
+            if (values.size !== "" && !values.q) {
               errorsActicon.q = "enter the quantity correctly";
             }
 
@@ -186,7 +186,8 @@ function ModifShoe() {
                   as="select"
                   name="size"
                   className="block text-sm py-3 px-4 rounded-lg w-full border outline-none">
-                  {shoe[0].stock.map(e=> <option value={e.size}>{e.size}</option>)}
+                    <option value="">Size</option>
+                  {shoe[0].stock.map(e=> <option value={e._id}>{e.size}</option>)}
                   </Field>
                 <ErrorMessage
                   name="size"
