@@ -40,7 +40,7 @@ const Footer = () => {
         <div className='w-full bg-black text-white py-y px-2'>
             <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-6 border-b-2 border-[#00ff01] py-8'>
                 <div>
-                        <h6 className='font-bold text-center text-[#00ff01] uppercase pt-2'>More links</h6>
+                        <h6 className='font-bold text-center text-[#00ff01] uppercase pt-2 pb-4'>More links</h6>
                             <ul>
                                 <Link to='AboutUs'> <li className='py-2 text-center hover:text-[#00ff01]'>About Us
                                 </li></Link>
@@ -53,10 +53,10 @@ const Footer = () => {
                 <div className='col-start-3 col-end-4 pt-8 md:pt-2'>
                     <p className='font-bold text-[#00ff01] text-center uppercase'>Follow US</p>
                     <p className='flex mt-6 pl-1 space-x-4'>
-                        <FaFacebook className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>
-                        <FaInstagram className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>
-                        <FaTwitter className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>
-                        <FaSpotify className='text-white text-6xl mx-2 hover:text-[#00ff01]'/>  
+                        <FaFacebook className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/>
+                        <FaInstagram className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/>
+                        <a href="https://twitter.com/SneakerParadis3" target='_blank'><FaTwitter className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/></a>
+                        <a href="https://open.spotify.com/playlist/3RcRK9HGTAm9eLW1LepWKZ" target='_blank'><FaSpotify className='text-white text-4xl mx-0.5 hover:text-[#00ff01]'/></a>  
                     </p>
                     
                 </div>

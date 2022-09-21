@@ -52,8 +52,8 @@ export default function CardCarrito({ shoe }) {
             src={shoe.image}
           />
           <div className="flex flex-col ml-3">
-            <p className="md:text-md font-medium text-white">{shoe.name}</p>
-            <p className="text-xs font-light text-gray-400">${shoe.price}</p>
+            <p className="md:text-md font-medium text-[#00ff01] capitalize">{shoe.name}</p>
+            <p className="text-xs font-light text-white">${shoe.price}</p>
           </div>
         </div>
         <div className="flex justify-center items-center">

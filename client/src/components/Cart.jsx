@@ -28,16 +28,16 @@ export default function Cart() {
       <NavBar />
       <div>
         <div className="py-12">
-          <div className="max-w-md mx-auto bg-[#0E1011] shadow-lg rounded-lg  md:max-w-5xl">
+          <div className="max-w-md mx-auto rounded-lg md:max-w-5xl">
             <div className="md:flex ">
               <div className="w-full p-4 px-5 py-5">
                 <div className="md:grid md:grid-cols-3 gap-2 ">
                   <div className="col-span-2 p-5">
-                    <h1 className="text-xl font-medium text-white">Shopping Cart</h1>
+                    <h1 className="text-3xl text-[#00ff01]">Shopping Cart</h1>
                     <div className="flex justify-between items-center mt-6 pt-6">
                       {products?.length === 0 ? (
                         <div>
-                          {dispatch(resetTotal()) && <h1 className="text-white">You have not added products to the cart... </h1>}
+                          {dispatch(resetTotal()) && <h1 className="text-white">You have not added products to the cart yet... </h1>}
                         </div>
                       ) : (
                         <div>
@@ -55,14 +55,14 @@ export default function Cart() {
                     <div className="flex justify-between items-center mt-3 pt-6 border-t">
                       <div className="flex items-center">
                         <Link to={`/`}>
-                          <span className="text-md  font-medium text-blue-500">
+                          <button className="font-medium py-2">
                             Continue Shopping
-                          </span>
+                          </button>
                         </Link>
                       </div>
 
                       <div className="flex justify-center items-end">
-                        <span className="text-sm font-medium text-gray-400 mr-1">
+                        <span className="text-sm font-medium text-[#00ff01] mr-1">
                           Subtotal:
                         </span>
                         <span className="text-lg font-bold text-white">

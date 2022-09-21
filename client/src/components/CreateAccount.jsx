@@ -26,7 +26,7 @@ const Signup = () => {
       showConfirmButton: false,
       timer: 2000
     })
-    navigate('/account')
+    navigate('/')
     } catch (error) {
       console.log(error)
       if (error.code === 'auth/email-already-in-use'){

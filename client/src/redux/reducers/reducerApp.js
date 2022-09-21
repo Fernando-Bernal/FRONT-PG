@@ -1,6 +1,7 @@
 import {
     GET_SHOES,
     GET_SHOE,
+    GET_ONSALE,
     GET_BY_NAME,
     GET_BRANDS,
     GET_BY_BRAND,
@@ -20,20 +21,47 @@ import {
     DECREMENT_QUANTITY, 
     CLEAN_CART,
     /////////////////////////////
-    GET_USERS
+    GET_USERS,
+    GET_CLIENTS,
+    GET_ORDER_CLIENT,
+    DELETE_SHOE,
+    MODIF_SHOE,
+    CREATE_SIZE,
+    DELETE_BRAND,
+    /////////////////////////////
+    GET_REVIEWS,
+    GET_EXACT_REVIEW,
+    POST_REVIEW,
+    EDIT_REVIEW,
+    CLEAN_REVIEWS,
+    /////////////////////////////
+    GET_FAVORITES,
+    /////////////////////////////
+    GET_USER_ORDERS,
+    GET_ORDER_ID
 } from '../actions/actions'
 
 const initialState = {
     shoes: [],
     shoe: [],
+    allShoes: [],
+    onSale: [],
     filter:[],
     brands:[],
     name: [],
     catalogBrand: [],
     cart:[],
+    favorites: [],
+    review: {},
+    shoeReviews: [],
     productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0,
-    users:[]
+    users:[],
+    clients:[],
+    order:[],
+    orders: [],
+    userOrders: [],
+    orderId: {}
 }
 
 export function reducerApp(state = initialState, action){
@@ -42,6 +70,7 @@ export function reducerApp(state = initialState, action){
       case GET_SHOES:
         return {
           ...state,
+          allShoes: action.payload,
           shoes: action.payload.map((e) => ({
             ...e,
             quantity: 0
@@ -56,6 +85,11 @@ export function reducerApp(state = initialState, action){
             stock:action.payload[0].stock.map( el => ({...el, quantity:0}))
           },
         };
+        case GET_ONSALE:
+      return {
+        ...state,
+        onSale: action.payload,
+      };
       case GET_BRANDS:
         return {
           ...state,
@@ -182,7 +216,94 @@ export function reducerApp(state = initialState, action){
           ...state,
           users: action.payload,
         };
-
+      case GET_CLIENTS:
+        return {
+          ...state,
+          clients: action.payload,
+        };
+        case GET_ORDER_CLIENT:
+          return{
+            ...state, 
+            order: [...state.clients].filter(e => e.idPayment === action.payload)
+          }
+        case DELETE_SHOE:
+          return{
+            ...state, 
+            shoes: [...state.shoes].filter(e => e._id !== action.payload)
+          }
+        case MODIF_SHOE:
+          return{
+            ...state, 
+            shoes: [...state.shoes].filter(e => e._id === action.payload)
+          }
+        case CREATE_SIZE:
+          return{
+            ...state, 
+            shoes: [...state.shoes].filter(e => e._id === action.payload)
+          }
+        case DELETE_BRAND:
+          return{
+            ...state, 
+            brands: [...state.brands].filter(e => e._id !== action.payload)
+          }
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        case GET_REVIEWS:
+          return{
+            ...state,
+            shoeReviews: action.payload
+          }
+        case GET_EXACT_REVIEW:
+          return{
+            ...state,
+            myReview: action.payload
+          }
+          case POST_REVIEW:
+          return {
+            ...state,
+            review: action.payload
+          };
+          case EDIT_REVIEW:
+            return{
+              ...state,
+              review: {...state.review, ...action.payload}
+            }
+          case CLEAN_REVIEWS:
+          return{
+            ...state,
+            review: {},
+            shoeReviews: []
+          }
+        ////////////////////////////////////////////////////////////
+          case GET_FAVORITES:
+           const concatShoesFavs = (shoes, favs) => {
+            const favShoes = [];
+            for (let i = 0; i < shoes.length; i++) {
+              const shoe = shoes[i];
+              for (let j = 0; j < favs.length; j++) {
+                const fav = favs[j];
+                if (shoe._id === fav.shoeId) {
+                 favShoes.push(shoe);
+                }
+              }
+            }
+            return favShoes;
+          };
+           return{
+             ...state,
+             favorites: concatShoesFavs(state.shoes, action.payload)
+           }
+          //////////////////////////////////////////////////////////
+          case GET_USER_ORDERS:
+           return{
+            ...state,
+            userOrders: action.payload
+           }
+          
+          case GET_ORDER_ID:
+           return{
+            ...state,
+            orderId: action.payload
+           }
       default:
         return state;
     }
