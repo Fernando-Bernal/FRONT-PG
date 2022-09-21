@@ -1,7 +1,10 @@
-import { FaUserAltSlash, FaUserAlt } from "react-icons/fa";
+import { FaUserAltSlash, FaUserAlt, FaUsersCog } from "react-icons/fa";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { getUsers } from "../../redux/actions/actions";
 
 function Users({ users }) {
+  const dispatch = useDispatch()
 
   const handleStatusDisable = async()=>{
     const { data } = await axios.put(
@@ -9,7 +12,8 @@ function Users({ users }) {
       {
         status: "Disabled"
       }
-    );
+      );
+    dispatch(getUsers())
   }
 
   const handleStatusEnable = async()=>{
@@ -19,6 +23,17 @@ function Users({ users }) {
         status: "Enabled"
       }
     );
+    dispatch(getUsers())
+  }
+
+  const handleManager = async()=>{
+    const { data } = await axios.put(
+      `https://sneakers-back-end.herokuapp.com/users/${users._id}`,
+      {
+        manager: users.manager === true ? false : true
+      }
+    );
+    dispatch(getUsers())
   }
 
   return (
@@ -48,8 +63,10 @@ function Users({ users }) {
         </td>
         <td className="px-4 py-3 text-sm">{users.createdAt}</td>
         <td className="px-4 py-3 text-sm">{users.status}</td>
+        <td className="px-4 py-3 text-sm">{users.manager.toString()}</td>
         <td className="px-4 py-3 text-sm"><button className="w-8 h-8" onClick={handleStatusDisable}><FaUserAltSlash/></button></td>
         <td className="px-4 py-3 text-sm"><button className="w-8 h-8" onClick={handleStatusEnable}><FaUserAlt/></button></td>
+        <td className="px-4 py-3 text-sm"><button className="w-8 h-8" onClick={handleManager}><FaUsersCog/></button></td>
       </tr>
     </>
   );

@@ -67,7 +67,7 @@ function Admin() {
         if(clients.length){
             setCurrentPageClients(0)
         }
-    },[])
+    },[clients])
 
     const prevPageClients = ()=>{
         if(currentPageClients < 5){
@@ -273,8 +273,10 @@ function Admin() {
                                         <th className="px-4 py-3">Users</th>
                                         <th className="px-4 py-3">Date</th>
                                         <th className="px-4 py-3">Status</th>
+                                        <th className="px-4 py-3">Admin</th>
                                         <th className="px-4 py-3">Disable</th>
                                         <th className="px-4 py-3">Enable</th>
+                                        <th className="px-4 py-3">Admin</th>
                                     </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -374,8 +376,10 @@ function Admin() {
                                     <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                         <th className="px-4 py-3">Products</th>
                                         <th className="px-4 py-3">brand</th>
+                                        <th className="px-4 py-3">OnSale</th>
                                         <th className="px-4 py-3">edit</th>
                                         <th className="px-4 py-3">delete</th>
+                                        <th className="px-4 py-3">onSale</th>
                                     </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">

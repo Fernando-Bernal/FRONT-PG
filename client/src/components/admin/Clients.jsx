@@ -3,19 +3,22 @@ import axios from "axios";
 import { GiConverseShoe } from "react-icons/gi";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { useDispatch } from "react-redux";
-import { getOrderClient } from "../../redux/actions/actions";
+import { getClients, getOrderClient } from "../../redux/actions/actions";
 
 function Clients({ clients }) {
   const dispatch = useDispatch();
 
+  
   const handleStatus = async()=>{
-    const { data } = await axios.put(
-      `https://sneakers-back-end.herokuapp.com/cart/${clients._id}`,
+       const { data } = await axios.put(
+      `https://sneakers-back-end.herokuapp.com/cart/order/${clients.idPayment}`,
       {
-        status: "Received"
+        status: clients.status === "Pending" ? "Received" : "Pending"
       }
-    );
-  }
+      );
+      dispatch(getClients())
+      console.log(data)
+    }
 
   return (
     <>
