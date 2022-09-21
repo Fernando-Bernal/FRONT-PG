@@ -48,7 +48,7 @@ function checkout({ products, subTotal }) {
 
     const expresiones = {
       nombre: /^[a-zA-ZÀ-ÿ\s]{3,40}$/, // Letras y espacios, pueden llevar acentos.
-      line1: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+      line1: /^[a-zA-Z0-9\_\s\-]{4,16}$/, // Letras, espacios, numeros, guion y guion_bajo
     };
 
     const validationName = () => {
@@ -354,7 +354,7 @@ function checkout({ products, subTotal }) {
             />
             {data.validateName === "false" && (
               <p className="text-xs px-1  text-red-500">
-                Por favor ingrese un nombre valido.
+                Please enter a valid name.
               </p>
             )}
           </div>
