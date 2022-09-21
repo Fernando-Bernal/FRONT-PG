@@ -24,6 +24,7 @@ import Forget from './components/Forget';
 import ModifShoe from './components/admin/ModifShoe';
 import OnSale from './components/OnSale';
 import Favorites from './components/Favorites'
+import CreateSize from './components/admin/CreateSize';
 
 export function App() {
   
@@ -41,10 +42,11 @@ export function App() {
           <Route exact path="/createaccount" element={<CreateAccount/>} />
           <Route exact path='/account' element={<Protected><Account/></Protected>} />
           <Route exact path= "/admin" element={<ProtectedAdmin><Admin/></ProtectedAdmin>} />
-          <Route exact path= "/orders" element={<Orders/>} />
-          <Route exact path= "/createshoes" element={<CreateShoes/>} />
-          <Route exact path= "/createbrand" element={<CreateBrand/>} />
-          <Route exact path= "/modifshoe" element={<ModifShoe/>} />
+          <Route exact path= "/orders" element={<ProtectedAdmin><Orders/></ProtectedAdmin>} />
+          <Route exact path= "/createshoes" element={<ProtectedAdmin><CreateShoes/></ProtectedAdmin>} />
+          <Route exact path= "/createbrand" element={<ProtectedAdmin><CreateBrand/></ProtectedAdmin>} />
+          <Route exact path= "/createsize" element={<ProtectedAdmin><CreateSize/></ProtectedAdmin>} />
+          <Route exact path= "/modifshoe" element={<ProtectedAdmin><ModifShoe/></ProtectedAdmin>} />
           <Route exact path="/colletions/:brand" element={<CatalogBrand/>} />
           <Route exact path="/cart" element={<Cart/>} />
           <Route exact path= "/aboutUs" element={<AboutUs/>} />

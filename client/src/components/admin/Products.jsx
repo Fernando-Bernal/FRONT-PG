@@ -2,9 +2,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
-import { MdLocalOffer } from "react-icons/md";
+import { MdLocalOffer, MdCreateNewFolder } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { deleteShoe, modifShoe, getShoes } from "../../redux/actions/actions";
+import { deleteShoe, modifShoe, getShoes, createSize } from "../../redux/actions/actions";
 
 function Products({ products }) {
   const dispatch = useDispatch();
@@ -80,13 +80,20 @@ const handleOnSale = async()=>{
           </Link>
         </td>
         <td className="px-4 py-3 text-sm">
-          <button onClick={handleDelete} className="w-8 h-8">
-            <AiFillDelete />
-          </button>
+          <Link to={"/createsize"}>
+            <button onClick={()=>dispatch(createSize(products._id))} className="w-8 h-8">
+              <MdCreateNewFolder />
+            </button>
+          </Link>
         </td>
         <td className="px-4 py-3 text-sm">
           <button onClick={handleOnSale} className="w-8 h-8">
             <MdLocalOffer />
+          </button>
+        </td>
+        <td className="px-4 py-3 text-sm">
+          <button onClick={handleDelete} className="w-8 h-8">
+            <AiFillDelete />
           </button>
         </td>
       </tr>

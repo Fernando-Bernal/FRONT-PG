@@ -29,6 +29,7 @@ export const GET_CLIENTS = 'GET_CLIENTS'
 export const GET_ORDER_CLIENT = 'GET_ORDER_CLIENT'
 export const DELETE_SHOE = 'DELETE_SHOE'
 export const MODIF_SHOE = 'MODIF_SHOE'
+export const CREATE_SIZE = 'CREATE_SIZE'
 export const DELETE_BRAND = 'DELETE_BRAND'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GET_REVIEWS = "GET_REVIEWS"
@@ -202,6 +203,12 @@ export const modifShoe = (shoe)=>{
     return {
         type: 'MODIF_SHOE',
         payload: shoe
+    }
+}
+export const createSize = (size)=>{
+    return {
+        type: 'CREATE_SIZE',
+        payload: size
     }
 }
 export const deleteBrand = (brand)=>{

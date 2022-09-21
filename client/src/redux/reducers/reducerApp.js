@@ -26,6 +26,7 @@ import {
     GET_ORDER_CLIENT,
     DELETE_SHOE,
     MODIF_SHOE,
+    CREATE_SIZE,
     DELETE_BRAND,
     /////////////////////////////
     GET_REVIEWS,
@@ -226,6 +227,11 @@ export function reducerApp(state = initialState, action){
             shoes: [...state.shoes].filter(e => e._id !== action.payload)
           }
         case MODIF_SHOE:
+          return{
+            ...state, 
+            shoes: [...state.shoes].filter(e => e._id === action.payload)
+          }
+        case CREATE_SIZE:
           return{
             ...state, 
             shoes: [...state.shoes].filter(e => e._id === action.payload)

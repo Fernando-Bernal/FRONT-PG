@@ -171,7 +171,7 @@ function Admin() {
                 {/*-- Header --*/}
                 <div className="fixed w-full flex items-center justify-between bg-gray-800 h-14 text-white z-10">
                     <div className="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-blue-800 dark:bg-gray-800 border-none">
-                    <img className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
+                    {/* <img className="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" /> */}
                     <span className="hidden md:block">{user.email}</span>
                     </div>
                     <div className="flex justify-between items-center h-14 bg-blue-800 dark:bg-gray-800 header-right">
@@ -378,8 +378,9 @@ function Admin() {
                                         <th className="px-4 py-3">brand</th>
                                         <th className="px-4 py-3">OnSale</th>
                                         <th className="px-4 py-3">edit</th>
-                                        <th className="px-4 py-3">delete</th>
+                                        <th className="px-4 py-3">Size</th>
                                         <th className="px-4 py-3">onSale</th>
+                                        <th className="px-4 py-3">delete</th>
                                     </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
