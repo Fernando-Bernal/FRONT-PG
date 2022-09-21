@@ -16,29 +16,23 @@ function ModifShoe() {
             brand: `${shoe[0].brand}`,
             name: `${shoe[0].name}`,
             description: `${shoe[0].description}`,
-            image: `${shoe[0].image}`,
+            image: "",
             color: `${shoe[0].color}`,
             price: `${shoe[0].price}`,
-            size: `${shoe[0].stock[0].size}`,
-            q: `${shoe[0].stock[0].q}`
+            size: "",
+            q: ""
           }}
           validate={(values) => {
             let errorsActicon = {};
 
-           /*  //brand
+           //brand
             if (!values.brand) {
               errorsActicon.brand = "enter the brand correctly";
-            } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.brand)) {
-              errorsActicon.brand =
-                "The name can only contain letters and spaces";
             }
 
             //name
             if (!values.name) {
               errorsActicon.name = "enter the name correctly";
-            } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)) {
-              errorsActicon.name =
-                "The name can only contain letters and spaces";
             }
 
             //image
@@ -49,39 +43,27 @@ function ModifShoe() {
             //color
             if (!values.color) {
               errorsActicon.color = "enter the color correctly";
-            } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.color)) {
-              errorsActicon.color =
-                "The name can only contain letters and spaces";
             }
 
             //price
             if (!values.price) {
               errorsActicon.price = "enter the price correctly";
-            } else if (!/^[0-9]{1,40}$/.test(values.price)) {
-              errorsActicon.price = "only numbers";
             }
 
             //size
             if (!values.size) {
               errorsActicon.size = "enter the size correctly";
-            } else if (!/^[0-9]{1,40}$/.test(values.size)) {
-              errorsActicon.size = "only numbers";
             }
 
             //q
             if (!values.q) {
               errorsActicon.q = "enter the quantity correctly";
-            } else if (!/^[0-9]{1,40}$/.test(values.q)) {
-              errorsActicon.q = "only numbers";
             }
 
             //description
             if (!values.description) {
               errorsActicon.description = "enter the description correctly";
-            } else if (!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.description)) {
-              errorsActicon.description =
-                "The name can only contain letters and spaces";
-            } */
+            }
 
             return errorsActicon;
           }}
@@ -98,13 +80,13 @@ function ModifShoe() {
                   image: e.image,
                   color: e.color,
                   price: e.price,
-                  stock: [
-                    {
-                      size: e.size,
-                      q: e.q
-                    },
-                  ],
+                  size: e.size,
+                  q: e.q,
                   onSale: false
+                },{
+                  "headers":{
+                    "Content-Type": "multipart/form-data"
+                  }
                 }
               );
               navigate("/admin");
@@ -128,7 +110,7 @@ function ModifShoe() {
             }
           }}
         >
-          {({ errors }) => (
+          {({ errors, setFieldValue }) => (
             <Form className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
               <div>
                 <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
@@ -201,10 +183,10 @@ function ModifShoe() {
                 />
                 <label>size</label>
                 <Field
-                  type="number"
+                  as="select"
                   name="size"
                   className="block text-sm py-3 px-4 rounded-lg w-full border outline-none">
-                  {/* {shoe[0].stock.map(e=> <option value={e.size}>{e.size}</option>)} */}
+                  {shoe[0].stock.map(e=> <option value={e.size}>{e.size}</option>)}
                   </Field>
                 <ErrorMessage
                   name="size"
@@ -243,9 +225,11 @@ function ModifShoe() {
                   )}
                 />
                 <label>image</label>
-                <Field
-                  type="fiel"
+                <input
+                  type="file"
                   name="image"
+                  placeholder="Image"
+                  onChange={e => setFieldValue("image", e.target.files[0])}
                   className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                 />
                 <ErrorMessage
