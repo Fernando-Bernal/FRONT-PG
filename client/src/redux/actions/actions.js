@@ -37,8 +37,6 @@ export const POST_REVIEW = "POST_REVIEW"
 export const EDIT_REVIEW = "EDIT_REVIEW"
 export const CLEAN_REVIEWS = "CLEAN_REVIEWS"
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DELETE_BRAND = 'DELETE_BRAND'
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GET_FAVORITES = 'GET_FAVORITES'
 export const POST_FAVORITES = 'POST_FAVORITES'
 export const DELETE_FAVORITES = 'DELETE_FAVORITES'
@@ -252,33 +250,24 @@ return {
     payload: {}
 }
 }
-
-
-export const deleteBrand = (brand)=>{
-    return {
-        type: 'DELETE_BRAND',
-        payload: brand
-    }
-}
-
 ////////////////////////////////////////////////////////////////////////////
 
 export const getFavorites = (idUser) => (dispatch)=>{
- return axios(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`)
-     .then(res => dispatch({type: 'GET_FAVORITES', payload: res.data}))
+    return axios(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`)
+    .then(res => dispatch({type: 'GET_FAVORITES', payload: res.data}))
 }
 
 export function postFavorite(idUser, shoeId) {
- return async function (dispatch) {
- const create = axios.post(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { shoeId: shoeId })
-     return dispatch({
-     type: 'POST_FAVORITES',
-     payload: create,
-     });
- };
+    return async function (dispatch) {
+    const create = axios.post(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { shoeId: shoeId })
+        return dispatch({
+        type: 'POST_FAVORITES',
+        payload: create,
+        });
+    };
 }
 
 export const deleteFavorite = (idUser, shoeId) => (dispatch) => {
- return axios.delete(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { data: {shoeId} })
- .then(res => dispatch({type: 'DELETE_FAVORITES', payload: {}}))
+    return axios.delete(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { data: {shoeId} })
+    .then(res => dispatch({type: 'DELETE_FAVORITES', payload: {}}))
 }

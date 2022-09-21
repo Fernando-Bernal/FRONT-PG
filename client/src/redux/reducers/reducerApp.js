@@ -33,7 +33,6 @@ import {
     POST_REVIEW,
     EDIT_REVIEW,
     CLEAN_REVIEWS,
-    DELETE_BRAND,
     /////////////////////////////
     GET_FAVORITES,
 } from '../actions/actions'
@@ -262,11 +261,6 @@ export function reducerApp(state = initialState, action){
             ...state,
             review: {},
             shoeReviews: []
-          }
-        case DELETE_BRAND:
-          return{
-            ...state, 
-            brands: [...state.brands].filter(e => e._id !== action.payload)
           }
         ////////////////////////////////////////////////////////////
           case GET_FAVORITES:
