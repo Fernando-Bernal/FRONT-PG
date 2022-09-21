@@ -29,7 +29,6 @@ export const GET_CLIENTS = 'GET_CLIENTS'
 export const GET_ORDER_CLIENT = 'GET_ORDER_CLIENT'
 export const DELETE_SHOE = 'DELETE_SHOE'
 export const MODIF_SHOE = 'MODIF_SHOE'
-export const GET_ORDER_DETAIL = 'GET_ORDER_DETAIL'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GET_REVIEWS = "GET_REVIEWS"
 export const GET_EXACT_REVIEW = "GET_EXACT_REVIEW"
@@ -56,7 +55,7 @@ export const getShoe = (id) => (dispatch)=>{
 }
 
 export const getOnSale = () => (dispatch)=>{
-    return axios("https://sneaker-paradise-sanavalos.herokuapp.com/shoes/onSale")
+    return axios("https://sneakers-back-end.herokuapp.com/shoes/onSale")
         .then(res=> dispatch({type: "GET_ONSALE", payload: res.data}))
 }
 
@@ -206,27 +205,22 @@ export const modifShoe = (shoe)=>{
         payload: shoe
     }
 }
-
-export const getOrderDetail = (email) => (dispatch) => {
-    return axios(`https://sneakers-back-end.herokuapp.com/users/email/${email}`)
-        .then(res => dispatch({type: 'GET_ORDER_DETAIL', payload: res.data}))
-}   
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 export const getReviews = (shoeId) => (dispatch)=>{
-    return axios(`https://sneaker-paradise-sanavalos.herokuapp.com/reviews/${shoeId}`)
+    return axios(`https://sneakers-back-end.herokuapp.com/reviews/${shoeId}`)
         .then(res => dispatch({type: 'GET_REVIEWS', payload: res.data}))
 }
 
 export const getExactReview = (shoeId, idUser) => (dispatch) => {
-    return axios(`https://sneaker-paradise-sanavalos.herokuapp.com/reviews/${shoeId}`, {idUser : idUser})
+    return axios(`https://sneakers-back-end.herokuapp.com/reviews/${shoeId}`, {idUser : idUser})
         .then(res => dispatch({type: 'GET_EXACT_REVIEW', payload: res.data}))
 }
 
 export function postReview(idUser, review, rating, shoeId) {
     return async function (dispatch) {
-    const create = axios.post(`https://sneaker-paradise-sanavalos.herokuapp.com/reviews/${shoeId}`, { idUser: idUser, review: review, rating: rating })
+    const create = axios.post(`https://sneakers-back-end.herokuapp.com/reviews/${shoeId}`, { idUser: idUser, review: review, rating: rating })
         return dispatch({
         type: 'POST_REVIEW',
         payload: create,
@@ -235,12 +229,12 @@ export function postReview(idUser, review, rating, shoeId) {
 }
 
 export const editReview = (idReview, review, rating) => (dispatch) =>{
-    return axios.put(`https://sneaker-paradise-sanavalos.herokuapp.com/reviews/exact/${idReview}`, {review, rating })
+    return axios.put(`https://sneakers-back-end.herokuapp.com/reviews/exact/${idReview}`, {review, rating })
     .then(res => dispatch({type: 'EDIT_REVIEW', payload: res.data}))
 }
 
 export const deleteReview = (idReview) => (dispatch) => {
-    return axios.delete(`https://sneaker-paradise-sanavalos.herokuapp.com/reviews/exact/${idReview}`)
+    return axios.delete(`https://sneakers-back-end.herokuapp.com/reviews/exact/${idReview}`)
     .then(res => dispatch({type: 'DELETE_REVIEW', payload: {}}))
 }
 
@@ -262,13 +256,13 @@ export const deleteBrand = (brand)=>{
 ////////////////////////////////////////////////////////////////////////////
 
 export const getFavorites = (idUser) => (dispatch)=>{
- return axios(`https://sneaker-paradise-sanavalos.herokuapp.com/favorites/${idUser}`)
+ return axios(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`)
      .then(res => dispatch({type: 'GET_FAVORITES', payload: res.data}))
 }
 
 export function postFavorite(idUser, shoeId) {
  return async function (dispatch) {
- const create = axios.post(`https://sneaker-paradise-sanavalos.herokuapp.com/favorites/${idUser}`, { shoeId: shoeId })
+ const create = axios.post(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { shoeId: shoeId })
      return dispatch({
      type: 'POST_FAVORITES',
      payload: create,
@@ -277,6 +271,6 @@ export function postFavorite(idUser, shoeId) {
 }
 
 export const deleteFavorite = (idUser, shoeId) => (dispatch) => {
- return axios.delete(`https://sneaker-paradise-sanavalos.herokuapp.com/favorites/${idUser}`, { data: {shoeId} })
+ return axios.delete(`https://sneakers-back-end.herokuapp.com/favorites/${idUser}`, { data: {shoeId} })
  .then(res => dispatch({type: 'DELETE_FAVORITES', payload: {}}))
 }

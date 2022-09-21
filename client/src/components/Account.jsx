@@ -11,8 +11,8 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
 import { useSelector, useDispatch } from 'react-redux';
-import { getOrderDetail, getUsers } from '../redux/actions/actions';
-import {RiAdminFill} from 'react-icons/ri'
+import { getUsers } from '../redux/actions/actions';
+import { RiAdminFill } from 'react-icons/ri'
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -22,7 +22,6 @@ const Account = () => {
   const [photoURL, setPhotoURL] = useState('https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231709/thesomeday123170900021.jpg')
   const [password, setPassword] = useState()
   const [name, setName] = useState()
-  const orders = useSelector(state => state.orders)
   const users = useSelector(state => state.users)
   const dispatch = useDispatch()
 
@@ -49,9 +48,15 @@ const Account = () => {
     }
   }
 
+  // const historyUser = (users) => {
+  //   let userOrder = users.find(u => u.email === user.email)
+    
+  //     console.log(userOrder.records)
+  //     return userOrder.records
+  // } 
+  
   useEffect(()=>{
     logEvent(analytics,'ACCOUNT |S.P|')
-    dispatch(getOrderDetail(user.email))
     dispatch(getUsers())
     return () => {
       setImageUp(null)
@@ -61,6 +66,7 @@ const Account = () => {
   useEffect(()=>{
     usersAdmin()
     if(users.length > 0 && user) validateAccount(users)
+    // if(users.length > 0 && user) historyUser(users)
     if(user?.photoURL){
       setPhotoURL(user.photoURL)
     }
@@ -138,7 +144,7 @@ const Account = () => {
       console.log(error)
     }
   }
-
+  
   return (
     <div>
       <NavBar/>
@@ -242,9 +248,16 @@ const Account = () => {
               </div>
             </div>
             <hr />
-            <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="px-4">My Orders</h2>
-              {orders ? orders.map(e => <p>{e}</p>): <p>No orders</p>}
+            <h2 className="text-center pt-4 font-bold text-lg">My Orders</h2>
+            <div className="w-full items-center p-4 columns-2">
+              <div className='text-center'>
+                <h3 className='mb-3 font-bold'>Order ID</h3>
+                {/* {historyUser(users).map(e => <p>{e.idPayment._id}</p>)} */}
+              </div>
+              <div className='text-center'>
+                <h3 className='mb-3 font-bold'>Total</h3>
+                {/* {historyUser(users).map(e => <p>${e.idPayment.amount}</p>)} */}
+              </div>
             </div>
             <hr />
             <div className="w-full p-4 justify-center items-center flex">
