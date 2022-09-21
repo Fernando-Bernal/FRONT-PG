@@ -2,9 +2,9 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
+import { MdLocalOffer } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { deleteShoe, modifShoe } from "../../redux/actions/actions";
-import { async } from "@firebase/util";
+import { deleteShoe, modifShoe, getShoes } from "../../redux/actions/actions";
 
 function Products({ products }) {
   const dispatch = useDispatch();
@@ -32,6 +32,17 @@ function Products({ products }) {
     }
   })
 }
+
+const handleOnSale = async()=>{
+  const { data } = await axios.put(
+    `https://sneakers-back-end.herokuapp.com/shoes/${products._id}`,
+    {
+      onSale: products.onSale === true ? false : true
+    }
+    );
+    dispatch(getShoes())
+    console.log(data)
+  }
   
 
   return (
@@ -60,6 +71,7 @@ function Products({ products }) {
           </div>
         </td>
         <td className="px-4 py-3 text-sm">{products.brand}</td>
+        <td className="px-4 py-3 text-sm">{products.onSale.toString()}</td>
         <td className="px-4 py-3 text-sm">
           <Link to={"/modifshoe"}>
             <button onClick={()=>dispatch(modifShoe(products._id))} className="w-8 h-8">
@@ -70,6 +82,11 @@ function Products({ products }) {
         <td className="px-4 py-3 text-sm">
           <button onClick={handleDelete} className="w-8 h-8">
             <AiFillDelete />
+          </button>
+        </td>
+        <td className="px-4 py-3 text-sm">
+          <button onClick={handleOnSale} className="w-8 h-8">
+            <MdLocalOffer />
           </button>
         </td>
       </tr>

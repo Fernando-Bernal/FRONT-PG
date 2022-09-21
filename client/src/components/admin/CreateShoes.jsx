@@ -81,14 +81,6 @@ function CreateShoes() {
                 
                 try{
                     console.log('enviado')
-                    resetForm();
-                    Swal.fire({
-                        position: 'top-center',
-                        icon: 'success',
-                        title: 'Your shoe add to store',
-                        showConfirmButton: false,
-                        timer: 5000
-                      })
                     const { data } = await axios.post(
                         "https://sneakers-back-end.herokuapp.com/shoes",
                         {
@@ -98,12 +90,22 @@ function CreateShoes() {
                           image: e.image,
                           color: e.color,
                           price: e.price,
-                          stock: [{
-                            size:e.size,
-                            q:e.q
-                          }]
+                          size:e.size,
+                          q:e.q
+                        }, {
+                            "headers":
+                            {
+                                "Content-Type": "multipart/form-data",
+                            }
                         })
-                        console.log(JSON.stringify(data))
+                        resetForm();
+                        Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: 'Your shoe add to store',
+                            showConfirmButton: false,
+                            timer: 5000
+                        })
                 }catch(error){
                     console.log(error)
                     Swal.fire({
@@ -117,7 +119,7 @@ function CreateShoes() {
                 
             }}
         >
-            {({errors})=>(
+            {({errors, setFieldValue})=>(
                 <Form className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
                     <div>
                         <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
@@ -191,9 +193,11 @@ function CreateShoes() {
                         <ErrorMessage name="description" component={()=>(
                             <div className="text-xs px-1  text-red-500">{errors.description}</div>
                         )}/>
-                        <Field
+                        <input
                         type="file"
                         name="image"
+                        placeholder="Image"
+                        onChange={e => setFieldValue("image", e.target.files[0])}
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="image" component={()=>(
