@@ -34,10 +34,10 @@ function CreateShoes() {
                     errorsActicon.name = 'The name can only contain letters and spaces'
                 }
 
-                /* //image
+                //image
                 if(!values.image){
                     errorsActicon.image = 'add the image'
-                } */
+                } 
 
                 //color
                 if(!values.color){
