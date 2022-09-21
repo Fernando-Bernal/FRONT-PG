@@ -6,10 +6,13 @@ import {logEvent } from 'firebase/analytics';
 import Swal from "sweetalert2";
 import NavBar from './NavBar';
 import { useEffect } from 'react';
-import {MdEmail, MdPerson, MdLock, MdImage} from 'react-icons/md'
+import {MdEmail, MdPerson, MdLock, MdImage, MdFavorite} from 'react-icons/md'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase';
 import { updatePassword, updateProfile } from 'firebase/auth'
+import { useSelector, useDispatch } from 'react-redux';
+import { getUsers } from '../redux/actions/actions';
+import { RiAdminFill } from 'react-icons/ri'
 
 const Account = () => {
   const {user, logout} = UserAuth()
@@ -19,6 +22,8 @@ const Account = () => {
   const [photoURL, setPhotoURL] = useState('https://images.assetsdelivery.com/compings_v2/thesomeday123/thesomeday1231709/thesomeday123170900021.jpg')
   const [password, setPassword] = useState()
   const [name, setName] = useState()
+  const users = useSelector(state => state.users)
+  const dispatch = useDispatch()
 
   const usersAdmin = () => {
     if(user?.email === 'marioelkamui@gmail.com' && user?.uid === 'mXfXQunp6gNgqnLrqpnPwHYcKEQ2' ||
@@ -29,8 +34,30 @@ const Account = () => {
     }
   }
 
+  const validateAccount = (users) => {
+    let userVal = users.find(u => u.email === user.email)
+    if(userVal.status === "Disabled" || userVal.status === "Eliminated"){
+      navigate('/')
+      Swal.fire({
+        icon: 'warning',
+        title: 'Your account is Disabled or Eliminated',
+        showConfirmButton: false,
+        timer: 2000
+      })
+      logout()
+    }
+  }
+
+  // const historyUser = (users) => {
+  //   let userOrder = users.find(u => u.email === user.email)
+    
+  //     console.log(userOrder.records)
+  //     return userOrder.records
+  // } 
+  
   useEffect(()=>{
     logEvent(analytics,'ACCOUNT |S.P|')
+    dispatch(getUsers())
     return () => {
       setImageUp(null)
     }
@@ -38,6 +65,8 @@ const Account = () => {
 
   useEffect(()=>{
     usersAdmin()
+    if(users.length > 0 && user) validateAccount(users)
+    // if(users.length > 0 && user) historyUser(users)
     if(user?.photoURL){
       setPhotoURL(user.photoURL)
     }
@@ -70,7 +99,7 @@ const Account = () => {
       navigate('/')
       Swal.fire({
         icon: 'success',
-        title: 'You logout',
+        title: 'See you later!',
         showConfirmButton: false,
         timer: 2000
       })
@@ -115,7 +144,7 @@ const Account = () => {
       console.log(error)
     }
   }
-
+  
   return (
     <div>
       <NavBar/>
@@ -123,17 +152,19 @@ const Account = () => {
         <div className="container mx-auto max-w-2xl md:w-3/4">
           <div className="rounded-t-lg border-2 border-[#00ff01] p-4">
             <div className="mx-auto max-w-sm md:mx-0 md:w-full">
-              <div className="inline-flex items-center space-x-4">
+              <div className="inline-flex items-center space-x-8">
                 <img
                   className="h-[80px] w-[80px] rounded-full"
                   alt=""
                   src={photoURL}
                 />
                 <h1 className="text-white text-2xl">{user?.displayName}</h1>
+                <Link to='/favorites'><button className="px-4 py-3 text-xl flex w-[165px]"><MdFavorite className='h-6 w-6 mr-2'/>Favorites</button></Link>
                 <Link to={'/admin'}>
                   {admin && 
                     <button
-                      className='px-6 py-2 my-4'>
+                      className='px-7 py-3 text-xl flex w-[165px]'>
+                      <RiAdminFill className='h-6 w-6 mr-2'/>
                       Admin
                     </button>
                   }
@@ -141,18 +172,18 @@ const Account = () => {
               </div>
             </div>
           </div>
-          <div className="space-y-3 bg-white">
+          <div className="space-y-3 bg-[#000000] border ">
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Account</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Account</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm">Email</label>
-                <div className="inline-flex w-full border">
-                  <div className="w-1/12 bg-gray-100 pt-2">
-                    <MdEmail className='h-6 w-6 ml-1'/>
+                <label className="text-sm text-[#00ff01]">Email</label>
+                <div className="inline-flex w-full">
+                  <div className="w-1/12 bg-[#000000] pt-2">
+                    <MdEmail className='text-[#00ff01] h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="email"
-                    className="w-11/12 p-2"
+                    className="w-11/12 p-2 bg-[#000000] focus:text-[#00ff01] focus:outline-none"
                     placeholder={user && user.email}
                     disabled
                   />
@@ -161,17 +192,17 @@ const Account = () => {
             </div>
             <hr />
             <div className="w-full items-center space-y-4 p-4 md:inline-flex md:space-y-0">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Personal info</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Personal info</h2>
               <div className="mx-auto max-w-sm space-y-5 md:w-2/3">
                 <div>
-                  <label className="text-sm">Display name</label>
-                  <div className="inline-flex w-full border">
-                    <div className="w-1/12 bg-gray-100 pt-2">
-                      <MdPerson className='h-6 w-6 ml-1'/>
+                  <label className="text-sm text-[#00ff01] ">Display name</label>
+                  <div className="inline-flex w-full">
+                    <div className="w-1/12 bg-[#000000] pt-2">
+                      <MdPerson className='text-[#00ff01] h-6 w-6 ml-1'/>
                     </div>
                     <input
                       type="text"
-                      className="w-11/12 p-2 focus:text-gray-600 focus:outline-none"
+                      className=" bg-[#000000] w-11/12 p-2 focus:text-[#00ff01] focus:outline-none"
                       placeholder={user?.displayName}
                       onChange={handleName}
                     />
@@ -182,16 +213,16 @@ const Account = () => {
             </div>
             <hr />
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Change password</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Change password</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm">New Password</label>
-                <div className="inline-flex w-full border">
-                  <div className="w-1/12 bg-gray-100 pt-2">
-                    <MdLock className='h-6 w-6 ml-1'/>
+                <label className="text-sm text-[#00ff01] ">New Password</label>
+                <div className="inline-flex w-full">
+                  <div className="w-1/12 bg-[#000000] pt-2">
+                    <MdLock className='text-[#00ff01] h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="password"
-                    className="w-11/12 p-2"
+                    className=" bg-[#000000] focus:text-[#00ff01] w-11/12 p-2"
                     placeholder='...'
                     onChange={handlePassword}
                   />
@@ -200,12 +231,12 @@ const Account = () => {
               </div>
             </div>
             <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="mx-auto max-w-sm md:w-1/3">Upload an image</h2>
+              <h2 className="mx-auto max-w-sm md:w-1/3 text-[#00ff01] ">Upload an image</h2>
               <div className="mx-auto max-w-sm md:w-2/3">
-                <label className="text-sm">New profile image</label>
-                <div className="inline-flex w-full border">
-                  <div className="w-1/12 bg-gray-100 pt-2">
-                    <MdImage className='h-6 w-6 ml-1'/>
+                <label className="text-sm text-[#00ff01] ">New profile image</label>
+                <div className="inline-flex w-full">
+                  <div className="w-1/12 bg-[#000000] pt-2">
+                    <MdImage className=' text-[#00ff01] h-6 w-6 ml-1'/>
                   </div>
                   <input
                     type="file"
@@ -217,8 +248,16 @@ const Account = () => {
               </div>
             </div>
             <hr />
-            <div className="w-full items-center p-4 md:inline-flex">
-              <h2 className="px-4">My Orders</h2>
+            <h2 className="text-center pt-4 font-bold text-lg">My Orders</h2>
+            <div className="w-full items-center p-4 columns-2">
+              <div className='text-center'>
+                <h3 className='mb-3 font-bold'>Order ID</h3>
+                {/* {historyUser(users).map(e => <p>{e.idPayment._id}</p>)} */}
+              </div>
+              <div className='text-center'>
+                <h3 className='mb-3 font-bold'>Total</h3>
+                {/* {historyUser(users).map(e => <p>${e.idPayment.amount}</p>)} */}
+              </div>
             </div>
             <hr />
             <div className="w-full p-4 justify-center items-center flex">

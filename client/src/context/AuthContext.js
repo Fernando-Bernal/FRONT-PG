@@ -42,6 +42,11 @@ const AuthContextProvider = ({children}) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
       console.log(currentUser)
+      let userGoogle = {
+        email: currentUser.email,
+        idUser: currentUser.uid
+      }
+      dispatch(postUser(userGoogle))
     })
     return () => {
       unsubscribe()

@@ -71,7 +71,7 @@ const Card = ({shoe}) => {
               <div>
                 <p className="mt-1 text-sm text-white uppercase">{shoe.brand}</p>
                 <h3 className="text-sm text-bold text-[#00ff01] capitalize">{shoe.name}</h3>
-                <p className="my-1 text-md text-white">${shoe.price}</p>
+                 <p className="my-1 text-md text-white">{shoe.onSale ? <><span class="bg-red-500  text-white font-medium border border-red-700 rounded">ON SALE</span> ${shoe.price} </>: `$${shoe.price}` }</p>
               </div>             
             </div>
           </div>

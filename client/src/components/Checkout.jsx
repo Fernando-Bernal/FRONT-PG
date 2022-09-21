@@ -206,17 +206,18 @@ function checkout({ products, subTotal }) {
         base: {
           fontSize: "14px",
           iconColor: "#00ff01",
-          backgroundColor: "#1F2937",
+          backgroundColor: "#000000",
+          color: "#ffffff",
           "::placeholder": {
-            color: "#9CA3AF",
-            backgroundColor: "#1F2937",
+            color: "#00ff01",
+            backgroundColor: "0000000",
           },
           ":hover": {
             iconColor: "#ffff01",
-            backgroundColor: "#1F2937",
+            backgroundColor: "#000000",
           },
           ":-webkit-autofill": {
-            backgroundColor: "#1F2937",
+            backgroundColor: "#0000000",
           },
         },
         invalid: {},
@@ -384,7 +385,7 @@ function checkout({ products, subTotal }) {
     <div>
       <Elements stripe={stripePromise}>
         <div>
-          <div className=" p-5 bg-[#2f3436] rounded overflow-visible">
+          <div className=" p-5 bg-black rounded overflow-visible">
             <div className="flex justify-center flex-col pt-3">
               <CheckoutForm />
             </div>
