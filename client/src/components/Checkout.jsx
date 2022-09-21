@@ -142,7 +142,7 @@ function checkout({ products, subTotal }) {
           const { id } = paymentMethod;
           try {
             const { data } = await axios.post(
-              "https://sneakers-back-end.herokuapp.com/checkout",
+              "https://sneakers-back-end.herokuapp.com/cart/checkout",
               {
                 id,
                 email: user.email,
