@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { analytics } from '../firebase';
 import {logEvent } from 'firebase/analytics'
 import {MdFavorite} from 'react-icons/md'
+import { IoMdHeartDislike }from 'react-icons/io'
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import { UserAuth } from "../context/AuthContext";
 import Select from "react-select";
 import Swal from "sweetalert2";
-import { getShoe, addProductCarrito, cleanShoe } from '../redux/actions/actions';
+import { getShoe, addProductCarrito, cleanShoe, postFavorite, deleteFavorite, getFavorites } from '../redux/actions/actions';
 import NavBar from './NavBar';
 import Review from './Review';
 
 const CardDetail = () => {
     const dispatch = useDispatch()
     const shoe = useSelector((state) => state.shoe)
+    const shoeId = shoe?._id
+    const favorites = useSelector((state) => state.favorites)
+    const idUser = UserAuth()?.user?.uid;
     let { id } = useParams()
-
     const [shoeToCart, setShoeToCart] = useState({
       _id:'',
       name:'',
@@ -59,12 +63,13 @@ const CardDetail = () => {
     }
 
     useEffect(()=>{
+      dispatch(getFavorites(idUser))
       logEvent(analytics, 'shoe', {
         id: `${shoe._id}`,
         brand: `${shoe.brand}`,
         name: `${shoe.name}`
       })
-    },[])
+    }, [])
 
     useEffect(() => {
       dispatch(getShoe(id));
@@ -72,6 +77,26 @@ const CardDetail = () => {
         dispatch(cleanShoe())
     }
   }, [dispatch, id])
+
+  const addFavorite = () => {
+    dispatch(postFavorite(idUser, shoeId))
+    Swal.fire({
+      icon: 'success',
+      title: 'Shoe added to Favorites',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
+
+  const removeFavorite = () => {
+    dispatch(deleteFavorite(idUser, shoeId))
+    Swal.fire({
+      icon: 'success',
+      title: 'Shoe remove from Favorites',
+      showConfirmButton: false,
+      timer: 2000
+    })
+  }
 
   return (
     <>
@@ -106,9 +131,12 @@ const CardDetail = () => {
           <Link to={`/cart`}> 
             <button className="flex ml-auto border py-2 px-6" onClick={toCart}>BUY ME!</button>
           </Link>
-          <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4">
+            <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4" onClick={addFavorite}>
             <MdFavorite/>
           </button>
+        <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4 bg-[#e04747] border-[#de3030]" onClick={removeFavorite}>
+        <IoMdHeartDislike/>
+        </button>
         </div>
       </div>
       <Review id={id}/>

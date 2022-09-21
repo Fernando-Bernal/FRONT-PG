@@ -33,7 +33,8 @@ import {
     POST_REVIEW,
     EDIT_REVIEW,
     CLEAN_REVIEWS,
-
+    /////////////////////////////
+    GET_FAVORITES,
 } from '../actions/actions'
 
 const initialState = {
@@ -46,13 +47,15 @@ const initialState = {
     name: [],
     catalogBrand: [],
     cart:[],
+    favorites: [],
     review: {},
     shoeReviews: [],
     productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0,
     users:[],
     clients:[],
-    order:[]
+    order:[],
+    orders: []
 }
 
 export function reducerApp(state = initialState, action){
@@ -259,7 +262,26 @@ export function reducerApp(state = initialState, action){
             review: {},
             shoeReviews: []
           }
-        
+        ////////////////////////////////////////////////////////////
+          case GET_FAVORITES:
+           const concatShoesFavs = (shoes, favs) => {
+            const favShoes = [];
+            for (let i = 0; i < shoes.length; i++) {
+              const shoe = shoes[i];
+              for (let j = 0; j < favs.length; j++) {
+                const fav = favs[j];
+                if (shoe._id === fav.shoeId) {
+                 favShoes.push(shoe);
+                }
+              }
+            }
+            return favShoes;
+          };
+           return{
+             ...state,
+             favorites: concatShoesFavs(state.shoes, action.payload)
+           }
+
       default:
         return state;
     }

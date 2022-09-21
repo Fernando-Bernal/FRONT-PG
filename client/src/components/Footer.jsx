@@ -40,7 +40,7 @@ const Footer = () => {
         <div className='w-full bg-black text-white py-y px-2'>
             <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-6 border-b-2 border-[#00ff01] py-8'>
                 <div>
-                        <h6 className='font-bold text-center text-[#00ff01] uppercase pt-2'>More links</h6>
+                        <h6 className='font-bold text-center text-[#00ff01] uppercase pt-2 pb-4'>More links</h6>
                             <ul>
                                 <Link to='AboutUs'> <li className='py-2 text-center hover:text-[#00ff01]'>About Us
                                 </li></Link>

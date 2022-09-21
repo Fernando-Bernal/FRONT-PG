@@ -56,7 +56,7 @@ const Carousel = () => {
                 {index === slide && (
                   <Link to={`/products/${shoe._id}`}>
                     <img
-                      className="rounded-lg object-cover h-[400px] w-[700px] cursor-pointer hover:opacity-60"
+                      className="rounded-lg object-fill h-[400px] w-[700px] cursor-pointer hover:opacity-60"
                       src={shoe.image}
                       alt="x"
                     />
