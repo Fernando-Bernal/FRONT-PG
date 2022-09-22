@@ -19,7 +19,8 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
-    await createUser(user.email, user.password)
+      if(user !== undefined){
+    await createUser(user?.email, user?.password)
     Swal.fire({
       icon: 'success',
       title: 'Welcome to Sneaker Paradise!',
@@ -27,6 +28,8 @@ const Signup = () => {
       timer: 2000
     })
     navigate('/account')
+    window.location.reload()
+  }
     } catch (error) {
       console.log(error)
       if (error.code === 'auth/email-already-in-use'){
