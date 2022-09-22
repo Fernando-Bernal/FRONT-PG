@@ -1,11 +1,12 @@
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom'
 
 function CreateBrand() {
-  return (
+    return (
     <div>
-      <div className="min-h-screen bg-gray-800 flex justify-center items-center py-20">
+        <div className="min-h-screen flex justify-center items-center py-20">
         <Formik 
             initialValues={{
                 name:''
@@ -23,44 +24,39 @@ function CreateBrand() {
                 return errorsActicon
             }}
             onSubmit={async(e, {resetForm})=>{
-                //console.log(e)
-                
                 try{
-                    console.log('enviado')
                     resetForm();
                     
                     const { data } = await axios.post(
                         "https://sneakers-back-end.herokuapp.com/brands",
                         {
-                          name: e.name    
+                            name: e.name    
                         })
                         Swal.fire({
-                            position: 'top-center',
                             title: `${data}`,
                             showConfirmButton: false,
                             timer: 5000
-                          })
+                        })
                 }catch(error){
                     console.log(error)
                     Swal.fire({
-                        position: "top-center",
                         icon: "error",
-                        title: "error in your shoes",
+                        title: "Something is wrong creating your shoes",
                         showConfirmButton: false,
                         timer: 5000,
-                      });
+                    });
                 }
                 
             }}
         >
             {({errors})=>(
-                <Form className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
+                <Form className="py-12 px-12 bg-white rounded-2xl z-20">
                     <div>
-                        <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
+                        <h1 className="text-3xl font-bold text-center mb-4">
                         Create Brand
                         </h1>
-                        <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-                            add some new brand to the store!
+                        <p className="w-80 text-center text-sm mb-8 font-semibold tracking-wide">
+                            Add some new brand to the store!
                         </p>
                     </div>
                     <div className="space-y-3">
@@ -79,12 +75,17 @@ function CreateBrand() {
                         Create
                         </button>
                     </div>
+                    <div className="text-center mt-6">
+                    <Link to='/admin'><button className="py-3 w-64 text-xl rounded-2xl mx-1">
+                        Back to Admin
+                        </button></Link>
+                    </div>
                 </Form>
             )}
         </Formik>
-      </div>
+        </div>
     </div>
-  );
+    );
 }
 
 export default CreateBrand;

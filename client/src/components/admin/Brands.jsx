@@ -34,12 +34,12 @@ function Brands({ brands }) {
 
   return (
     <>
-      <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+      <tr className="bg-gray-50 text-gray-700">
         <td className="px-4 py-3">
           <div className="flex items-center text-sm">
             <div>
-              <p className="font-bold">{brands.name}</p>
-              <p className="text-xs text-gray-600 dark:text-gray-400">
+              <p className="font-bold uppercase">{brands.name}</p>
+              <p className="text-xs text-gray-600">
                 {brands._id}
               </p>
             </div>

@@ -85,6 +85,7 @@ const BotChat = () => {
         options: [
         { value: "Account", label: "Account", trigger: "9" },
         { value: "Chart", label: "Shoe size", trigger: "10" },
+        { value: "Order", label: "Order problem", trigger: "bugSelection" }
         ]
       },
       {
@@ -97,22 +98,22 @@ const BotChat = () => {
       },
       {
         id: "bugSelection",
-        component: (<Link to={'/ContactUs'}><div>Oh no! Please contact us through this form</div></Link>),
+        component: (<div>Oh no! Please contact us through this <Link to={'/ContactUs'} className='hover:text-blue-500 underline'>form</Link></div>),
         trigger: "16"
       },
       {
         id: "9",
-        component: (<Link to={'/account'}><div>Visit your account</div></Link>),
+        component: (<Link to={'/account'} className='hover:text-blue-500 underline'><div>Visit your account</div></Link>),
         trigger: "15"
       },
       {
         id: "10",
-        component: (<Link to={'/SizeChart'}><div>Check our size chart!</div></Link>),
+        component: (<Link to={'/SizeChart'} className='hover:text-blue-500 underline'><div>Check our size chart!</div></Link>),
         trigger: "15"
       },
       {
         id: "12",
-        component: (<Link to={'/AboutUs'}><div>Get to know us more</div></Link>),
+        component: (<Link to={'/AboutUs'} className='hover:text-blue-500 underline'><div>Get to know us more</div></Link>),
         trigger: "15"
       },
       {

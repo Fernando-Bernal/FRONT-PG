@@ -2,14 +2,15 @@ import { useSelector } from "react-redux";
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom'
 
 function CreateSize() {
 
-   const shoe = useSelector((state) => state.shoes);
+    const shoe = useSelector((state) => state.shoes);
 
-  return (
+    return (
     <div>
-      <div className="min-h-screen bg-gray-800 flex justify-center items-center py-20">
+        <div className="min-h-screen flex justify-center items-center py-20">
         <Formik 
             initialValues={{
                 size:'',
@@ -34,9 +35,7 @@ function CreateSize() {
                 return errorsActicon
             }}
             onSubmit={async(e, {resetForm})=>{
-                //console.log(e)
                 try{
-                    console.log('enviado') 
                     const { data } = await axios.put(
                         `https://sneakers-back-end.herokuapp.com/shoes/addSize/${shoe[0]._id}`,
                         {
@@ -44,7 +43,6 @@ function CreateSize() {
                             q:e.q
                         })
                         Swal.fire({
-                            position: 'top-center',
                             title: `${data}`,
                             showConfirmButton: false,
                             timer: 5000
@@ -53,12 +51,11 @@ function CreateSize() {
                 }catch(error){
                     console.log(error)
                     Swal.fire({
-                        position: "top-center",
                         icon: "error",
-                        title: "error in your size",
+                        title: "Something is wrong creating your size",
                         showConfirmButton: false,
                         timer: 5000,
-                      });
+                        });
                 }
                 
             }}
@@ -66,18 +63,18 @@ function CreateSize() {
             {({errors})=>(
                 <Form className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
                     <div>
-                        <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
+                        <h1 className="text-3xl font-bold text-center mb-4">
                         Create size
                         </h1>
-                        <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-                            add some new size to the shoe!
+                        <p className="w-80 text-center text-sm mb-8 font-semibold tracking-wide">
+                            Add some new size to a shoe!
                         </p>
                     </div>
                     <div className="space-y-3">
                         <Field
                         type="number"
                         name="size"
-                        placeholder="number the size"
+                        placeholder="Number the size"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage component={()=>(
@@ -86,7 +83,7 @@ function CreateSize() {
                         <Field
                         type="number"
                         name="q"
-                        placeholder="quantity"
+                        placeholder="Quantity"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage component={()=>(
@@ -97,6 +94,11 @@ function CreateSize() {
                         <button className="py-3 w-64 text-xl rounded-2xl" typeof='submit'>
                         Create
                         </button>
+                    </div>
+                    <div className="text-center mt-6">
+                    <Link to='/admin'><button className="py-3 w-64 text-xl rounded-2xl mx-1">
+                        Back to Admin
+                        </button></Link>
                     </div>
                 </Form>
             )}

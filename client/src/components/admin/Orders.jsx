@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from 'react-router-dom'
 
 function Orders() {
 
@@ -6,46 +7,54 @@ function Orders() {
 
   return (
     <div>
-      <div className="bg-opacity-50 py-40">
-        <div className="container mx-auto max-w-2xl shadow-md md:w-3/4 border bg-green-800 rounded-lg">
-            <p className="flex items-center text-2xl font-bold justify-center text-black">Order</p>
-            <p className="flex items-center text-xs font-semibold justify-center text-black">Stripe: {order[0].idPayment}</p>
-            <p className="flex items-center text-xs font-semibold justify-center text-black">Client: {order[0].email}</p>
-          <div className="relative flex items-center">
-            <div>
-              {order[0]?.shoe.map((e) => {
-                return (
-                  <div>
-                    <section key={e._id}>
-                      <ul>
-                        <li>
-                          <article className="inline-block p-2 cursos-pointer hover:scale-105 ease-in-out duration-200 hover:bg-[#00ff01]">
-                            <img
-                              src={e.image}
-                              alt=""
-                              className="w-16 h-16 object-contain"
-                            />
-                            <div>
-                              <h3 className="text-sm font-semibold capitalize">
-                                {e.name}
-                              </h3>
-                              <p className="text-s text-black">${e.price}</p>
-                              <p className="text-s text-black">size: {e.size}</p>
-                              <p className="text-s text-black">quantity: {e.quantity}</p>
-                            </div>
-                          </article>
-                        </li>
-                      </ul>
-                    </section>
-                  </div>
-                );
-              })}
-            </div>
+      <div className="py-40 text-white">
+        <div className="mx-auto max-w-2xl md:w-3/4 border border-[#00ff01] rounded-lg">
+          <p className="flex items-center text-2xl font-bold justify-center text-[#00ff01] my-2">ORDER</p>
+          <p className="flex items-center text-xs font-semibold justify-center">Stripe: {order[0].idPayment}</p>
+          <p className="flex items-center text-xs font-semibold justify-center">Client: {order[0].email}</p>
+          <div className='text-center'>
+            <table className="w-full mt-2">
+              <thead>
+                <tr className="text-xs font-semibold tracking-wide text-left text-[#00ff01] uppercase border-b border-[#00ff01]">
+                  <th className="px-4 py-3">shoes</th>
+                  <th className="px-4 py-3">quantity</th>
+                  <th className="px-4 py-3">size</th>
+                  <th className="px-4 py-3">price</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#00ff01]">
+                {order[0]?.shoe.map(e => 
+                <tr className="text-white">
+                <td className="px-4 py-2">
+                <div className="flex items-center text-sm">
+                  <img
+                  className="w-12 h-12 object-contain"
+                  src={e.image}
+                  alt=""
+                  loading="lazy"
+                  />
+                  <p className="font-bold text-center ml-4 capitalize">{e.name}</p>
+                </div>
+                </td>
+                <td className="px-4 py-3 text-sm">{e.quantity}</td>
+                <td className="px-4 py-3 text-sm">{e.size}</td>
+                <td className="px-4 py-3 text-sm">{e.price}</td>
+                </tr>
+                )}
+              </tbody>
+            </table>
           </div>
+        </div>
+        <div className="text-center mt-6">
+          <Link to='/admin'><button className="py-3 w-64 text-xl rounded-2xl mx-1">
+            Back to Admin
+          </button></Link>
         </div>
       </div>
     </div>
   );
 }
+
+
 
 export default Orders;

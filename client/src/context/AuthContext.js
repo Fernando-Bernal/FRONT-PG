@@ -22,7 +22,6 @@ const AuthContextProvider = ({children}) => {
       email: register.user.email,
       idUser: register.user.uid 
     }
-    dispatch(postUser(userRegister))
   }
 
   const googleSignIn = () => {
@@ -42,11 +41,11 @@ const AuthContextProvider = ({children}) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
       console.log(currentUser)
-      let userGoogle = {
+      let actualUser = {
         email: currentUser.email,
         idUser: currentUser.uid
       }
-      dispatch(postUser(userGoogle))
+      dispatch(postUser(actualUser))
     })
     return () => {
       unsubscribe()

@@ -251,7 +251,7 @@ const Account = () => {
             </div>
             <div className='text-center'>
               <h3 className='mb-3 font-bold'>Total</h3>
-              {orders?.map(e => <p>${e.amount}</p>)}
+              {orders?.map(e => <p>${e?.amount/100}</p>)}
             </div>
           </div>
             : (users.length > 0 && user.email) && <button onClick={() => setShowOrders(true)} className='ml-[262px]'>SHOW ORDERS</button> 

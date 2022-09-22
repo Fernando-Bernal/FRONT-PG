@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom'
 
 function ModifShoe() {
   const shoe = useSelector((state) => state.shoes);
@@ -10,7 +11,7 @@ function ModifShoe() {
     console.log(shoe)
   return (
     <div>
-      <div className="min-h-screen bg-gray-800 flex justify-center items-center py-20">
+      <div className="min-h-screen flex justify-center items-center py-20">
         <Formik
           initialValues={{
             brand: `${shoe[0].brand}`,
@@ -68,8 +69,6 @@ function ModifShoe() {
             return errorsActicon;
           }}
           onSubmit={async (e, { resetForm }) => {
-            //console.log(e)
-                console.log(e.name)
             try {
               const { data } = await axios.put(
                 `https://sneakers-back-end.herokuapp.com/shoes/${shoe[0]._id}`,
@@ -111,23 +110,22 @@ function ModifShoe() {
           }}
         >
           {({ errors, setFieldValue }) => (
-            <Form className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
+            <Form className="py-12 px-12 bg-white rounded-2xl z-20">
               <div>
-                <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
-                 Modif Shoes
+                <h1 className="text-3xl font-bold text-center mb-4">
+                  Modify Shoes
                 </h1>
-                <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-                  add some modif shoes to the store!
+                <p className="text-center text-sm mb-8 font-semibold tracking-wide">
+                  Add some modif shoes to the store!
                 </p>
               </div>
-              <div className="space-y-3">
-                <label>brand</label>
+              <div className="">
+                <label>Brand</label>
                 <Field
                   type="text"
                   name="brand"
-
                   placeholder={shoe[0].brand}
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none uppercase mb-4"
                 />
                 <ErrorMessage
                   component={() => (
@@ -136,12 +134,12 @@ function ModifShoe() {
                     </div>
                   )}
                 />
-                <label>name</label>
+                <label>Name</label>
                 <Field
                   type="text"
                   name="name"
                   placeholder={shoe[0].name}
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none capitalize mb-4"
                   />
                 <ErrorMessage
                   name="name"
@@ -151,12 +149,12 @@ function ModifShoe() {
                     </div>
                   )}
                 />
-                <label>color</label>
+                <label>Color</label>
                 <Field
                   type="text"
                   name="color"
                   placeholder={shoe[0].color}
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none mb-4"
                 />
                 <ErrorMessage
                   name="color"
@@ -166,12 +164,12 @@ function ModifShoe() {
                     </div>
                   )}
                 />
-                <label>price</label>
+                <label>Price</label>
                 <Field
                   type="number"
                   name="price"
                   placeholder={shoe[0].price}
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none mb-4"
                 />
                 <ErrorMessage
                   name="price"
@@ -181,11 +179,11 @@ function ModifShoe() {
                     </div>
                   )}
                 />
-                <label>size</label>
+                <label>Size</label>
                 <Field
                   as="select"
                   name="size"
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none">
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none mb-4">
                   {shoe[0].stock.map(e=> <option value={e.size}>{e.size}</option>)}
                   </Field>
                 <ErrorMessage
@@ -196,12 +194,12 @@ function ModifShoe() {
                     </div>
                   )}
                 />
-                <label>quantity</label>
+                <label>Quantity</label>
                 <Field
                   type="number"
                   name="q"
                   placeholder="quantity"
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none mb-4"
                 />
                 <ErrorMessage
                   name="q"
@@ -214,7 +212,7 @@ function ModifShoe() {
                   name="description"
                   as="textarea"
                   placeholder={shoe[0].description}
-                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+                  className="block text-sm py-3 px-4 rounded-lg w-full border outline-none mb-4"
                 />
                 <ErrorMessage
                   name="description"
@@ -224,11 +222,10 @@ function ModifShoe() {
                     </div>
                   )}
                 />
-                <label>image</label>
+                <label>Image</label>
                 <input
                   type="file"
                   name="image"
-                  placeholder="Image"
                   onChange={e => setFieldValue("image", e.target.files[0])}
                   className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                 />
@@ -243,11 +240,14 @@ function ModifShoe() {
               </div>
               <div className="text-center mt-6">
                 <button
-                  className="py-3 w-64 text-xl rounded-2xl"
+                  className="py-3 w-64 text-xl rounded-2xl mx-1"
                   typeof="submit"
                 >
-                  MODIF
+                  Modify
                 </button>
+                <Link to='/admin'><button className="py-3 w-64 text-xl rounded-2xl mx-1">
+                        Back to Admin
+                        </button></Link>
               </div>
             </Form>
           )}

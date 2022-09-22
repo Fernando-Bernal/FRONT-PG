@@ -1,11 +1,12 @@
 import {Formik, Form, Field, ErrorMessage} from 'formik'
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { Link } from 'react-router-dom'
 
 function CreateShoes() {
-  return (
+    return (
     <div>
-      <div className="min-h-screen bg-gray-800 flex justify-center items-center py-20">
+        <div className="min-h-screen flex justify-center items-center py-20">
         <Formik 
             initialValues={{
                 brand:'',
@@ -33,11 +34,6 @@ function CreateShoes() {
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)){
                     errorsActicon.name = 'The name can only contain letters and spaces'
                 }
-
-                /* //image
-                if(!values.image){
-                    errorsActicon.image = 'add the image'
-                } */
 
                 //color
                 if(!values.color){
@@ -77,21 +73,19 @@ function CreateShoes() {
                 return errorsActicon
             }}
             onSubmit={async(e, {resetForm})=>{
-                //console.log(e)
                 
                 try{
-                    console.log('enviado')
                     const { data } = await axios.post(
                         "https://sneakers-back-end.herokuapp.com/shoes",
                         {
-                          brand: e.brand,
-                          name: e.name,
-                          description: e.description,
-                          image: e.image,
-                          color: e.color,
-                          price: e.price,
-                          size:e.size,
-                          q:e.q
+                        brand: e.brand,
+                        name: e.name,
+                        description: e.description,
+                        image: e.image,
+                        color: e.color,
+                        price: e.price,
+                        size:e.size,
+                        q:e.q
                         }, {
                             "headers":
                             {
@@ -100,33 +94,31 @@ function CreateShoes() {
                         })
                         resetForm();
                         Swal.fire({
-                            position: 'top-center',
                             icon: 'success',
-                            title: 'Your shoe add to store',
+                            title: 'Your shoe is added to store',
                             showConfirmButton: false,
                             timer: 5000
                         })
                 }catch(error){
                     console.log(error)
                     Swal.fire({
-                        position: "top-center",
                         icon: "error",
-                        title: "error in your shoes",
+                        title: "Something is wrong creating your shoes",
                         showConfirmButton: false,
                         timer: 5000,
-                      });
+                    });
                 }
                 
             }}
         >
             {({errors, setFieldValue})=>(
-                <Form className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
+                <Form className="py-12 px-12 bg-white rounded-2xl z-20">
                     <div>
-                        <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
+                        <h1 className="text-4xl font-bold text-center mb-4">
                         Create Shoes
                         </h1>
-                        <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-                            add some new shoes to the store!
+                        <p className="text-center mb-8 font-semibold tracking-wide">
+                            Add some new shoes to the store!
                         </p>
                     </div>
                     <div className="space-y-3">
@@ -169,7 +161,7 @@ function CreateShoes() {
                         <Field
                         type="number"
                         name="size"
-                        placeholder="size"
+                        placeholder="Size"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="size" component={()=>(
@@ -178,7 +170,7 @@ function CreateShoes() {
                         <Field
                         type="number"
                         name="q"
-                        placeholder="quantity"
+                        placeholder="Quantity"
                         className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
                         />
                         <ErrorMessage name="q" component={()=>(
@@ -205,16 +197,19 @@ function CreateShoes() {
                         )}/>
                     </div>
                     <div className="text-center mt-6">
-                        <button className="py-3 w-64 text-xl rounded-2xl" typeof='submit'>
+                        <button className="py-3 w-64 text-xl rounded-2xl mx-1" typeof='submit'>
                         Create
                         </button>
+                        <Link to='/admin'><button className="py-3 w-64 text-xl rounded-2xl mx-1">
+                        Back to Admin
+                        </button></Link>
                     </div>
                 </Form>
             )}
         </Formik>
-      </div>
+        </div>
     </div>
-  );
+    );
 }
 
 export default CreateShoes;

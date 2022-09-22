@@ -47,7 +47,7 @@ const handleOnSale = async()=>{
 
   return (
     <>
-      <tr className="bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-700 dark:text-gray-400">
+      <tr className="bg-gray-50 text-gray-700">
         <td className="px-4 py-3">
           <div className="flex items-center text-sm">
             <div className="relative hidden w-8 h-8 mr-3 rounded-full md:block">
@@ -70,8 +70,8 @@ const handleOnSale = async()=>{
             </div>
           </div>
         </td>
-        <td className="px-4 py-3 text-sm">{products.brand}</td>
-        <td className="px-4 py-3 text-sm">{products.onSale.toString()}</td>
+        <td className="px-4 py-3 text-sm uppercase">{products.brand}</td>
+        <td className="px-4 py-3 text-sm capitalize">{products.onSale.toString()}</td>
         <td className="px-4 py-3 text-sm">
           <Link to={"/modifshoe"}>
             <button onClick={()=>dispatch(modifShoe(products._id))} className="w-8 h-8">

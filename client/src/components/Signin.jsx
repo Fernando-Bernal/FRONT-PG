@@ -19,7 +19,6 @@ const Signin = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      navigate('/')
       await Swal.fire({
         icon: 'success',
         title: 'Welcome Google User!',
@@ -27,6 +26,7 @@ const Signin = () => {
         timer: 2000
       })
       await googleSignIn()
+      navigate('/account')
     } catch (error) {
       console.log(error)
     }
@@ -48,7 +48,7 @@ const Signin = () => {
       showConfirmButton: false,
       timer: 2000
     })
-    navigate('/')
+    navigate('/account')
     } catch (error) {
       if (error.code === 'auth/user-not-found'){
         Swal.fire({

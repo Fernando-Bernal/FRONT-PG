@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { UserAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,6 +8,7 @@ import {
   cleanReviews,
   editReview,
   deleteReview,
+  getOrders
 } from "../redux/actions/actions";
 
 const Star = ({ selected = false, onSelect = (f) => f }) => (
@@ -19,11 +19,13 @@ const Star = ({ selected = false, onSelect = (f) => f }) => (
 
 const Review = (props) => {
   const idUser = UserAuth()?.user?.uid;
+  const emailUser = UserAuth()?.user?.email;
   const shoeId = props.id;
   const [review, setReview] = useState("");
   const [updateReview, setUpdateReview] = useState("");
   const [error, setError]= useState('')
-  const navigate = useNavigate();
+  const [render, setRender] = useState(false)
+  const [noBought, setNoBought] = useState(false)
 
   const dispatch = useDispatch();
   const totalStars = 5;
@@ -31,8 +33,12 @@ const Review = (props) => {
   const [editForm, setEditForm] = useState(false);
 
   const rating = selectedStars;
-
+  const userOrders = useSelector ((state) => state.userOrders)
   const reviews = useSelector((state) => state.shoeReviews);
+
+  useEffect(() => {
+    dispatch(getOrders(emailUser))
+  }, [idUser])
 
   useEffect(() => {
     dispatch(getReviews(shoeId));
@@ -42,9 +48,14 @@ const Review = (props) => {
   }, [dispatch, shoeId]);
 
   useEffect(() => {
-    review.length < 5 ? setError('Review must contain at least 5 characters.') : setError('')
-    rating === 0 ? setError("Rating can't be 0") : setError('')
-}, [review])  
+    if(review.length < 5 && (editForm === false)){
+      return setError('Review must contain at least 5 characters.')
+    }
+    if( editForm && updateReview.length > 5 ){
+      return setError('Review update must contain at least 5 characters.')
+    }
+    return setError('')
+}, [review, updateReview])  
   
   async function handleDelete(r) {
     await dispatch(deleteReview(r._id));
@@ -52,17 +63,31 @@ const Review = (props) => {
   }
 
   async function handleEdit(r) {
-    console.log();
     await dispatch(editReview(r._id, updateReview, rating));
+    setEditForm(false)
     window.location.reload();
   }
+
+    const orderCheck =  () =>{
+    let result =  userOrders?.map(order => order.shoe.find(shoe => (shoe._id === shoeId)) && order.status === 'Received')
+    if(result[0] === true){
+      setNoBought(false)
+      setRender(true)
+    } else{
+      setNoBought(true)
+      setRender(false)
+    }
+    }
 
   return (
     <>
       <div className="container ">
       <div>
+        <h2 className="text-white">Buy these pair to review them!</h2>
+        <button onClick={() => orderCheck()}>I already bought them</button>
+        {noBought ? <p className="text-red-600">You haven't bought these yet</p> : null}
         <div className=" text-white col-12 ">
-        {idUser ?  
+        {render && (editForm === false) ?  
           <div className="mt-20 ">
             <h1>ADD REVIEW</h1>
             <div>
@@ -81,7 +106,7 @@ const Review = (props) => {
             </div>          
             <form onSubmit={() => dispatch(postReview(idUser, review, rating, shoeId))}>
               <div className="form-group">
-              {error !== '' ? <p>ERROR: {error}</p> : null}
+              {error !== '' ? <p className="text-red-600">{error}</p> : null}
                 <label className="flex flex-row">Description:</label>
                 <textarea
                   type="text"
@@ -93,11 +118,26 @@ const Review = (props) => {
                   placeholder="Message"
                 />
               </div>
-              {error === '' ? <button type="submit" className='text-black border bg-[#00ff01] border-[#00ff01] mt-2'>SUBMIT</button> : <p>CHECK FOR ERRORS</p>}
+              {error === '' ? <button type="submit" className='text-black border bg-[#00ff01] border-[#00ff01] mt-2'>SUBMIT</button> : null}
             </form>
             </div>
-            : <p> LOG IN TO REVIEW IT</p>
+            : null
             }
+            {editForm ? <div className="flex items-center">
+              <h3>RATING: </h3>
+              <div className="flex flex-row py-4 ">
+                {[...Array(totalStars)].map((n, i) => (
+                  <Star
+                    key={i}
+                    selected={selectedStars > i}
+                    onSelect={() => setSelectedStars(i + 1)}
+                  />
+                ))}
+                <p className="text-white flex flex-row text-xs font-light pt-1 pl-2">
+                  {selectedStars} of {totalStars} stars
+                </p>
+              </div>
+            </div> : null }
           <h3 className="mt-7">ALL REVIEWS </h3>
           {reviews.length > 0 ? (
             reviews.map((r) => {
@@ -121,6 +161,7 @@ const Review = (props) => {
                           Don't forget to rate it
                         </p>
                       </div>
+                      {error === 'Review update must contain at least 5 characters.'?
                       <div className='flex flex-row justify-evenly mt-2'>
                         <button
                           className="btn btn-primary"
@@ -135,6 +176,8 @@ const Review = (props) => {
                           CANCEL EDIT
                         </button>
                       </div>
+                      : <p>{error}</p>
+                      }
                     </form>
                   ) : (
                     <div>
