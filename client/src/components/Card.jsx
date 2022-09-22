@@ -60,7 +60,7 @@ const Card = ({shoe}) => {
         <div className="">
           <Link to={`/products/${shoe._id}`}>
           <div className="group relative cursor-pointer ">
-            <div className="overflow-hidde group-hover:opacity-60">
+            <div className="overflow-hidde group-hover:scale-105">
               <img
                 src={shoe.image}
                 alt={shoe.name}

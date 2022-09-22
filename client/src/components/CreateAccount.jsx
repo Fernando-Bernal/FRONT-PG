@@ -76,10 +76,6 @@ const Signup = () => {
             <label className='py-2 font-medium'>Password:</label>
             <input name='password' onChange={handleChanges} className='p-3 rounded-md text-black' type="password" />
           </div>
-          {/* <div className='flex py-2'>
-            <input className='p-3 mr-4 cursor-pointer text-[#00ff01] rounded-md' type="checkbox"/>
-            <label className='py-2 font-medium'>Sign Up for Newsletter</label>
-          </div> */}
           <button className='w-full py-4 my-2'>Create account</button>
           <Link to='/'><button className='w-full py-4 my-2'>Back Home</button></Link>
         </form>

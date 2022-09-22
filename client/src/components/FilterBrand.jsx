@@ -23,7 +23,7 @@ function FilterBrand() {
         BRANDS
       </p>
       <div>   
-        <div className="absolute t-20 z-40 hidden group-hover:block hover:block">
+      <div className="absolute t-20 z-50 hidden group-hover:block hover:block">
           <div className="py-3">
             <div className="w-4 h-4 left-3 absolute mt-1 bg-white rotate-45">
             </div>

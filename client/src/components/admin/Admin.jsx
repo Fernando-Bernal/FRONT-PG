@@ -95,15 +95,15 @@ function Admin() {
         if(currentPageProducts < 7){
             setCurrentPageProducts(0)
         }else{
-            setCurrentPageProducts(currentPageProducts - 6)
+            setCurrentPageProducts(currentPageProducts - 5)
         }
         }
 
         const nextPageProducts = ()=>{
-        if(products.length <= currentPageProducts + 6){
+        if(products.length <= currentPageProducts + 5){
             setCurrentPageProducts(currentPageProducts)
         }else{
-            setCurrentPageProducts(currentPageProducts + 6)
+            setCurrentPageProducts(currentPageProducts + 5)
         }
         }
 
@@ -131,7 +131,7 @@ function Admin() {
 
     const usersPage = users.slice(currentPage, currentPage + 4)
     const clientsPage = clients.slice(currentPageClients, currentPageClients + 4)
-    const productsPage = products.slice(currentPageProducts, currentPageProducts + 6)
+    const productsPage = products.slice(currentPageProducts, currentPageProducts + 5)
     const brandsPage = brands.slice(currentPageBrands, currentPageBrands + 4)
 
     const resultUsers =  usersPage.length + currentPage
@@ -228,7 +228,7 @@ function Admin() {
                 </div>
                 {/*-- ./Header --*/}
                 <div className="py-40">
-                <div className="container mx-auto max-w-4xl md:w-3/4 border border-[#00ff01] rounded-lg">
+                <div className="container mx-auto max-w-[950px] md:w-3/4 border border-[#00ff01] rounded-lg">
                     {/*-- Statistics Cards --*/}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-4 gap-4">
                         <Link to={'/createshoes'}>
@@ -279,7 +279,7 @@ function Admin() {
                                 <div className="w-full overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
-                                    <tr className="text-xs font-bold tracking-wide text-left text-black uppercase bg-[#00ff01]">
+                                    <tr className="text-xs font-bold tracking-wide text-left text-white uppercase bg-black border border-[#00ff01]">
                                         <th className="px-4 py-3">Users</th>
                                         <th className="px-4 py-3">Date</th>
                                         <th className="px-4 py-3">Status</th>
@@ -331,7 +331,7 @@ function Admin() {
                                 <div className="w-full overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
-                                    <tr className="text-xs font-bold tracking-wide text-left text-black uppercase bg-[#00ff01]">
+                                    <tr className="text-xs font-bold tracking-wide text-left text-white uppercase bg-black border border-[#00ff01]">
                                         <th className="px-4 py-3">Clients</th>
                                         <th className="px-4 py-3">Stripe</th>
                                         <th className="px-4 py-3">Amount</th>
@@ -379,11 +379,11 @@ function Admin() {
 
                     {/*-- Products Table --*/}
                     <div className="my-4 mx-4">
-                            <div className="w-full overflow-hidden rounded-lg shadow-xs">
+                            <div className="w-full rounded-lg shadow-xs">
                                 <div className="w-full overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
-                                    <tr className="text-xs font-bold tracking-wide text-left text-black uppercase bg-[#00ff01]">
+                                    <tr className="text-xs font-bold tracking-wide text-left text-white uppercase bg-black border border-[#00ff01]">
                                         <th className="px-4 py-3">Products</th>
                                         <th className="px-4 py-3">brand</th>
                                         <th className="px-4 py-3">OnSale</th>
@@ -435,7 +435,7 @@ function Admin() {
                                 <div className="w-full overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
-                                    <tr className="text-xs font-bold tracking-wide text-left text-black uppercase bg-[#00ff01]">
+                                    <tr className="text-xs font-bold tracking-wide text-left text-white uppercase bg-black border border-[#00ff01]">
                                         <th className="px-4 py-3">Brands</th>
                                         <th className="px-4 py-3">Delete</th>
                                     </tr>

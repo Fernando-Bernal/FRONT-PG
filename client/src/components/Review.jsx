@@ -83,7 +83,7 @@ const Review = (props) => {
     <>
       <div className="container ">
       <div>
-        <h2 className="text-white">Buy these pair to review them!</h2>
+        <h2 className="text-red-600 my-3 text-lg">Buy these pair to review them!</h2>
         <button onClick={() => orderCheck()}>I already bought them</button>
         {noBought ? <p className="text-red-600">You haven't bought these yet</p> : null}
         <div className=" text-white col-12 ">
@@ -139,10 +139,11 @@ const Review = (props) => {
               </div>
             </div> : null }
           <h3 className="mt-7">ALL REVIEWS </h3>
+          <div className="flex">
           {reviews.length > 0 ? (
             reviews.map((r) => {
               return (
-                <div className="w-[400px] mt-6 mb-5 rounded border border-[#00ff01]">
+                <div className="w-[400px] mt-6 mb-5 rounded border border-[#00ff01] mr-3">
                   {editForm && r.idUser === idUser ? (
                     <form>
                       <div className="form-group flex flex-row">
@@ -182,9 +183,9 @@ const Review = (props) => {
                   ) : (
                     <div>
                       {r.idUser === idUser ? (
-                        <h3>MY REVIEW</h3>
+                        <h3 className="font-bold">MY REVIEW</h3>
                       ) : (
-                        <p> ANONYMOUS USER </p>
+                        <p className="font-bold"> ANONYMOUS USER </p>
                       )}
                       <div className="lg:w-4/5 flex flex-wrap">
                         <p className=" text-white">REVIEW: {r.review}</p>
@@ -208,6 +209,7 @@ const Review = (props) => {
           ) : (
             <p>NO REVIEWS YET</p>
           )}
+          </div>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ function CreateBrand() {
 
                 //name
                 if(!values.name){
-                    errorsActicon.name = 'enter the brand correctly'
+                    errorsActicon.name = 'Enter a valid brand name'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)){
                     errorsActicon.name = 'The name can only contain letters and spaces'
                 }
@@ -33,17 +33,16 @@ function CreateBrand() {
                             name: e.name    
                         })
                         Swal.fire({
-                            title: `${data}`,
+                            title: 'Your Brand was created',
                             showConfirmButton: false,
-                            timer: 5000
+                            timer: 3000
                         })
                 }catch(error){
-                    console.log(error)
                     Swal.fire({
                         icon: "error",
-                        title: "Something is wrong creating your shoes",
+                        title: "Something went wrong creating your brand",
                         showConfirmButton: false,
-                        timer: 5000,
+                        timer: 3000,
                     });
                 }
                 

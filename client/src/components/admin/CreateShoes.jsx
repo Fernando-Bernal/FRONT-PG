@@ -23,49 +23,49 @@ function CreateShoes() {
 
                 //brand
                 if(!values.brand){
-                    errorsActicon.brand = 'enter the brand correctly'
+                    errorsActicon.brand = 'Enter a valid brand'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.brand)){
                     errorsActicon.brand = 'The name can only contain letters and spaces'
                 }
 
                 //name
                 if(!values.name){
-                    errorsActicon.name = 'enter the name correctly'
+                    errorsActicon.name = 'Enter a valid name'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.name)){
                     errorsActicon.name = 'The name can only contain letters and spaces'
                 }
 
                 //color
                 if(!values.color){
-                    errorsActicon.color = 'enter the color correctly'
+                    errorsActicon.color = 'Enter a valid color'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.color)){
                     errorsActicon.color = 'The name can only contain letters and spaces'
                 }
 
                 //price
                 if(!values.price){
-                    errorsActicon.price = 'enter the price correctly'
+                    errorsActicon.price = 'Enter a valid price'
                 }else if(!/^[0-9]{1,40}$/.test(values.price)){
-                    errorsActicon.price = 'only numbers'
+                    errorsActicon.price = 'Only numbers'
                 }
 
                 //size
                 if(!values.size){
-                    errorsActicon.size = 'enter the size correctly'
+                    errorsActicon.size = 'Enter a valid size'
                 }else if(!/^[0-9]{1,40}$/.test(values.size)){
                     errorsActicon.size = 'only numbers'
                 }
 
                 //q
                 if(!values.q){
-                    errorsActicon.q = 'enter the quantity correctly'
+                    errorsActicon.q = 'Enter a valid quantity'
                 }else if(!/^[0-9]{1,40}$/.test(values.q)){
                     errorsActicon.q = 'only numbers'
                 }
 
                 //description
                 if(!values.description){
-                    errorsActicon.description = 'enter the description correctly'
+                    errorsActicon.description = 'Enter a valid description'
                 }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(values.description)){
                     errorsActicon.description = 'The name can only contain letters and spaces'
                 }
@@ -95,17 +95,17 @@ function CreateShoes() {
                         resetForm();
                         Swal.fire({
                             icon: 'success',
-                            title: 'Your shoe is added to store',
+                            title: 'Your shoe was added to store',
                             showConfirmButton: false,
-                            timer: 5000
+                            timer: 3000
                         })
                 }catch(error){
                     console.log(error)
                     Swal.fire({
                         icon: "error",
-                        title: "Something is wrong creating your shoes",
+                        title: "Something went wrong creating your shoes",
                         showConfirmButton: false,
-                        timer: 5000,
+                        timer: 3000,
                     });
                 }
                 

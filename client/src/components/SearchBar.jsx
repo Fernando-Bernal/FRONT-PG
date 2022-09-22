@@ -29,7 +29,7 @@ function SearchBar() {
       </div>
       <>
       {
-            show? <div className="w-full h-full fixed bottom-0 right-0 z-40 ">
+            show? <div className="w-full h-full fixed bottom-0 right-0 z-50">
         <div
           className="bg-gray-800 opacity-60 w-full h-full"
           onClick={() => setShow(!show)}

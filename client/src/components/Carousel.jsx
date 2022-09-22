@@ -37,34 +37,34 @@ const Carousel = () => {
 
   return (
     <div>
-      <h1 className="text-[#00ff01] flex justify-center items-center bg-black py-4 font-bold text-3xl">
-        Big Sale!!!
-      </h1>
       <div className="px-4 pt-2 pb-2 relative flex justify-center items-center bg-black">
         {length > 0 ?<><BsArrowLeftSquareFill
           onClick={prevSlide}
-          className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer left-12 hover:opacity-60"
+          className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer left-[15%] hover:opacity-60 z-40"
         />
         <BsArrowRightSquareFill
           onClick={nextSlide}
-          className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer right-12 hover:opacity-60"
+          className="absolute top-[50%] text-4xl text-[#00ff01] cursor-pointer right-[15%] hover:opacity-60 z-40"
         />
         </> : null}
         {length > 0
           ? saleShoes.map((shoe, index) => (
-              <div className={index === slide ? "opacity-100" : "opacity-0"}>
+              <div className='relative mt-10'>
                 {index === slide && (
                   <Link to={`/products/${shoe._id}`}>
+                    <p className="z-40 absolute bottom-0 capitalize font-semibold text-xl">{shoe.name}</p>
+                    <p className="z-40 absolute top-0 right-10 uppercase font-bold">{shoe.brand}</p>
+                    <p className="z-40 absolute top-10 right-10 uppercase font-bold text-red-600 text-2xl">SALE ${shoe.price}</p>
                     <img
-                      className="rounded-lg object-fill h-[400px] w-[700px] cursor-pointer hover:opacity-60"
+                      className="rounded-lg object-fill h-[400px] w-[700px] cursor-pointer transition duration-500 ease-in-out hover:-translate-y-1 hover:scale-110"
                       src={shoe.image}
-                      alt="x"
+                      alt={shoe.name}
                     />
                   </Link>
                 )}
               </div>
             ))
-          : <img alt = "img not found" src = {Banner} className='h-[400px] w-[700px]'/>}
+          : <img alt = "Winter sale banner" src = {Banner} className='h-[400px] w-[700px]'/>}
       </div>
     </div>
   );

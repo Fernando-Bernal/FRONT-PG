@@ -45,7 +45,7 @@ function Order() {
                 alt=""
                 loading="lazy"
               />
-              <p className="font-bold ml-2 capitalize">{shoe.name}</p>
+              <Link to={`/products/${shoe._id}`} className='hover:scale-105'><p className="font-bold ml-2 capitalize">{shoe.name}</p></Link>
             </div>
             </td>
             <td className="px-4 py-3 text-sm">{shoe.quantity}</td>

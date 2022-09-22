@@ -41,14 +41,15 @@ function Catalog(){
 
   return (
     <div className="bg-black">
-      <div className="text-[#00ff01] text-3xl font-semibold text-center pb-2 pt-10">Products</div>
-      <div className='m-2 flex justify-around'>
-        <button onClick={prevPage}>
+      <div className='m-2 flex justify-center items-center pt-10'>
+        {currentPage === 0 ? null :
+        <div><button onClick={prevPage}>
           Previous
-        </button>
-        <button onClick={nextPage}>
-          Next
-        </button>
+        </button></div>}
+        <div className="text-[#00ff01] text-3xl font-semibold text-center pb-2 mx-5">COLLECTION</div>
+        <div><button onClick={nextPage}>
+        Next
+      </button></div>
       </div>
       <div className="container pb-2">
           <div className="grid grid-cols-6 gap-y-2 gap-x-2 sm:grid-cols-2 lg:grid-cols-6 xl:gap-x-2">
@@ -61,9 +62,7 @@ function Catalog(){
             )}
           </div>
       </div>
-      
     </div>
-    
   )
 }
 

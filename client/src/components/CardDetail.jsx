@@ -62,6 +62,11 @@ const CardDetail = () => {
       }
     }
 
+    // useEffect(() => {
+    //   dispatch(getFavorites(idUser))
+    // }, [favorites])
+    
+
     useEffect(()=>{
       dispatch(getFavorites(idUser))
       logEvent(analytics, 'shoe', {
@@ -131,12 +136,18 @@ const CardDetail = () => {
           <Link to={`/cart`}> 
             <button className="flex ml-auto border py-2 px-6" onClick={toCart}>BUY ME!</button>
           </Link>
-            <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4" onClick={addFavorite}>
-            <MdFavorite/>
-          </button>
+          {favorites.length > 0 && favorites.find(shoe => shoe._id === shoeId) ?
+            null
+          : <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4" onClick={addFavorite}>
+          <MdFavorite/>
+        </button>
+          }
+        {favorites.length > 0 && favorites.find(shoe => shoe._id === shoeId) ?
         <button className="rounded-full w-10 h-10 border inline-flex items-center justify-center ml-4 bg-[#e04747] border-[#de3030]" onClick={removeFavorite}>
         <IoMdHeartDislike/>
         </button>
+        : null        
+        }
         </div>
       </div>
       <Review id={id}/>

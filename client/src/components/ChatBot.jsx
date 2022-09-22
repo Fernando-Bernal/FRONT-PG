@@ -26,7 +26,7 @@ const BotChat = () => {
   
   return (
     <>
-      <button className='flex float-right mr-6 text-lg font-bold' onClick={changeModal}>
+      <button className='flex mr-6 text-lg font-bold z-40 absolute right-0 capitalize' onClick={changeModal}>
         <TbRobot className='text-3xl'/> Need Help?
       </button>
     {showModal ? ( 

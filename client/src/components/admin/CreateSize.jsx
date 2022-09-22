@@ -21,13 +21,13 @@ function CreateSize() {
 
                 //size
                 if(!values.size){
-                    errorsActicon.size = 'enter the size correctly'
+                    errorsActicon.size = 'Enter a valid size'
                 }else if(!/^[0-9]{1,40}$/.test(values.size)){
                     errorsActicon.size = 'The size can only contain number'
                 }
                 //q
                 if(!values.q){
-                    errorsActicon.q = 'enter the quantity correctly'
+                    errorsActicon.q = 'Enter a valid quantity'
                 }else if(!/^[0-9]{1,40}$/.test(values.q)){
                     errorsActicon.q = 'The quantity can only contain number'
                 }
@@ -43,18 +43,18 @@ function CreateSize() {
                             q:e.q
                         })
                         Swal.fire({
-                            title: `${data}`,
+                            title: 'The size for your shoes was created',
                             showConfirmButton: false,
-                            timer: 5000
+                            timer: 3000
                         })
                         resetForm();
                 }catch(error){
                     console.log(error)
                     Swal.fire({
                         icon: "error",
-                        title: "Something is wrong creating your size",
+                        title: "Something went wrong creating the size",
                         showConfirmButton: false,
-                        timer: 5000,
+                        timer: 3000,
                         });
                 }
                 

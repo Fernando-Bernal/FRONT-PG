@@ -28,42 +28,42 @@ function ModifShoe() {
 
            //brand
             if (!values.brand) {
-              errorsActicon.brand = "enter the brand correctly";
+              errorsActicon.brand = "Enter a valid brand";
             }
 
             //name
             if (!values.name) {
-              errorsActicon.name = "enter the name correctly";
+              errorsActicon.name = "Enter a valid name";
             }
 
             //image
                 if(!values.image){
-                    errorsActicon.image = 'add the image'
+                    errorsActicon.image = 'Add a valid image'
                 }
 
             //color
             if (!values.color) {
-              errorsActicon.color = "enter the color correctly";
+              errorsActicon.color = "Enter a valid color";
             }
 
             //price
             if (!values.price) {
-              errorsActicon.price = "enter the price correctly";
+              errorsActicon.price = "Enter a valid price";
             }
 
             //size
             if (!values.size) {
-              errorsActicon.size = "enter the size correctly";
+              errorsActicon.size = "Enter a valid size";
             }
 
             //q
             if (!values.q) {
-              errorsActicon.q = "enter the quantity correctly";
+              errorsActicon.q = "Enter a valid quantity";
             }
 
             //description
             if (!values.description) {
-              errorsActicon.description = "enter the description correctly";
+              errorsActicon.description = "Enter a valid description";
             }
 
             return errorsActicon;
@@ -90,21 +90,18 @@ function ModifShoe() {
               );
               navigate("/admin");
               Swal.fire({
-                position: "top-center",
                 icon: "success",
-                title: "Your modif shoe add to store",
+                title: "Your modified shoe was added to store",
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 3000,
               });
               resetForm();
             } catch (error) {
-              console.log(error);
               Swal.fire({
-                position: "top-center",
                 icon: "error",
-                title: "error in your modif shoes",
+                title: "Something went wrong creating your shoes",
                 showConfirmButton: false,
-                timer: 5000,
+                timer: 3000,
               });
             }
           }}
@@ -116,7 +113,7 @@ function ModifShoe() {
                   Modify Shoes
                 </h1>
                 <p className="text-center text-sm mb-8 font-semibold tracking-wide">
-                  Add some modif shoes to the store!
+                  Add some modify shoes to the store!
                 </p>
               </div>
               <div className="">

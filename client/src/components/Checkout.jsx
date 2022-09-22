@@ -322,9 +322,9 @@ function checkout({ products, subTotal }) {
 
               <div className="flex justify-between items-center mt-3">
                 <span className="text-xs text-[#00ff01]">
-                Card Holder Name
+                  {data.name}
                 </span>
-                <span className="text-xs text-[#00ff01]">12/18</span>
+                <span className="text-xs text-[#00ff01]">**/**</span>
               </div>
             </div>
 
