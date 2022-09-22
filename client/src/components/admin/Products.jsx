@@ -35,7 +35,7 @@ function Products({ products }) {
 
 const handleOnSale = async()=>{
   const { data } = await axios.put(
-    `https://sneakers-back-end.herokuapp.com/shoes/${products._id}`,
+    `https://sneakers-back-end.herokuapp.com/admin/onsale/${products._id}`,
     {
       onSale: products.onSale === true ? false : true
     }

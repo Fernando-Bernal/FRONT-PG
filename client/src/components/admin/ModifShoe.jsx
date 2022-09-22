@@ -56,7 +56,7 @@ function ModifShoe() {
             }
 
             //q
-            if (!values.q) {
+            if (values.size !== "" && !values.q) {
               errorsActicon.q = "Enter a valid quantity";
             }
 
@@ -180,6 +180,7 @@ function ModifShoe() {
                   as="select"
                   name="size"
                   className="block text-sm py-3 px-4 rounded-lg w-full border outline-none mb-4">
+                    <option value="">Size</option>
                   {shoe[0].stock.map(e=> <option value={e.size}>{e.size}</option>)}
                   </Field>
                 <ErrorMessage

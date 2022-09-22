@@ -33,7 +33,7 @@ export default function Cart() {
               <div className="w-full p-4 px-5 py-5">
                 <div className="md:grid md:grid-cols-3 gap-2 ">
                   <div className="col-span-2 p-5">
-                    <h1 className="text-3xl text-[#00ff01]">Shopping Cart</h1>
+                    <h1 className="text-3xl text-white">Shopping Cart</h1>
                     <div className="flex justify-between items-center mt-6 pt-6">
                       {products?.length === 0 ? (
                         <div>
@@ -47,7 +47,7 @@ export default function Cart() {
                               ))}
                             
                     <div className="flex items-center justify-end">
-                      <button className="flex flex-row items-center h-8" onClick={()=>dispatch(limpiarCarrito())}><AiFillDelete/> <AiFillDelete/> <AiFillDelete/></button>
+                      <button className="flex flex-row items-center h-8 bg-red-500" onClick={()=>dispatch(limpiarCarrito())}>Clear Cart</button>
                     </div>
                         </div>
                       )}

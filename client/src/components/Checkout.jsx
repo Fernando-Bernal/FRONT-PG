@@ -220,7 +220,7 @@ function checkout({ products, subTotal }) {
       <div>
         <form onSubmit={handleSubmit}>
           <div className="pb-5 rounded-t border-b-2 border-gray-400 overflow-visible">
-            <span className="text-xl font-medium text-[#00ff01] block pb-3">
+            <span className="text-xl font-medium text-white block pb-3">
               Address
             </span>
 
@@ -296,7 +296,7 @@ function checkout({ products, subTotal }) {
               )}
             </div>
           </div>
-          <span className="text-xl font-medium text-[#00ff01] block py-3">
+          <span className="text-xl font-medium text-white block py-3">
             Card Details
           </span>
 
