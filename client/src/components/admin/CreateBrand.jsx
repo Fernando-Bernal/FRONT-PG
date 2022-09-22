@@ -33,7 +33,7 @@ function CreateBrand() {
                             name: e.name    
                         })
                         Swal.fire({
-                            title: 'Your Brand was created',
+                            title: `${data}`,
                             showConfirmButton: false,
                             timer: 3000
                         })

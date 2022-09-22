@@ -156,7 +156,6 @@ export function reducerApp(state = initialState, action){
           };
 
       case DELETE_PRODUCT_CARRITO:
-        console.log(state.productosCarrito)
         return {
           ...state,
           productosCarrito: (state.productosCarrito = JSON.parse(

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getFavorites,
-  deleteFavorite,
   getShoes,
 } from "../redux/actions/actions";
 import { UserAuth } from "../context/AuthContext";

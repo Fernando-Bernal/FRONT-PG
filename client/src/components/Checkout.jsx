@@ -92,8 +92,6 @@ function checkout({ products, subTotal }) {
       uid: UserAuth()?.user?.uid,
     };
 
-    console.log(user);
-
     const stripe = useStripe();
     const elements = useElements();
 
@@ -138,7 +136,6 @@ function checkout({ products, subTotal }) {
         data.validatePostal_code === "true"
       ) {
         if (!error && user.email !== undefined && user.uid !== undefined) {
-          console.log(paymentMethod);
           const { id } = paymentMethod;
           try {
             const { data } = await axios.post(
@@ -151,7 +148,6 @@ function checkout({ products, subTotal }) {
                 amount: subTotal * 100,
               }
             );
-            console.log(paymentMethod);
             Swal.fire({
               title: `${data.message}`,
               showConfirmButton: false,
@@ -159,7 +155,6 @@ function checkout({ products, subTotal }) {
             });
             setProcessingTo(false);
             setIsDisableTo(false);
-            console.log(data);
             elements.getElement(CardElement).clear();
             dispatch(limpiarCarrito());
           } catch (error) {

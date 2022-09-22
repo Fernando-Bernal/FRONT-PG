@@ -62,10 +62,9 @@ const CardDetail = () => {
       }
     }
 
-    // useEffect(() => {
-    //   dispatch(getFavorites(idUser))
-    // }, [favorites])
-    
+    useEffect(() => {
+      dispatch(getFavorites(idUser))
+    }, [favorites])
 
     useEffect(()=>{
       dispatch(getFavorites(idUser))

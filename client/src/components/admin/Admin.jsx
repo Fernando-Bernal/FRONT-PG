@@ -92,7 +92,7 @@ function Admin() {
         },[])
     
         const prevPageProducts = ()=>{
-        if(currentPageProducts < 7){
+        if(currentPageProducts < 6){
             setCurrentPageProducts(0)
         }else{
             setCurrentPageProducts(currentPageProducts - 5)

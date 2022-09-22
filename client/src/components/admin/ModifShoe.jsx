@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 function ModifShoe() {
   const shoe = useSelector((state) => state.shoes);
   const navigate = useNavigate();
-    console.log(shoe)
   return (
     <div>
       <div className="min-h-screen flex justify-center items-center py-20">

@@ -41,7 +41,6 @@ const handleOnSale = async()=>{
     }
     );
     dispatch(getShoes())
-    console.log(data)
   }
   
 

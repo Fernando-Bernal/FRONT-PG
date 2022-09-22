@@ -43,7 +43,7 @@ function CreateSize() {
                             q:e.q
                         })
                         Swal.fire({
-                            title: 'The size for your shoes was created',
+                            title: `${data}`,
                             showConfirmButton: false,
                             timer: 3000
                         })

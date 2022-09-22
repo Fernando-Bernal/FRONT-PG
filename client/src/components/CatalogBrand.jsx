@@ -48,8 +48,6 @@ const options = catalogBrand.map(e => ({value:e._id, label:e.color}))
 
   const catalogBrandPage = catalogBrand.slice(currentPage, currentPage + 28);
 
-  console.log(brand)
-
   useEffect(()=>{
     logEvent(analytics,`${brand} |S.P|`)
   },[])

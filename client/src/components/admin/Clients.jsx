@@ -17,7 +17,6 @@ function Clients({ clients }) {
       }
       );
       dispatch(getClients())
-      console.log(data)
     }
 
   return (
